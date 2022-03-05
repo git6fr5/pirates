@@ -15,9 +15,7 @@ public class Sword : Card {
 
         Debug.Log("Doing damage");
         character.TakeDamage(m_Value);
-        CameraShake.ActivateShake(board.TurnDelay);
         return true;
     }
-
 
 }

@@ -13,12 +13,21 @@ public class Board : MonoBehaviour {
     public class PieceData {
         public Piece m_Piece;
         public Vector2Int m_Position;
+
+        public PieceData(Piece piece, Vector2Int position) {
+            m_Piece = piece;
+            m_Position = position;
+        }
     }
 
     #endregion
 
     /* --- Variables --- */
     #region Variables
+
+    // Generation.
+    public bool m_Reset;
+    public int m_Depth;
 
     // Settings.
     public int m_Width;
@@ -27,6 +36,8 @@ public class Board : MonoBehaviour {
     public int Height => m_Height;
 
     // Pieces.
+    public Coroutine m_GameLoop;
+    public LDtkReader m_LDtkReader;
     public PieceData[] m_PieceData;
     public List<Piece> m_Pieces;
     public List<Piece> Pieces => m_Pieces;
@@ -50,8 +61,32 @@ public class Board : MonoBehaviour {
     #region Unity
 
     void Start() {
+        Init();
+    }
 
+    void Update() {
+        if (m_Reset) {
+            Reset();
+            Init();
+            m_Reset = false;
+        }
+    }
+
+    public void Reset() {
+        StopCoroutine(m_GameLoop);
+        for (int i = 0; i < m_Pieces.Count; i++) {
+            Destroy(m_Pieces[i].gameObject);
+        }
+        for (int i = 0; i < m_Height; i++) {
+            for (int j = 0; j < m_Width; j++) {
+                m_Background.SetTile(new Vector3Int(j, i, 0), null);
+            }
+        }
+    }
+
+    public void Init() {
         // Pieces.
+        m_PieceData = m_LDtkReader.Get(m_Depth);
         m_Pieces = new List<Piece>();
         for (int i = 0; i < m_PieceData.Length; i++) {
             Piece newPiece = m_PieceData[i].m_Piece.Create(this, m_PieceData[i].m_Position.x, m_PieceData[i].m_Position.y);
@@ -62,7 +97,7 @@ public class Board : MonoBehaviour {
         // Loop.
         m_Characters = GetAll<Character>();
         m_MaxTurnNumber = m_Characters.Length;
-        StartCoroutine(IEGameLoop());
+        m_GameLoop = StartCoroutine(IEGameLoop());
 
         // Background.
         for (int i = 0; i < m_Height; i++) {
@@ -70,7 +105,6 @@ public class Board : MonoBehaviour {
                 m_Background.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
             }
         }
-
     }
 
     #endregion
@@ -81,7 +115,6 @@ public class Board : MonoBehaviour {
     public static Board FindInstance() {
         return (Board)GameObject.FindObjectOfType(typeof(Board));
     }
-
 
     public T[] GetAll<T>() {
         List<T> newList = new List<T>();
@@ -94,7 +127,7 @@ public class Board : MonoBehaviour {
     }
 
     public T Get<T>() {
-        Piece piece = m_Pieces.Find(piece => piece.GetComponent<T>() != null);
+        Piece piece = m_Pieces.Find(piece => piece != null && piece.GetComponent<T>() != null);
         if (piece != null) {
             return piece.GetComponent<T>();
         }
@@ -102,7 +135,7 @@ public class Board : MonoBehaviour {
     }
 
     public T GetAt<T>(Vector2Int position) {
-        Piece piece = m_Pieces.Find(piece => piece.Position == position);
+        Piece piece = m_Pieces.Find(piece => piece != null && piece.Position == position);
         if (piece != null) {
             return piece.GetComponent<T>();
         }
@@ -116,8 +149,10 @@ public class Board : MonoBehaviour {
             for (int i = 0; i < m_Characters.Length; i++) {
                 m_TurnNumber = i;
                 m_Characters[i].NewTurn();
-                yield return new WaitUntil(() => m_Characters[i].CompletedTurn);
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitUntil(() => m_Characters[i] == null || (m_Characters[i] != null && m_Characters[i].CompletedTurn));
+                if (m_Characters[i] != null && !m_Characters[i].IsStatic) {
+                    yield return new WaitForSeconds(0.025f);
+                }
             }
             yield return new WaitForSeconds(m_TurnDelay);
             m_RoundNumber += 1;

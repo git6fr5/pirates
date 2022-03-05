@@ -8,10 +8,11 @@ public class CardUI : MonoBehaviour {
     #region Variables
 
     // References.
-    [SerializeField] private Card m_Card;
+    [SerializeField] protected Card m_Card;
 
     // Icons.
     [Space(2), Header("Icons")]
+    [SerializeField] private Sprite m_EmptyCard;
     [SerializeField] private Sprite m_MeleeIcon;
     [SerializeField] private Sprite m_BuffIcon;
 
@@ -22,6 +23,7 @@ public class CardUI : MonoBehaviour {
     [SerializeField] public Label m_Value;
     [SerializeField] private SpriteRenderer m_CardFace;
     [SerializeField] private SpriteRenderer m_CardTargetType;
+    public SpriteRenderer CardTargetType => m_CardTargetType;
 
     // Selection.
     [Space(2), Header("Interaction")]
@@ -31,6 +33,7 @@ public class CardUI : MonoBehaviour {
 
     // Transformation.
     [SerializeField, ReadOnly] private Vector2 m_Origin;
+    [SerializeField, ReadOnly] private Vector2 m_IconPosition;
     [SerializeField, ReadOnly] private float m_Scale;
     [SerializeField] private float m_ScaleSpeed = 5f;
 
@@ -40,7 +43,10 @@ public class CardUI : MonoBehaviour {
     #region Unity
 
     void Update() {
-        if (m_Card == null) { return; }
+        if (m_Card == null) {
+            DrawEmpty();
+            return; 
+        }
 
         float deltaTime = Time.deltaTime;
         Draw();
@@ -79,6 +85,7 @@ public class CardUI : MonoBehaviour {
     public void SetOrigin(int i) {
         transform.position += i * Vector3.right * 4f;
         m_Origin = transform.position;
+        m_IconPosition = m_CardTargetType.transform.localPosition;
     }
 
     #endregion
@@ -87,15 +94,27 @@ public class CardUI : MonoBehaviour {
     #region Activation
 
     private void CheckActive() {
+        if (m_Card == null) {
+            return;
+        }
+
         if (m_Active && !m_Card.Active) {
-            Board board = Board.FindInstance();
-            if (board != null && board.Get<Player>() != null) {
-                m_Card.Activate(board, board.Get<Player>().Position);
-            }
+            Activate();
         }
         else if (!m_Active && m_Card.Active) {
-            m_Card.Deactivate();
+            Deactivate();
         }
+    }
+
+    protected virtual void Activate() {
+        Board board = Board.FindInstance();
+        if (board != null && board.Get<Player>() != null) {
+            m_Card.Activate(board, board.Get<Player>().Position);
+        }
+    }
+
+    protected virtual void Deactivate() {
+        m_Card.Deactivate();
     }
 
     #endregion
@@ -151,8 +170,10 @@ public class CardUI : MonoBehaviour {
             m_CardTargetType.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else {
-            m_CardTargetType.gameObject.SetActive(false);
+            // m_CardTargetType.gameObject.SetActive(false);
             m_CardTargetType.transform.SetParent(transform);
+            m_CardTargetType.transform.localScale = new Vector3(1f, 1f, 1f);
+            m_CardTargetType.transform.localPosition = m_IconPosition;
         }
     }
 
@@ -171,10 +192,27 @@ public class CardUI : MonoBehaviour {
         m_Value.SetText(m_Card.Value.ToString());
         m_Charges.SetText(m_Card.Charges.ToString());
         // Draw the targets.
+        DrawTarget();
+    }
+
+    protected virtual void DrawTarget() {
         Board board = Board.FindInstance();
         if (board != null && board.Get<Player>() != null) {
             BoardUI.DrawTargetUI(m_Card, board, board.Get<Player>().Position, ref m_TargetIndicators, m_MouseOver || m_Active);
         }
+    }
+
+    void DrawEmpty() {
+        // Draw the name.
+        m_CardFace.sprite = m_EmptyCard;
+        m_CardName.gameObject.SetActive(false);
+        // Draw the sprites.
+        m_CardTargetType.gameObject.SetActive(false);
+        // Draw the values.
+        m_Value.gameObject.SetActive(false);
+        m_Charges.gameObject.SetActive(false);
+        transform.localScale = new Vector3(1f, 1f, 1f);
+        transform.position = (Vector3)m_Origin;
     }
 
     private Sprite GetCardTargetTypeIcon(TargetType targetType) {
@@ -189,9 +227,5 @@ public class CardUI : MonoBehaviour {
     }
 
     #endregion
-
-
-
-
 
 }

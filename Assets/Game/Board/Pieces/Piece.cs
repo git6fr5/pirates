@@ -25,6 +25,11 @@ public class Piece : MonoBehaviour {
     /* --- Unity --- */
     #region Unity
 
+    // Ew.
+    void Awake() {
+        Snap();
+    }
+
     void Update() {
         Think();
         float deltaTime = Time.deltaTime;
@@ -59,6 +64,10 @@ public class Piece : MonoBehaviour {
 
     /* --- Region --- */
     #region Actions
+
+    public void Snap() {
+        transform.position = (Vector3)(Vector2)m_Position;
+    }
 
     public void Move(float deltaTime) {
         if (m_Board == null) {

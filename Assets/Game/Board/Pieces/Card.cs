@@ -62,12 +62,13 @@ public class Card : Piece {
     /* --- Use --- */
     #region Use
 
+    public void AddCharges(int charges) {
+        m_Charges = m_Charges + charges;
+    }
+
     public void UseCharge() {
         m_Active = false;
         m_Charges = m_Charges - 1;
-        if (m_Charges <= 0) {
-            Destroy(gameObject);
-        }
     }
 
     public virtual bool Effect(Board board, Vector2Int target) {

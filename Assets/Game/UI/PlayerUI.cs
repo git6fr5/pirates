@@ -8,13 +8,13 @@ public class PlayerUI : MonoBehaviour {
     #region Variables
 
     [SerializeField] private CardUI m_PlayerCard;
-    public List<CardUI> m_PlayerCards;
+    private CardUI[] m_PlayerCards;
 
     [SerializeField] private SpriteRenderer m_PlayerHeart;
-    public List<SpriteRenderer> m_PlayerHearts;
+    private List<SpriteRenderer> m_PlayerHearts;
 
     [SerializeField] private SpriteRenderer m_PlayerAction;
-    public List<SpriteRenderer> m_PlayerActions;
+    private List<SpriteRenderer> m_PlayerActions;
 
     [SerializeField] private SpriteRenderer m_TargetSquare;
 
@@ -25,6 +25,7 @@ public class PlayerUI : MonoBehaviour {
 
     public void Refresh(Player player, Board board) {
         if (player == null || board == null) { return; }
+        transform.SetParent(null);
 
         RefreshTargetUI(player, board);
         RefreshCardUI(player);
@@ -46,30 +47,55 @@ public class PlayerUI : MonoBehaviour {
 
     private void RefreshCardUI(Player player) {
 
+        if (m_PlayerCards == null) {
+
+            m_PlayerCards = new CardUI[player.Cards.Length];
+            for (int i = 0; i < player.Cards.Length; i++) {
+                CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
+                m_PlayerCards[i] = newCardUI;
+            }
+        }
+
+        //// Refresh the cards.
+        //for (int i = 0; i < m_PlayerCards.Count; i++) {
+        //    if (m_PlayerCards[i] == null) {
+        //        CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
+        //    }
+        //}
+
         // While not the players turn, deactivate the card ui interactability.
         if (player.CompletedTurn) {
-            for (int i = 0; i < m_PlayerCards.Count; i++) {
+            for (int i = 0; i < m_PlayerCards.Length; i++) {
                 m_PlayerCards[i].gameObject.SetActive(false);
             }
         }
         else {
-            for (int i = 0; i < m_PlayerCards.Count; i++) {
+            for (int i = 0; i < m_PlayerCards.Length; i++) {
                 m_PlayerCards[i].gameObject.SetActive(true);
             }
         }
+        
 
-        // Refresh the cards.
+    }
+
+    public void ResetCards(Player player, bool redraw = true) {
+
         if (m_PlayerCards != null) {
-            for (int i = 0; i < m_PlayerCards.Count; i++) {
-                CardUI card = m_PlayerCards[i];
-                Destroy(card.gameObject);
+            for (int i = 0; i < m_PlayerCards.Length; i++) {
+                CardUI cardUI = m_PlayerCards[i];
+                if (cardUI != null) {
+                    Destroy(cardUI.CardTargetType.gameObject);
+                    Destroy(cardUI.gameObject);
+                }
             }
         }
 
-        m_PlayerCards = new List<CardUI>();
-        for (int i = 0; i < player.Cards.Length; i++) {
-            CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
-            m_PlayerCards.Add(newCardUI);
+        if (redraw) {
+            m_PlayerCards = new CardUI[player.Cards.Length];
+            for (int i = 0; i < player.Cards.Length; i++) {
+                CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
+                m_PlayerCards[i] = newCardUI;
+            }
         }
 
     }
@@ -104,7 +130,6 @@ public class PlayerUI : MonoBehaviour {
 
         m_PlayerActions = new List<SpriteRenderer>();
         int energy = player.ActionsPerTurn - player.ActionsTaken;
-        print(energy);
         for (int i = 0; i < energy; i++) {
             SpriteRenderer newEnergy = Instantiate(m_PlayerAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
             newEnergy.transform.position += i * 1f * Vector3.right;

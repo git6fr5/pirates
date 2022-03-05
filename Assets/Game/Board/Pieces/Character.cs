@@ -21,7 +21,6 @@ public class Character : Piece {
     [SerializeField] protected int m_Hearts;
     public int Hearts => m_Hearts;
 
-
     public int m_ActionsTaken;
     public int ActionsTaken => m_ActionsTaken;
 
@@ -33,9 +32,14 @@ public class Character : Piece {
     private bool m_CompletedTurn;
     public bool CompletedTurn => m_CompletedTurn;
 
-    public int m_CardSlots;
+    [SerializeField] private int m_CardSlots;
+    public int CardSlots => m_CardSlots;
+
     public Card[] m_Cards;
     public Card[] Cards => m_Cards;
+
+    [SerializeField] private bool m_IsStatic;
+    public bool IsStatic => m_IsStatic;
 
     void Start() {
         m_Hearts = m_MaxHearts;
@@ -159,6 +163,7 @@ public class Character : Piece {
 
     private IEnumerator IEPerformingAction(float duration) {
         yield return new WaitForSeconds(duration);
+        Snap();
         m_PerformingAction = false;
     }
 
@@ -177,6 +182,9 @@ public class Character : Piece {
                     Vector2Int intTarget = new Vector2Int((int)((Vector2)target).x, (int)((Vector2)target).y);
                     if (m_Cards[i].Effect(m_Board, intTarget)) {
                         m_Cards[i].UseCharge();
+                        if (m_Cards[i].Charges <= 0) {
+                            RemoveCard(i);
+                        }
                         m_ActionsTaken += 1;
                         float duration = m_Board.TurnDelay;
                         PerformAction(duration);
@@ -191,10 +199,33 @@ public class Character : Piece {
         return false;
     }
 
+    public virtual void RemoveCard(int index) {
+        Card card = m_Cards[index];
+        for (int i = index + 1; i < m_Cards.Length; i++) {
+            m_Cards[i - 1] = m_Cards[i];
+        }
+        m_Cards[m_Cards.Length - 1] = null;
+        Destroy(card.gameObject);
+    }
+
+    public virtual bool AddCard(Card card) {
+        for (int i = 0; i < m_Cards.Length; i++) {
+            if (m_Cards[i] == null) {
+                Card newCard = Instantiate(card.gameObject).GetComponent<Card>();
+                m_Cards[i] = newCard;
+                newCard.transform.SetParent(transform);
+                Destroy(card.gameObject);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /* --- Damage --- */
 
     public void TakeDamage(int damage) {
         m_Hearts -= damage;
+        CameraShake.ActivateShake(m_Board.TurnDelay);
     }
 
     public void Heal(int health) {
@@ -206,15 +237,22 @@ public class Character : Piece {
 
     private void CheckDeath() {
         if (m_Hearts <= 0) {
+            ClearUI();
             Destroy(gameObject);
         }
     }
 
     /* --- UI --- */
+    void OnDestroy() {
+        ClearUI();
+    }
 
     protected virtual void SetUI() {
         //
     }
 
+    protected virtual void ClearUI() {
+
+    }
 
 }

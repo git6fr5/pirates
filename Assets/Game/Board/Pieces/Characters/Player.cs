@@ -60,11 +60,33 @@ public class Player : Character {
 
     #endregion
 
+    /* --- Cards --- */
+    #region Card
+
+    public override void RemoveCard(int index) {
+        base.RemoveCard(index);
+        m_PlayerUI.ResetCards(this);
+    }
+
+    public override bool AddCard(Card card) {
+        bool success = base.AddCard(card);
+        m_PlayerUI.ResetCards(this);
+        return success;
+    }
+
+    #endregion
+
     /* --- UI --- */
     #region UI
 
     protected override void SetUI() {
         m_PlayerUI.Refresh(this, m_Board);
+       
+    }
+
+    protected override void ClearUI() {
+        m_PlayerUI.ResetCards(this, false);
+        Destroy(m_PlayerUI);
     }
 
     #endregion

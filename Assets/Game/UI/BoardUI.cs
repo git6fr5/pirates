@@ -58,7 +58,7 @@ public class BoardUI : MonoBehaviour {
     public static void DrawHealth(int hearts, Vector2Int origin, ref List<SpriteRenderer> healthIndicators) {
         for (int i = 0; i < hearts; i++) {
             Vector3 position = (Vector3)(Vector2)origin + Vector3.up + Vector3.right * ((float)i - (float)hearts / 2f);
-            DrawSprite(HeartIndicator, position, new Color(1f, 1f, 0f, 0f), 0.25f, ref healthIndicators);
+            DrawSprite(HeartIndicator, position, new Color(1f, 1f, 0f, 0f), 0.5f, ref healthIndicators);
         }
     }
 
@@ -69,14 +69,16 @@ public class BoardUI : MonoBehaviour {
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = SquareIndicator;
         spriteRenderers.Add(indicator);
+        Destroy(indicator.gameObject, 0.05f);
     }
 
     public static void DrawSprite(Sprite sprite, Vector3 position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers) {
         SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-        indicator.sortingOrder = 1;
+        indicator.sortingOrder = 2;
         indicator.transform.position = position;
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = sprite;
+        spriteRenderers.Add(indicator);
         spriteRenderers.Add(indicator);
     }
 
@@ -84,7 +86,9 @@ public class BoardUI : MonoBehaviour {
         if (spriteRenderers != null) {
             for (int i = 0; i < spriteRenderers.Count; i++) {
                 SpriteRenderer spriteRenderer = spriteRenderers[i];
-                Destroy(spriteRenderer.gameObject);
+                if (spriteRenderer != null) {
+                    Destroy(spriteRenderer.gameObject);
+                }
             }
         }
         spriteRenderers = new List<SpriteRenderer>();
