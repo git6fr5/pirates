@@ -8,30 +8,45 @@ using UnityEngine;
 /// </summary>
 public class Card : Piece {
 
-    public string m_CardName;
+    /* --- Variables --- */
+    #region Variables
+
+    [Header("Settings")]
+    // Name.
+    [SerializeField] private string m_CardName;
     public string CardName => m_CardName;
-
-    public Sprite m_CardIcon;
-    public Sprite CardIcon => m_CardIcon;
-
-    public int m_Value;
+    // Target Type.
+    [SerializeField] private TargetType m_TargetType;
+    public TargetType CardTargetType => m_TargetType;
+    // Range.
+    [SerializeField] private int m_Range;
+    public int Range => m_Range;
+    // Value.
+    [SerializeField] protected int m_Value;
     public int Value => m_Value;
-
-    public int m_Charges;
+    // Charges.
+    [SerializeField] private int m_Charges;
     public int Charges => m_Charges;
+    // Face.
+    [SerializeField] private Sprite m_Face;
+    public Sprite Face => m_Face;
 
-    public bool m_Active;
+    [Header("Activation")]
+    // Activation.
+    [SerializeField, ReadOnly] private bool m_Active;
     public bool Active => m_Active;
+    // Activation Effect
+    [SerializeField] private Sprite m_ActivationEffect;
 
-    public TargetType m_TargetType;
-    public int m_Range;
+    [Header("Targetting")]
+    // Indicator.
+    [SerializeField] private Sprite m_SquareIndicator;
+    private List<SpriteRenderer> m_TargetIndicators;
 
-    protected List<Vector2Int> m_TargetablePositions;
-    public List<Vector2Int> TargetablePositions => m_TargetablePositions;
+    #endregion
 
-    public Sprite m_Effect;
-    public Sprite m_Indicator;
-    public List<SpriteRenderer> m_Indicators;
+    /* --- Activation --- */
+    #region Activation
 
     public void Activate(Board board, Vector2Int origin) {
         m_Active = true;
@@ -41,6 +56,11 @@ public class Card : Piece {
     public void Deactivate() {
         m_Active = false;
     }
+
+    #endregion
+
+    /* --- Use --- */
+    #region Use
 
     public void UseCharge() {
         m_Active = false;
@@ -53,61 +73,31 @@ public class Card : Piece {
     public virtual bool Effect(Board board, Vector2Int target) {
         SpriteRenderer effect = new GameObject("Effect", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
         effect.transform.position = (Vector3)(Vector2)target;
-        effect.sprite = m_Effect;
+        effect.sprite = m_ActivationEffect;
         Destroy(effect.gameObject, board.TurnDelay);
         return false;
     }
 
-    public void GetTargetablePositions(Board board, Vector2Int origin) {
-        m_TargetablePositions = new List<Vector2Int>();
+    #endregion
+
+    /* --- Targetting --- */
+    #region Targetting
+
+    public List<Vector2Int> GetTargetablePositions(Board board, Vector2Int origin) {
+        List<Vector2Int> targetablePositions = new List<Vector2Int>();
         switch (m_TargetType) {
             case TargetType.Melee:
-                board.AdjacentPositions(origin, m_Range, ref m_TargetablePositions);
-                return;
+                targetablePositions = board.AdjacentPositions(origin, m_Range, ref targetablePositions);
+                break;
             case TargetType.Self:
-                m_TargetablePositions.Add(origin);
-                return;
+                targetablePositions.Add(origin);
+                break;
             default:
-                return;
+                break;
         }
+        return targetablePositions;
     }
 
-    public void DrawTargetablePositions(Board board, Vector2Int origin, bool redraw = true) {
-        GetTargetablePositions(board, origin);
-        List<Vector2Int> targettablePositions = m_TargetablePositions;
-
-        if (m_Indicators != null) {
-            for (int i = 0; i < m_Indicators.Count; i++) {
-                SpriteRenderer oldIndicator = m_Indicators[i];
-                Destroy(oldIndicator.gameObject);
-            }
-        }
-        m_Indicators = new List<SpriteRenderer>();
-
-        if (redraw) {
-            for (int i = 0; i < targettablePositions.Count; i++) {
-                SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-                indicator.sortingOrder = 1;
-                indicator.transform.position = (Vector3)(Vector2)targettablePositions[i];
-                indicator.color = new Color(1f, 1f, 1f, 0.25f);
-                indicator.sprite = m_Indicator;
-                m_Indicators.Add(indicator);
-            }
-        }
-        
-    }
-
-    protected override void Draw() {
-        if (m_Active) {
-            Gizmos.color = Color.yellow;
-            base.Draw();
-
-            for (int i = 0; i < m_TargetablePositions.Count; i++) {
-                Gizmos.DrawWireSphere((Vector3)(Vector2)m_TargetablePositions[i], 0.35f);
-            }
-        }
-
-    }
-
+    #endregion
 
 }

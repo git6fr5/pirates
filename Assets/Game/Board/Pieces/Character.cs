@@ -23,7 +23,11 @@ public class Character : Piece {
 
 
     public int m_ActionsTaken;
+    public int ActionsTaken => m_ActionsTaken;
+
     public int m_ActionsPerTurn;
+    public int ActionsPerTurn => m_ActionsPerTurn;
+
     public bool m_PerformingAction;
 
     private bool m_CompletedTurn;
@@ -53,6 +57,7 @@ public class Character : Piece {
 
     protected override void Think() {
         CheckDeath();
+        SetUI();
 
         if (!m_CompletedTurn) {
             TakeTurn();
@@ -133,7 +138,7 @@ public class Character : Piece {
         if (direction.y < 0) {
             return Action.MoveDown;
         }
-        return Action.None;
+        return Action.Pass;
     }
 
     /* --- Execution --- */
@@ -203,6 +208,12 @@ public class Character : Piece {
         if (m_Hearts <= 0) {
             Destroy(gameObject);
         }
+    }
+
+    /* --- UI --- */
+
+    protected virtual void SetUI() {
+        //
     }
 
 

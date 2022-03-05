@@ -5,15 +5,20 @@ using UnityEngine.Tilemaps;
 
 [System.Serializable]
 public class Board : MonoBehaviour {
-    
+
     /* --- Data --- */
+    #region Data
+
     [System.Serializable]
     public class PieceData {
         public Piece m_Piece;
         public Vector2Int m_Position;
     }
 
+    #endregion
+
     /* --- Variables --- */
+    #region Variables
 
     // Settings.
     public int m_Width;
@@ -39,7 +44,10 @@ public class Board : MonoBehaviour {
     public TileBase m_BackgroundTile;
     public PlayerUI m_PlayerUI;
 
+    #endregion
+
     /* --- Unity --- */
+    #region Unity
 
     void Start() {
 
@@ -56,9 +64,7 @@ public class Board : MonoBehaviour {
         m_MaxTurnNumber = m_Characters.Length;
         StartCoroutine(IEGameLoop());
 
-        // UI.
-        Player player = Get<Player>();
-        m_PlayerUI.Set(this, player);
+        // Background.
         for (int i = 0; i < m_Height; i++) {
             for (int j = 0; j < m_Width; j++) {
                 m_Background.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
@@ -66,6 +72,16 @@ public class Board : MonoBehaviour {
         }
 
     }
+
+    #endregion
+
+    /* --- Generics --- */
+    #region Generics
+
+    public static Board FindInstance() {
+        return (Board)GameObject.FindObjectOfType(typeof(Board));
+    }
+
 
     public T[] GetAll<T>() {
         List<T> newList = new List<T>();
@@ -92,6 +108,8 @@ public class Board : MonoBehaviour {
         }
         return default(T);
     }
+
+    #endregion
 
     private IEnumerator IEGameLoop() {
         while (true) {
@@ -147,7 +165,7 @@ public class Board : MonoBehaviour {
         return false;
     }
 
-    public void AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> adjacentPositions) {
+    public List<Vector2Int> AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> adjacentPositions) {
         
         List<Vector2Int> adjacentDirections = new List<Vector2Int>() {
             Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
@@ -166,7 +184,7 @@ public class Board : MonoBehaviour {
         //    }
         //}
 
-        return;
+        return adjacentPositions;
     }
 
     public bool WithinRadius(Piece pieceA, Piece pieceB, int radius) {

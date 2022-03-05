@@ -17,8 +17,8 @@ public class Piece : MonoBehaviour {
     protected Vector2Int m_Position;
     public Vector2Int Position => m_Position;
     // Color.
-    [SerializeField] protected Color m_PieceColor = Color.white;
-    public Color PieceColor => m_PieceColor;
+    [SerializeField] protected Color m_DebugColor = Color.white;
+    public Color DebugColor => m_DebugColor;
 
     #endregion
 
@@ -84,7 +84,7 @@ public class Piece : MonoBehaviour {
     }
 
     protected virtual void Draw() {
-        Gizmos.color = m_PieceColor;
+        Gizmos.color = m_DebugColor;
         Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 

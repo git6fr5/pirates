@@ -4,98 +4,116 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour {
 
-    public Player m_Player;
-    public CardUI m_BaseCardUI;
-    public List<CardUI> m_CardUI;
+    /* --- Variables --- */
+    #region Variables
 
-    public SpriteRenderer m_BaseHeart;
-    public List<SpriteRenderer> m_Hearts;
+    [SerializeField] private CardUI m_PlayerCard;
+    public List<CardUI> m_PlayerCards;
 
-    public Board m_Board;
+    [SerializeField] private SpriteRenderer m_PlayerHeart;
+    public List<SpriteRenderer> m_PlayerHearts;
 
-    public SpriteRenderer m_MouseIndicator;
+    [SerializeField] private SpriteRenderer m_PlayerAction;
+    public List<SpriteRenderer> m_PlayerActions;
 
-    public void Set(Board board, Player player) {
-        m_Player = player;
-        m_Board = board;
-        SetCardUI();
+    [SerializeField] private SpriteRenderer m_TargetSquare;
+
+    #endregion
+
+    /* --- Refreshing --- */
+    #region Refreshing
+
+    public void Refresh(Player player, Board board) {
+        if (player == null || board == null) { return; }
+
+        RefreshTargetUI(player, board);
+        RefreshCardUI(player);
+        RefreshHealthUI(player);
+        RefreshEnergyUI(player);
     }
 
-    void Update() {
-        if (m_Player.CompletedTurn) {
-            for (int i = 0; i < m_CardUI.Count; i++) {
-                m_CardUI[i].gameObject.SetActive(false);
-            }
-        }
-        else {
-            for (int i = 0; i < m_CardUI.Count; i++) {
-                m_CardUI[i].gameObject.SetActive(true);
-            }
-        }
-        SetHealthUI();
-
-        SetMouseIndicator();
-    }
-
-    void SetMouseIndicator() {
+    private void RefreshTargetUI(Player player, Board board) {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f, 0f);
         Vector3 snappedPosition = new Vector3(Mathf.Floor(mousePosition.x), Mathf.Floor(mousePosition.y), 0f);
-        if (mousePosition.x >= 0 && mousePosition.x < m_Board.Width && mousePosition.y >= 0 && mousePosition.y < m_Board.Height) {
-            m_MouseIndicator.gameObject.SetActive(true);
-            m_MouseIndicator.transform.position = snappedPosition;
+        if (!player.CompletedTurn && mousePosition.x >= 0 && mousePosition.x < board.Width && mousePosition.y >= 0 && mousePosition.y < board.Height) {
+            m_TargetSquare.gameObject.SetActive(true);
+            m_TargetSquare.transform.position = snappedPosition;
         }
         else {
-            m_MouseIndicator.gameObject.SetActive(false);
+            m_TargetSquare.gameObject.SetActive(false);
         }
     }
 
-    public Board GetBoard() {
-        return m_Board;
-    }
+    private void RefreshCardUI(Player player) {
 
-    public Vector2Int GetPlayerPosition() {
-        return m_Player.Position;
-    }
-
-    private void SetCardUI() {
-        if (m_Player == null) {
-            return;
+        // While not the players turn, deactivate the card ui interactability.
+        if (player.CompletedTurn) {
+            for (int i = 0; i < m_PlayerCards.Count; i++) {
+                m_PlayerCards[i].gameObject.SetActive(false);
+            }
+        }
+        else {
+            for (int i = 0; i < m_PlayerCards.Count; i++) {
+                m_PlayerCards[i].gameObject.SetActive(true);
+            }
         }
 
-        if (m_CardUI != null) {
-            for (int i = 0; i < m_CardUI.Count; i++) {
-                CardUI card = m_CardUI[i];
+        // Refresh the cards.
+        if (m_PlayerCards != null) {
+            for (int i = 0; i < m_PlayerCards.Count; i++) {
+                CardUI card = m_PlayerCards[i];
                 Destroy(card.gameObject);
             }
         }
 
-        m_CardUI = new List<CardUI>();
-        for (int i = 0; i < m_Player.Cards.Length; i++) {
-            CardUI newCardUI = m_BaseCardUI.Create(this, m_Player.Cards[i], i);
-            m_CardUI.Add(newCardUI);
+        m_PlayerCards = new List<CardUI>();
+        for (int i = 0; i < player.Cards.Length; i++) {
+            CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
+            m_PlayerCards.Add(newCardUI);
         }
 
     }
 
-    private void SetHealthUI() {
-        if (m_Player == null) {
-            return;
-        }
+    private void RefreshHealthUI(Player player) {
 
-        if (m_Hearts != null) {
-            for (int i = 0; i < m_Hearts.Count; i++) {
-                SpriteRenderer renderer = m_Hearts[i];
+        if (m_PlayerHearts != null) {
+            for (int i = 0; i < m_PlayerHearts.Count; i++) {
+                SpriteRenderer renderer = m_PlayerHearts[i];
                 Destroy(renderer.gameObject);
             }
         }
 
-        m_Hearts = new List<SpriteRenderer>();
-        for (int i = 0; i < m_Player.Hearts; i++) {
-            SpriteRenderer newHeart = Instantiate(m_BaseHeart.gameObject, m_BaseHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+        m_PlayerHearts = new List<SpriteRenderer>();
+        for (int i = 0; i < player.Hearts; i++) {
+            SpriteRenderer newHeart = Instantiate(m_PlayerHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
             newHeart.transform.position += i * 1f * Vector3.right;
             newHeart.gameObject.SetActive(true);
-            m_Hearts.Add(newHeart);
+            m_PlayerHearts.Add(newHeart);
         }
 
     }
+
+    private void RefreshEnergyUI(Player player) {
+
+        if (m_PlayerActions != null) {
+            for (int i = 0; i < m_PlayerActions.Count; i++) {
+                SpriteRenderer renderer = m_PlayerActions[i];
+                Destroy(renderer.gameObject);
+            }
+        }
+
+        m_PlayerActions = new List<SpriteRenderer>();
+        int energy = player.ActionsPerTurn - player.ActionsTaken;
+        print(energy);
+        for (int i = 0; i < energy; i++) {
+            SpriteRenderer newEnergy = Instantiate(m_PlayerAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+            newEnergy.transform.position += i * 1f * Vector3.right;
+            newEnergy.gameObject.SetActive(true);
+            m_PlayerActions.Add(newEnergy);
+        }
+
+    }
+
+    #endregion
+
 }
