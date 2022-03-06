@@ -10,6 +10,10 @@ public class Enemy : Character {
     /* --- Variables --- */
     #region Variables
 
+    // Difficulty.
+    [SerializeField] private Difficulty m_Difficulty;
+    public Difficulty EnemyDifficulty => m_Difficulty;
+
     // Settings.
     [SerializeField] private int m_MovementActions;
     [SerializeField] private int m_VisisonDistance;
@@ -51,7 +55,7 @@ public class Enemy : Character {
                 return action;
             }
         }
-        
+
         if (m_TookCardAction) {
             m_TookCardAction = false;
             return Action.Pass;

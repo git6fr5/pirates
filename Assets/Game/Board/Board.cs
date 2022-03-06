@@ -74,7 +74,9 @@ public class Board : MonoBehaviour {
     public void Reset() {
         StopCoroutine(m_GameLoop);
         for (int i = 0; i < m_Pieces.Count; i++) {
-            Destroy(m_Pieces[i].gameObject);
+            if (m_Pieces[i] != null) {
+                Destroy(m_Pieces[i].gameObject);
+            }
         }
         for (int i = 0; i < m_Height; i++) {
             for (int j = 0; j < m_Width; j++) {
@@ -104,6 +106,10 @@ public class Board : MonoBehaviour {
                 m_Background.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
             }
         }
+    }
+
+    public void SetDepth(int depth) {
+        m_Depth = depth;
     }
 
     #endregion
