@@ -15,11 +15,15 @@ public class Gun : Card {
             return false; // Should cards use charges if they don't do anything?
         }
 
-        Effect newEffect = m_ProjectileEffect.Create(origin, board.TurnDelay);
-        newEffect.MoveTo(target, board.TurnDelay);
+        float distance = (origin - target).magnitude;
+        float maxDistance = Mathf.Sqrt(2) * m_Range;
+        float actualSpeed = maxDistance / board.TurnDelay;
+        float timeInterval = distance / actualSpeed;
 
-        Debug.Log("Doing damage");
-        character.TakeDamage(m_Value);
+        Effect newEffect = m_ProjectileEffect.Create(origin, timeInterval);
+        newEffect.MoveTo(target, timeInterval);
+        character.TakeDamage(m_Value, timeInterval);
+
         return true;
     }
 

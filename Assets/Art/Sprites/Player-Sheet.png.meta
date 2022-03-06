@@ -148,10 +148,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -172,8 +172,8 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -184,8 +184,56 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -241,8 +289,8 @@ TextureImporter:
       name: Player-Sheet_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 120
+        x: 0
+        y: 100
         width: 20
         height: 20
       alignment: 0
@@ -262,8 +310,8 @@ TextureImporter:
       name: Player-Sheet_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 120
+        x: 20
+        y: 100
         width: 20
         height: 20
       alignment: 0
@@ -283,8 +331,8 @@ TextureImporter:
       name: Player-Sheet_4
       rect:
         serializedVersion: 2
-        x: 80
-        y: 120
+        x: 40
+        y: 100
         width: 20
         height: 20
       alignment: 0
@@ -304,7 +352,7 @@ TextureImporter:
       name: Player-Sheet_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 60
         y: 100
         width: 20
         height: 20
@@ -325,7 +373,7 @@ TextureImporter:
       name: Player-Sheet_6
       rect:
         serializedVersion: 2
-        x: 20
+        x: 80
         y: 100
         width: 20
         height: 20
@@ -346,8 +394,8 @@ TextureImporter:
       name: Player-Sheet_7
       rect:
         serializedVersion: 2
-        x: 40
-        y: 100
+        x: 0
+        y: 80
         width: 20
         height: 20
       alignment: 0
@@ -367,8 +415,8 @@ TextureImporter:
       name: Player-Sheet_8
       rect:
         serializedVersion: 2
-        x: 60
-        y: 100
+        x: 20
+        y: 80
         width: 20
         height: 20
       alignment: 0
@@ -388,8 +436,8 @@ TextureImporter:
       name: Player-Sheet_9
       rect:
         serializedVersion: 2
-        x: 80
-        y: 100
+        x: 0
+        y: 60
         width: 20
         height: 20
       alignment: 0
@@ -409,8 +457,8 @@ TextureImporter:
       name: Player-Sheet_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
+        x: 20
+        y: 60
         width: 20
         height: 20
       alignment: 0
@@ -430,8 +478,8 @@ TextureImporter:
       name: Player-Sheet_11
       rect:
         serializedVersion: 2
-        x: 20
-        y: 80
+        x: 40
+        y: 60
         width: 20
         height: 20
       alignment: 0
@@ -451,8 +499,8 @@ TextureImporter:
       name: Player-Sheet_12
       rect:
         serializedVersion: 2
-        x: 40
-        y: 80
+        x: 60
+        y: 60
         width: 20
         height: 20
       alignment: 0
@@ -472,8 +520,8 @@ TextureImporter:
       name: Player-Sheet_13
       rect:
         serializedVersion: 2
-        x: 60
-        y: 80
+        x: 0
+        y: 40
         width: 20
         height: 20
       alignment: 0
@@ -493,8 +541,8 @@ TextureImporter:
       name: Player-Sheet_14
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
+        x: 20
+        y: 40
         width: 20
         height: 20
       alignment: 0
@@ -514,8 +562,8 @@ TextureImporter:
       name: Player-Sheet_15
       rect:
         serializedVersion: 2
-        x: 0
-        y: 60
+        x: 40
+        y: 40
         width: 20
         height: 20
       alignment: 0
@@ -535,8 +583,8 @@ TextureImporter:
       name: Player-Sheet_16
       rect:
         serializedVersion: 2
-        x: 20
-        y: 60
+        x: 60
+        y: 40
         width: 20
         height: 20
       alignment: 0
@@ -556,8 +604,8 @@ TextureImporter:
       name: Player-Sheet_17
       rect:
         serializedVersion: 2
-        x: 40
-        y: 60
+        x: 0
+        y: 20
         width: 20
         height: 20
       alignment: 0
@@ -577,8 +625,8 @@ TextureImporter:
       name: Player-Sheet_18
       rect:
         serializedVersion: 2
-        x: 60
-        y: 60
+        x: 20
+        y: 20
         width: 20
         height: 20
       alignment: 0
@@ -598,8 +646,8 @@ TextureImporter:
       name: Player-Sheet_19
       rect:
         serializedVersion: 2
-        x: 80
-        y: 60
+        x: 40
+        y: 20
         width: 20
         height: 20
       alignment: 0
@@ -619,8 +667,8 @@ TextureImporter:
       name: Player-Sheet_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
+        x: 60
+        y: 20
         width: 20
         height: 20
       alignment: 0
@@ -640,8 +688,8 @@ TextureImporter:
       name: Player-Sheet_21
       rect:
         serializedVersion: 2
-        x: 20
-        y: 40
+        x: 0
+        y: 0
         width: 20
         height: 20
       alignment: 0
@@ -661,8 +709,8 @@ TextureImporter:
       name: Player-Sheet_22
       rect:
         serializedVersion: 2
-        x: 40
-        y: 40
+        x: 20
+        y: 0
         width: 20
         height: 20
       alignment: 0
@@ -682,8 +730,8 @@ TextureImporter:
       name: Player-Sheet_23
       rect:
         serializedVersion: 2
-        x: 60
-        y: 40
+        x: 40
+        y: 0
         width: 20
         height: 20
       alignment: 0
@@ -703,8 +751,8 @@ TextureImporter:
       name: Player-Sheet_24
       rect:
         serializedVersion: 2
-        x: 80
-        y: 40
+        x: 60
+        y: 0
         width: 20
         height: 20
       alignment: 0
@@ -716,216 +764,6 @@ TextureImporter:
       bones: []
       spriteID: 21db605d1f38be2f0800000000000000
       internalID: -942514622319641326
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_25
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc7376f2d1839ebf0800000000000000
-      internalID: -294642602615556148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_26
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7009d004accec9150800000000000000
-      internalID: 5880835566841204743
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_27
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 035823676a6e63540800000000000000
-      internalID: 4987427239981385008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_28
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23caef42f0b1a3190800000000000000
-      internalID: -7982037637701653454
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_29
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 20
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77de496bcf102e300800000000000000
-      internalID: 279788311756991863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_30
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 082489ab1ee3eee70800000000000000
-      internalID: 9146317032455160448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_31
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73baadedde3233a00800000000000000
-      internalID: 734970668744616759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_32
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb89dae100868dc40800000000000000
-      internalID: 5537290091576006843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_33
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a21a8123991b7900800000000000000
-      internalID: 683167888190345890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Sheet_34
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de4aadeac553c2470800000000000000
-      internalID: 8371124479561737453
       vertices: []
       indices: 
       edges: []

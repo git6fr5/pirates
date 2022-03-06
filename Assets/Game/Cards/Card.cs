@@ -22,7 +22,7 @@ public class Card : Piece { // Is there any reason for this to be derived from a
     [SerializeField] private TargetType m_TargetType;
     public TargetType CardTargetType => m_TargetType;
     // Range.
-    [SerializeField] private int m_Range;
+    [SerializeField] protected int m_Range;
     public int Range => m_Range;
     // Value.
     [SerializeField] protected int m_Value;

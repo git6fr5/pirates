@@ -21,6 +21,9 @@ public class Character : Piece {
     [SerializeField] protected int m_Hearts;
     public int Hearts => m_Hearts;
 
+    public Action m_CurrAction;
+    public Action CurrAction => m_CurrAction;
+
     public int m_ActionsTaken;
     public int ActionsTaken => m_ActionsTaken;
 
@@ -41,8 +44,11 @@ public class Character : Piece {
     [SerializeField] private bool m_IsStatic;
     public bool IsStatic => m_IsStatic;
 
+    [SerializeField] private bool m_Dead;
+
     void Start() {
         m_Hearts = m_MaxHearts;
+        m_CurrAction = Action.None;
 
         Card[] cards = new Card[m_CardSlots];
         if (cards.Length > m_Cards.Length) {
@@ -60,7 +66,10 @@ public class Character : Piece {
     }
 
     protected override void Think() {
-        CheckDeath();
+        if (m_Dead) {
+            m_CompletedTurn = true;
+            return;
+        }
         SetUI();
 
         if (!m_CompletedTurn) {
@@ -152,11 +161,12 @@ public class Character : Piece {
         if (tookAction) {
             m_ActionsTaken += 1;
             float duration = m_Board.TurnDelay;
-            PerformAction(duration);
+            PerformAction(index, duration);
         }
     }
 
-    private void PerformAction(float duration) {
+    private void PerformAction(int index, float duration) {
+        m_CurrAction = (Action)index;
         m_PerformingAction = true;
         StartCoroutine(IEPerformingAction(duration));
     }
@@ -165,6 +175,7 @@ public class Character : Piece {
         m_PerformingAction = WaitForEndOfAction();
         yield return new WaitForSeconds(duration);
         Snap();
+        m_CurrAction = Action.None;
         m_PerformingAction = false;
     }
 
@@ -192,7 +203,7 @@ public class Character : Piece {
                         }
                         m_ActionsTaken += 1;
                         float duration = m_Board.TurnDelay;
-                        PerformAction(duration);
+                        PerformAction(4 + i, duration);
                     }
                     else {
                         m_Cards[i].Deactivate();
@@ -228,9 +239,20 @@ public class Character : Piece {
 
     /* --- Damage --- */
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage, float delay = 0f) {
         m_Hearts -= damage;
-        CameraShake.ActivateShake(m_Board.TurnDelay);
+
+        if (delay != 0f) {
+            CameraShake.DelayedShake(delay, m_Board.TurnDelay / 3f);
+        }
+        else {
+            CameraShake.ActivateShake(m_Board.TurnDelay / 2f);
+        }
+
+        if (m_Hearts <= 0) {
+            m_Dead = true;
+            StartCoroutine(IEDeathDelay(delay));
+        }
     }
 
     public void Heal(int health) {
@@ -240,11 +262,10 @@ public class Character : Piece {
         }
     }
 
-    private void CheckDeath() {
-        if (m_Hearts <= 0) {
-            ClearUI();
-            Destroy(gameObject);
-        }
+    private IEnumerator IEDeathDelay(float delay) {
+        yield return new WaitForSeconds(delay);
+        ClearUI();
+        Destroy(gameObject);
     }
 
     /* --- UI --- */

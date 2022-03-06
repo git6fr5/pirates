@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 3070856426703930625}
   - component: {fileID: 3070856426703930630}
   - component: {fileID: 3070856426703930631}
+  - component: {fileID: 6971471554509331319}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_MaxHearts: 4
   m_Hearts: 0
+  m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 2
   m_PerformingAction: 0
@@ -358,6 +360,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6971471554509331319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3070856426703930628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpriteRenderer: {fileID: 0}
+  m_Character: {fileID: 0}
+  m_Sprites:
+  - {fileID: 4518225611054890064, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 1871674578834246284, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -8148742256322455360, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 3489784368332026933, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -3944583295012536477, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 3090173003755996115, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 8403341588387058359, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 8222716190985997936, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -3764308334532073066, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -3961127741491812631, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 2707164253404849536, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 760240769326365700, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 1723550264998150791, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 3286906832049929247, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 7634215581329522130, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 5539777403619449140, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -6321474878828185251, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 2187288752748286106, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -8430032442272652478, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 6562097317275539161, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 5492903409996221455, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -5136658248656738812, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: 4115175211340068186, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -7289432629376863316, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  - {fileID: -942514622319641326, guid: cc4688a58478a9c42a3c61427cf6fcad, type: 3}
+  m_IndexOffset: 0
+  m_IdleFrames: 2
+  m_ActionFrames: 5
+  m_BuffFrames: 2
+  m_MovementFrames: 4
+  m_DirectionIndex: 0
+  m_CurrentFrame: 0
+  m_Ticks: 0
 --- !u!1 &3070856426819997750
 GameObject:
   m_ObjectHideFlags: 0

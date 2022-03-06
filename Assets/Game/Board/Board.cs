@@ -151,9 +151,10 @@ public class Board : MonoBehaviour {
                 yield return new WaitUntil(() => m_Characters[i] == null || (m_Characters[i] != null && m_Characters[i].CompletedTurn));
                 if (m_Characters[i] != null && !m_Characters[i].IsStatic) {
                     // yield return new WaitForSeconds(m_TurnDelay);
+                    // yield return new WaitForSeconds(m_TurnDelay / 10f);
                 }
             }
-            // yield return new WaitForSeconds(m_TurnDelay);
+            // yield return new WaitForSeconds(m_TurnDelay / 2f);
             m_RoundNumber += 1;
         }
     }

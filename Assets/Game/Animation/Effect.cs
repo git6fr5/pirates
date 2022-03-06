@@ -25,7 +25,6 @@ public class Effect : MonoBehaviour {
 
     // Ticks.
     [SerializeField, ReadOnly] private int m_Frame;
-    [SerializeField, ReadOnly] private float m_FrameRate = 12f;
     [SerializeField, ReadOnly] private float m_Ticks;
 
     #endregion
@@ -71,7 +70,7 @@ public class Effect : MonoBehaviour {
 
     private void Animate(float deltaTime) {
         // Set the current frame.
-        m_Frame = (int)Mathf.Floor(m_Ticks * m_FrameRate);
+        m_Frame = (int)Mathf.Floor(m_Ticks * AnimationController.FrameRate);
         if (!m_Loop && m_Frame >= m_Sprites.Length) {
             Destroy(gameObject);
         }
