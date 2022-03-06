@@ -85,7 +85,7 @@ public class LDtkReader : MonoBehaviour {
         List<LDtkTileData> layerData = new List<LDtkTileData>();
 
         Board board = Board.FindInstance();
-        Vector2Int offset = new Vector2Int(quadrant.x * board.Width / 2 - 1, quadrant.y * board.Height / 2);
+        Vector2Int offset = new Vector2Int(quadrant.x * board.Width / 2, quadrant.y * board.Height / 2);
 
         LDtkUnity.LayerInstance layer = GetLayer(ldtkLevel, layerName);
         if (layer != null) {

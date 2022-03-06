@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class Card : Piece {
+public class Card : Piece { // Is there any reason for this to be derived from a piece? I guess.
 
     /* --- Variables --- */
     #region Variables
@@ -15,6 +15,9 @@ public class Card : Piece {
     // Name.
     [SerializeField] private string m_CardName;
     public string CardName => m_CardName;
+    // Rarity.
+    [SerializeField] private Rarity m_Rariry;
+    public Rarity CardRarity => m_Rariry;
     // Target Type.
     [SerializeField] private TargetType m_TargetType;
     public TargetType CardTargetType => m_TargetType;
@@ -33,15 +36,16 @@ public class Card : Piece {
 
     [Header("Activation")]
     // Activation.
-    [SerializeField, ReadOnly] private bool m_Active;
+    [SerializeField, ReadOnly] protected bool m_Active;
     public bool Active => m_Active;
     // Activation Effect
     [SerializeField] private Sprite m_ActivationEffect;
 
     [Header("Targetting")]
     // Indicator.
-    [SerializeField] private Sprite m_SquareIndicator;
+    // [SerializeField] private Sprite m_SquareIndicator;
     private List<SpriteRenderer> m_TargetIndicators;
+    protected List<Vector2Int> m_TargetablePositions;
 
     #endregion
 
@@ -75,6 +79,7 @@ public class Card : Piece {
         SpriteRenderer effect = new GameObject("Effect", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
         effect.transform.position = (Vector3)(Vector2)target;
         effect.sprite = m_ActivationEffect;
+        effect.sortingOrder = 1;
         Destroy(effect.gameObject, board.TurnDelay);
         return false;
     }
@@ -87,6 +92,12 @@ public class Card : Piece {
     public List<Vector2Int> GetTargetablePositions(Board board, Vector2Int origin) {
         List<Vector2Int> targetablePositions = new List<Vector2Int>();
         switch (m_TargetType) {
+            case TargetType.AOE:
+                targetablePositions = board.AllWithinRadius(origin, m_Range, ref targetablePositions);
+                break;
+            case TargetType.Directional:
+                targetablePositions = board.OctaDirectional(origin, m_Range, ref targetablePositions);
+                break;
             case TargetType.Melee:
                 targetablePositions = board.AdjacentPositions(origin, m_Range, ref targetablePositions);
                 break;
@@ -96,6 +107,7 @@ public class Card : Piece {
             default:
                 break;
         }
+        m_TargetablePositions = targetablePositions;
         return targetablePositions;
     }
 

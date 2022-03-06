@@ -162,9 +162,14 @@ public class Character : Piece {
     }
 
     private IEnumerator IEPerformingAction(float duration) {
+        m_PerformingAction = WaitForEndOfAction();
         yield return new WaitForSeconds(duration);
         Snap();
         m_PerformingAction = false;
+    }
+
+    protected virtual bool WaitForEndOfAction() {
+        return true;
     }
 
     private void ActivateCard(int index) {

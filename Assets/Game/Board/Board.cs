@@ -53,7 +53,6 @@ public class Board : MonoBehaviour {
     // UI.
     public Tilemap m_Background;
     public TileBase m_BackgroundTile;
-    public PlayerUI m_PlayerUI;
 
     #endregion
 
@@ -151,7 +150,7 @@ public class Board : MonoBehaviour {
                 m_Characters[i].NewTurn();
                 yield return new WaitUntil(() => m_Characters[i] == null || (m_Characters[i] != null && m_Characters[i].CompletedTurn));
                 if (m_Characters[i] != null && !m_Characters[i].IsStatic) {
-                    yield return new WaitForSeconds(0.025f);
+                    // yield return new WaitForSeconds(0.025f);
                 }
             }
             yield return new WaitForSeconds(m_TurnDelay);
@@ -200,15 +199,15 @@ public class Board : MonoBehaviour {
         return false;
     }
 
-    public List<Vector2Int> AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> adjacentPositions) {
+    public List<Vector2Int> AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> positions) {
         
-        List<Vector2Int> adjacentDirections = new List<Vector2Int>() {
+        List<Vector2Int> directions = new List<Vector2Int>() {
             Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
         };
 
-        for (int i = 0; i < adjacentDirections.Count; i++) {
-            if (CheckTarget(origin, adjacentDirections[i])) {
-                adjacentPositions.Add(origin + adjacentDirections[i]);
+        for (int i = 0; i < directions.Count; i++) {
+            if (CheckTarget(origin, directions[i])) {
+                positions.Add(origin + directions[i]);
             }
         }
 
@@ -219,7 +218,42 @@ public class Board : MonoBehaviour {
         //    }
         //}
 
-        return adjacentPositions;
+        return positions;
+    }
+
+    public List<Vector2Int> OctaDirectional(Vector2Int origin, int depth, ref List<Vector2Int> positions) {
+
+        List<Vector2Int> directions = new List<Vector2Int>() {
+            Vector2Int.right, Vector2Int.right + Vector2Int.up,
+            Vector2Int.up, Vector2Int.up + Vector2Int.left,
+            Vector2Int.left, Vector2Int.left + Vector2Int.down,
+            Vector2Int.down, Vector2Int.down + Vector2Int.right
+        };
+
+        List<int> brokenPaths = new List<int>();
+        for (int i = 1; i <= depth; i++) {
+            for (int j = 0; j < directions.Count; j++) {
+                if (!brokenPaths.Contains(j) && CheckTarget(origin, i * directions[j])) {
+                    positions.Add(origin + i * directions[j]);
+                    if (GetAt<Piece>(origin + i * directions[j])) {
+                        brokenPaths.Add(j);
+                    }
+                }
+            }
+        }
+
+        return positions;
+    }
+
+    public List<Vector2Int> AllWithinRadius(Vector2Int origin, int range, ref List<Vector2Int> positions) {
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                if (CheckTarget(origin, new Vector2Int(j, i))) {
+                    positions.Add(origin + new Vector2Int(j, i));
+                }
+            }
+        }
+        return positions;
     }
 
     public bool WithinRadius(Piece pieceA, Piece pieceB, int radius) {

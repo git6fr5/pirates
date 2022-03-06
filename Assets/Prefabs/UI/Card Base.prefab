@@ -377,7 +377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Card: {fileID: 0}
   m_EmptyCard: {fileID: 21300000, guid: 24db12dd56eee2e4faa0c946db935a20, type: 3}
-  m_MeleeIcon: {fileID: 21300000, guid: 09a6d4135ed86844c810cd321ee98133, type: 3}
+  m_MeleeIcon: {fileID: 21300000, guid: 19b7b47aadbce4842875b029e1f93701, type: 3}
+  m_DirectionalIcon: {fileID: 21300000, guid: 5b51853d59c53814abf2e64d720f53d1, type: 3}
   m_BuffIcon: {fileID: 21300000, guid: be7c933f85994014e8ce22bff81c76cc, type: 3}
   m_CardName: {fileID: 6942171078677441579}
   m_Charges: {fileID: 6942171079713414109}
@@ -387,6 +388,7 @@ MonoBehaviour:
   m_MouseOver: 0
   m_Active: 0
   m_Origin: {x: 0, y: 0}
+  m_IconPosition: {x: 0, y: 0}
   m_Scale: 0
   m_ScaleSpeed: 5
 --- !u!212 &6942171079555505309

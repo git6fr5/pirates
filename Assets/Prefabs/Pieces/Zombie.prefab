@@ -193,6 +193,10 @@ PrefabInstance:
       value: Sword
       objectReference: {fileID: 0}
     - target: {fileID: 2828822325662629477, guid: bbf5a94a77d46a44ead872bfb4607d2d, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828822325662629477, guid: bbf5a94a77d46a44ead872bfb4607d2d, type: 3}
       propertyPath: m_Charges
       value: 5000
       objectReference: {fileID: 0}

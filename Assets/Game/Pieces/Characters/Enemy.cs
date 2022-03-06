@@ -84,6 +84,17 @@ public class Enemy : Character {
             if (m_PlayerInVision) {
                 return MoveTowards(player);
             }
+            else {
+                List<Action> moves = new List<Action>();
+                for (int i = 0; i < 4; i++) {
+                    if (CheckMove((Action)i)) {
+                        moves.Add((Action)i);
+                    }
+                }
+                if (moves.Count > 0) {
+                    return moves[Random.Range(0, moves.Count - 1)];
+                }
+            }
         }
         return Action.Pass;
     }
@@ -96,6 +107,10 @@ public class Enemy : Character {
             }
         }
         return Action.Pass;
+    }
+
+    protected override bool WaitForEndOfAction() {
+        return false;
     }
 
     #endregion
