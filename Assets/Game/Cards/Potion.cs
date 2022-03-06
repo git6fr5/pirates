@@ -5,8 +5,8 @@ using UnityEngine;
 public class Potion : Card {
 
 
-    public override bool Effect(Board board, Vector2Int target) {
-        base.Effect(board, target);
+    public override bool Effect(Board board, Vector2Int origin, Vector2Int target) {
+        base.Effect(board, origin, target);
 
         Character character = board.GetAt<Character>(target);
         if (character == null) {

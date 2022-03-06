@@ -39,7 +39,7 @@ public class Card : Piece { // Is there any reason for this to be derived from a
     [SerializeField, ReadOnly] protected bool m_Active;
     public bool Active => m_Active;
     // Activation Effect
-    [SerializeField] private Sprite m_ActivationEffect;
+    [SerializeField] private Effect m_ActivationEffect;
 
     [Header("Targetting")]
     // Indicator.
@@ -75,12 +75,10 @@ public class Card : Piece { // Is there any reason for this to be derived from a
         m_Charges = m_Charges - 1;
     }
 
-    public virtual bool Effect(Board board, Vector2Int target) {
-        SpriteRenderer effect = new GameObject("Effect", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-        effect.transform.position = (Vector3)(Vector2)target;
-        effect.sprite = m_ActivationEffect;
-        effect.sortingOrder = 1;
-        Destroy(effect.gameObject, board.TurnDelay);
+    public virtual bool Effect(Board board, Vector2Int origin, Vector2Int target) {
+        if (m_ActivationEffect != null) {
+            m_ActivationEffect.Create(origin, 2f * board.TurnDelay);
+        }
         return false;
     }
 

@@ -185,7 +185,7 @@ public class Character : Piece {
                 Vector2Int? target = GetTarget(m_Cards[i]);
                 if (target != null) {
                     Vector2Int intTarget = new Vector2Int((int)((Vector2)target).x, (int)((Vector2)target).y);
-                    if (m_Cards[i].Effect(m_Board, intTarget)) {
+                    if (m_Cards[i].Effect(m_Board, m_Position, intTarget)) {
                         m_Cards[i].UseCharge();
                         if (m_Cards[i].Charges <= 0) {
                             RemoveCard(i);
