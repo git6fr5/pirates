@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7159194883666230284}
   - component: {fileID: 7159194883666230286}
   - component: {fileID: 7159194883666230289}
-  - component: {fileID: 805739891098404865}
+  - component: {fileID: 1809993646429418865}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -47,21 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69741eefd9954a54cb10636babdfde82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHearts: 8
-  m_Hearts: 8
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
-  m_CompletedTurn: 0
-  m_PerformingAction: 0
+  m_MaxHearts: 2
+  m_Hearts: 2
   m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 2
+  m_PerformingAction: 0
   m_CardSlots: 1
   m_Cards:
   - {fileID: 4907638515242736693}
-  m_StatusModifiers: []
-  m_Hexed: 0
-  m_Burning: 0
-  m_Paralyzed: 0
+  m_IsStatic: 0
+  m_Dead: 0
   m_Difficulty: 0
   m_MovementActions: 1
   m_VisisonDistance: 3
@@ -144,7 +141,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &805739891098404865
+--- !u!114 &1809993646429418865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,15 +153,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontAnimate: 1
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
-  m_Sprites: []
+  m_Sprites:
+  - {fileID: 5877797337218510432, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 7488991351611074748, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -5400543812159568300, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -6781373901745456170, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -4003303049461216246, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -4091102182878890451, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 8892993680857910674, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -5372363604363951257, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -4363696742679402114, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -6303436160557720405, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 9207836246732311909, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 7215930962050964773, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 6242394868483569621, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -7622300424456476092, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -8619725183688474160, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -7615328630510164821, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -5920743318231187098, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 12802670697669498, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 316294270768924481, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
   m_IndexOffset: 0
-  m_IdleFrames: 0
-  m_ActionFrames: 0
+  m_IdleFrames: 2
+  m_ActionFrames: 5
   m_BuffFrames: 0
-  m_MovementFrames: 0
+  m_MovementFrames: 4
   m_IdleFrameRate: 0
   m_ActionFrameRate: 0
   m_BuffFrameRate: 0
