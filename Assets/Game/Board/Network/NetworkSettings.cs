@@ -8,6 +8,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class NetworkSettings {
 
+    public bool Linear;
     public int Width;
     public int Height;
     public int SecondaryBranchDepth;

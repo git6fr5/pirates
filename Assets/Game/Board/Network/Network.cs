@@ -18,6 +18,7 @@ public class Network {
     private Node m_Exit;
     public Node Exit => m_Exit;
     // Primary Paths.
+    private bool m_Linear;
     private List<Node> m_PrimaryPath;
     public List<Node> PrimaryPath => m_PrimaryPath;
     // Secondary Paths.
@@ -40,6 +41,8 @@ public class Network {
                 m_Array[i][j] = new Node(j, i);
             }
         }
+
+        m_Linear = settings.Linear;
         if (generate) {
             Generate(settings);
             LinkNetwork();
@@ -69,7 +72,12 @@ public class Network {
         List<Node> pathControls = new List<Node>();
         pathControls.Add(m_Entrance);
         for (int i = 1; i < width - 1; i++) {
-            pathControls.Add(m_Array[Random.Range(1, height - 1)][i]);
+            if (m_Linear) {
+                pathControls.Add(m_Array[m_Entrance.Position.y][i]);
+            }
+            else {
+                pathControls.Add(m_Array[Random.Range(1, height - 1)][i]);
+            }
         }
         pathControls.Add(m_Exit);
 

@@ -989,10 +989,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Seed: 0
   m_Settings:
+    Linear: 1
     Width: 6
     Height: 6
-    SecondaryBranchDepth: 2
-    TertiaryBranchDepth: 50
+    SecondaryBranchDepth: 0
+    TertiaryBranchDepth: 0
     OverlapSecondaryBranches: 1
     OverlapTertiaryBranches: 1
   m_Board: {fileID: 110931699}
