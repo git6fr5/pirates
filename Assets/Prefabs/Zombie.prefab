@@ -47,18 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69741eefd9954a54cb10636babdfde82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_MaxHearts: 2
   m_Hearts: 2
+  m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CompletedTurn: 0
+  m_PerformingAction: 0
   m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 2
-  m_PerformingAction: 0
   m_CardSlots: 1
   m_Cards:
   - {fileID: 4907638515242736693}
-  m_IsStatic: 0
-  m_Dead: 0
+  m_StatusModifiers: []
+  m_Hexed: 0
+  m_Burning: 0
+  m_Paralyzed: 0
   m_Difficulty: 0
   m_MovementActions: 1
   m_VisisonDistance: 3
@@ -153,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontAnimate: 0
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
   m_Sprites:
@@ -175,6 +179,10 @@ MonoBehaviour:
   - {fileID: -5920743318231187098, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
   - {fileID: 12802670697669498, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
   - {fileID: 316294270768924481, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -4087625725534140761, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -1032117697420745213, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: 5948423612238156620, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
+  - {fileID: -5258981793333451929, guid: 863977e8587dffa44a7c7fc98bb1f802, type: 3}
   m_IndexOffset: 0
   m_IdleFrames: 2
   m_ActionFrames: 5
