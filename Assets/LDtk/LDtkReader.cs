@@ -33,10 +33,11 @@ public class LDtkReader : MonoBehaviour {
     [SerializeField] private Environment m_Environment;
     [SerializeField] private List<PieceData> m_PieceData;
 
+
     public PieceData[] Get(int depth) {
 
         m_PieceData = new List<PieceData>();
-        PieceData playerPiece = new PieceData(m_Environment.MainPlayer, new Vector2Int(0, 0));
+        PieceData playerPiece = new PieceData(m_Environment.MainPlayer, m_Environment.m_PlayerStartPosition);
         m_PieceData.Add(playerPiece);
 
         Vector2Int quadrant = new Vector2Int(0, 0);

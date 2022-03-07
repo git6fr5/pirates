@@ -16,9 +16,7 @@ public class NetworkDebugger : MonoBehaviour {
     [SerializeField] private Node m_CurrNode;
 
     [SerializeField] private Board m_Board;
-
-    public GameObject m_Link;
-    public List<GameObject> m_Links;
+    [SerializeField] private Environment m_Environment;
 
     public float m_NodeRadius;
 
@@ -38,30 +36,6 @@ public class NetworkDebugger : MonoBehaviour {
 
         if (generate) {
             Generate();
-
-            if (m_Links != null) {
-                for (int i = 0; i < m_Links.Count; i++) {
-                    GameObject linkObject = m_Links[i];
-                    Destroy(linkObject);
-                }
-            }
-            
-            int depth = m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
-            m_Board.SetDepth(depth);
-
-            m_Board.Reset();
-            m_Board.Init();
-
-            m_Links = new List<GameObject>();
-            for (int i = 0; i < m_CurrNode.Links.Count; i++) {
-                GameObject newLink = Instantiate(m_Link, transform.position, Quaternion.identity, null);
-                Vector2 v = Node.LinkToVector(m_CurrNode.Links[i]);
-                v.x = (v.x + 1f) / 2f;
-                v.y = (v.y + 1f) / 2f;
-                newLink.transform.position = new Vector3(m_Board.Width * v.x - 0.5f, m_Board.Height * v.y - 0.5f, 0f);
-                m_Links.Add(newLink);
-            }
-            
             generate = false;
         }
 
@@ -74,7 +48,68 @@ public class NetworkDebugger : MonoBehaviour {
     private void Generate() {
         m_Network = new Network(m_Settings, true);
         m_CurrNode = m_Network.Entrance;
+        ResetBoard();
     }
+
+    #region Board Generation
+
+    public void Move(Vector2Int direction) {
+        Vector2Int target = m_CurrNode.Position + direction;
+        bool verticalBounds = target.y >= 0 && target.y < m_Network.Array.Length;
+        bool horizontalBounds = target.x >= 0 && target.x < m_Network.Array[0].Length;
+        if (verticalBounds && horizontalBounds) {
+            m_CurrNode = m_Network.Array[target.y][target.x];
+
+            m_Environment.SetPlayer(m_Board.Get<Player>());
+            m_Environment.m_PlayerStartPosition = m_Board.Get<Player>().Position - new Vector2Int((m_Board.Width - 1) * direction.x, (m_Board.Height - 1)* direction.y);
+            ResetBoard();
+        }
+    }
+
+    private void ResetBoard() {
+        int depth = m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
+        m_Board.SetDepth(depth);
+
+        m_Board.Reset();
+        m_Board.Init();
+        List<NodeLink> links = GetAllLinks();
+        m_Board.AddExits(links);
+    }
+
+    private List<NodeLink> GetAllLinks() {
+        List<NodeLink> links = new List<NodeLink>();
+
+        for (int i = 0; i < m_CurrNode.Links.Count; i++) {
+            links.Add(m_CurrNode.Links[i]);
+        }
+
+        int height = m_Network.Array.Length;
+        int width = m_Network.Array[0].Length;
+        CheckForLinkInAdjacentNode(height, width, m_CurrNode.Position, new Vector2Int(1, 0), ref links);
+        CheckForLinkInAdjacentNode(height, width, m_CurrNode.Position, new Vector2Int(-1, 0), ref links);
+        CheckForLinkInAdjacentNode(height, width, m_CurrNode.Position, new Vector2Int(0, 1), ref links);
+        CheckForLinkInAdjacentNode(height, width, m_CurrNode.Position, new Vector2Int(0, -1), ref links);
+        return links;
+    }
+
+    private void CheckForLinkInAdjacentNode(int height, int width, Vector2Int position, Vector2Int direction, ref List<NodeLink> links) {
+        Vector2Int target = position + direction;
+
+        NodeLink fromLink = Node.VectorIntToLink(-direction);
+        NodeLink toLink = Node.VectorIntToLink(direction);
+
+        if (target.x >= 0 && target.x < width && target.y >= 0 && target.y < height) {
+            if (m_Network.Array[target.y][target.x].Links.Contains(fromLink)) {
+                if (!links.Contains(toLink)) {
+                    links.Add(toLink);
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region Debug
 
     void OnDrawGizmos() {
         if (m_Network?.Array == null) { return; }
@@ -133,5 +168,9 @@ public class NetworkDebugger : MonoBehaviour {
         // Default.
         return Color.white;
     }
+
+    #endregion
+
+
 
 }

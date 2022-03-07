@@ -47,7 +47,7 @@ public class Character : Piece {
     [SerializeField] private bool m_Dead;
 
     void Start() {
-        m_Hearts = m_MaxHearts;
+        // m_Hearts = m_MaxHearts;
         m_CurrAction = Action.None;
 
         Card[] cards = new Card[m_CardSlots];

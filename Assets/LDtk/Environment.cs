@@ -8,6 +8,7 @@ public class Environment : MonoBehaviour {
 
     [SerializeField] private Player m_Player;
     public Player MainPlayer => m_Player;
+    public Vector2Int m_PlayerStartPosition;
 
     [SerializeField] private Piece[] m_Walls;
     public Piece Wall => GetRandomWall();
@@ -57,6 +58,12 @@ public class Environment : MonoBehaviour {
         int index = (m_Seed * 7919 + depth * 7907 + quad * 7901) % modulo;
         print(index);
         return index;
+    }
+
+    public void SetPlayer(Player player) {
+        Player newPlayer = Instantiate(player.gameObject).GetComponent<Player>();
+        newPlayer.gameObject.SetActive(false);
+        m_Player = newPlayer;
     }
 
     private Piece GetRandomWall() {

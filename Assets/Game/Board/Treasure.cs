@@ -11,6 +11,9 @@ public class Treasure : Piece {
     /* --- Variables --- */
     #region Variables
 
+    // Rarity.
+    [SerializeField] private Rarity m_Rarity;
+
     // Treasure.
     [SerializeField] private Card[] m_Cards;
     public Card[] Cards => m_Cards;
@@ -29,6 +32,10 @@ public class Treasure : Piece {
     /* --- Unity --- */
     #region Unity
 
+    void Start() {
+        Init();
+    }
+
     void Update() {
         SetUI();
         CheckActivate();
@@ -40,6 +47,31 @@ public class Treasure : Piece {
 
     void OnMouseExit() {
         m_MouseOver = false;
+    }
+
+    #endregion
+
+    #region Initialization
+
+    private void Init() {
+
+        m_Cards = new Card[3];
+        if (m_Rarity == Rarity.Common) {
+            m_Cards[0] = TreasurePool.GetRandomCard(Rarity.Common);
+            m_Cards[1] = TreasurePool.GetRandomCard(Rarity.Common);
+            m_Cards[2] = TreasurePool.GetRandomCard(Rarity.Common);
+        }
+        else if (m_Rarity == Rarity.Rare) {
+            m_Cards[0] = TreasurePool.GetRandomCard(Rarity.Common);
+            m_Cards[1] = TreasurePool.GetRandomCard(Rarity.Rare);
+            m_Cards[2] = Random.Range(0f, 1f) < 0.5f ? TreasurePool.GetRandomCard(Rarity.Common) : TreasurePool.GetRandomCard(Rarity.Rare);
+        }
+        else {
+            m_Cards[0] = TreasurePool.GetRandomCard(Rarity.Rare);
+            m_Cards[1] = TreasurePool.GetRandomCard(Rarity.Legendary);
+            m_Cards[2] = Random.Range(0f, 1f) < 0.5f ? TreasurePool.GetRandomCard(Rarity.Common) : TreasurePool.GetRandomCard(Rarity.Rare);
+        }
+
     }
 
     #endregion

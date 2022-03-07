@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_MaxHearts: 1
-  m_Hearts: 0
+  m_Hearts: 1
   m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 1
@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Cards:
   - {fileID: 4961174355996992458}
   m_IsStatic: 0
+  m_Dead: 0
+  m_Difficulty: 0
   m_MovementActions: 1
   m_VisisonDistance: 3
   m_PlayerInVision: 0

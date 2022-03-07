@@ -50,9 +50,13 @@ public class Board : MonoBehaviour {
     public float m_TurnDelay;
     public float TurnDelay => m_TurnDelay;
 
-    // UI.
+    // Tilemap.
     public Tilemap m_Background;
     public TileBase m_BackgroundTile;
+    public NetworkDebugger m_NetworkDebugger;
+    public List<Vector2Int> m_Exits;
+    public TileBase m_ExitTile;
+
 
     #endregion
 
@@ -60,19 +64,21 @@ public class Board : MonoBehaviour {
     #region Unity
 
     void Start() {
-        Init();
+        // Init();
     }
 
     void Update() {
-        if (m_Reset) {
-            Reset();
-            Init();
-            m_Reset = false;
-        }
+        //if (m_Reset) {
+        //    Reset();
+        //    Init();
+        //    m_Reset = false;
+        //}
     }
 
     public void Reset() {
-        StopCoroutine(m_GameLoop);
+        if (m_GameLoop != null) {
+            StopCoroutine(m_GameLoop);
+        }
         for (int i = 0; i < m_Pieces.Count; i++) {
             if (m_Pieces[i] != null) {
                 Destroy(m_Pieces[i].gameObject);
@@ -83,6 +89,44 @@ public class Board : MonoBehaviour {
                 m_Background.SetTile(new Vector3Int(j, i, 0), null);
             }
         }
+    }
+
+    public void AddExits(List<NodeLink> nodeLinks) {
+
+        m_Exits = new List<Vector2Int>();
+        for (int i = 0; i < nodeLinks.Count; i++) {
+            Vector2 v = Node.LinkToVector(nodeLinks[i]);
+            
+            if (v.x == 1) {
+                v.x = m_Width;
+            }
+            else if (v.x == -1) {
+                v.x = -1; // This is just a coincidence right? lol.
+            }
+
+            if (v.y == 1) {
+                v.y = m_Height;
+            }
+            else if (v.y == -1) {
+                v.y = -1;
+            }
+
+            if (v.x == 0) {
+                m_Exits.Add(new Vector2Int((int)Mathf.Ceil((float)(m_Width - 1) / 2f), (int)v.y));
+                m_Exits.Add(new Vector2Int((int)Mathf.Floor((float)(m_Width - 1) / 2f), (int)v.y));
+            }
+            else if (v.y == 0) {
+                m_Exits.Add(new Vector2Int((int)v.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+                m_Exits.Add(new Vector2Int((int)v.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+            }
+
+        }
+
+        // Background.
+        for (int i = 0; i < m_Exits.Count; i++) {
+            m_Background.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
+        }
+
     }
 
     public void Init() {
@@ -97,6 +141,15 @@ public class Board : MonoBehaviour {
 
         // Loop.
         m_Characters = GetAll<Character>();
+        for (int i = 0; i < m_Characters.Length; i++) {
+            if (m_Characters[i].GetComponent<Player>() != null) {
+                Character temp = m_Characters[0];
+                m_Characters[0] = m_Characters[i];
+                m_Characters[i] = temp;
+                break;
+            }
+        }
+
         m_MaxTurnNumber = m_Characters.Length;
         m_GameLoop = StartCoroutine(IEGameLoop());
 
@@ -168,10 +221,15 @@ public class Board : MonoBehaviour {
     public bool CheckMove(Vector2Int origin, Vector2Int direction) {
 
         Vector2Int target = origin + direction;
+        if (m_Exits.Contains(target) && GetAt<Player>(origin) != null) {
+            // Debug.Log("Moving through to another level.");
+            m_NetworkDebugger.Move(direction);
+        }
+
         bool horizontalBoundCheck = target.x >= 0 && target.x < m_Width;
         bool verticalBoundCheck = target.y >= 0 && target.y < m_Height;
         if (!horizontalBoundCheck || !verticalBoundCheck) {
-            Debug.Log("Trying to move out of bounds.");
+            // Debug.Log("Trying to move out of bounds.");
             return false;
         }
 
@@ -180,7 +238,7 @@ public class Board : MonoBehaviour {
             return true;
         }
         else {
-            Debug.Log("Trying to move to an occupied square.");
+            // Debug.Log("Trying to move to an occupied square.");
             return false;
         }
 
@@ -327,6 +385,11 @@ public class Board : MonoBehaviour {
             for (int j = 0; j < m_Width; j++) {
                 Gizmos.DrawWireCube(new Vector3(j, i, 0), new Vector3(1, 1, 1));
             }
+        }
+
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < m_Exits.Count; i++) {
+            Gizmos.DrawWireCube((Vector3)(Vector2)m_Exits[i], new Vector3(1.25f, 1.25f, 1));
         }
     }
 

@@ -79,6 +79,9 @@ public class Node {
                 return Vector2.zero;
         }
     }
+    public static NodeLink VectorIntToLink(Vector2Int vector) {
+        return VectorToLink((Vector2)vector);
+    }
 
     public static NodeLink VectorToLink(Vector2 vector) {
         if (vector == Vector2.right) {

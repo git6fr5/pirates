@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_MaxHearts: 2
-  m_Hearts: 0
+  m_Hearts: 2
   m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 2
@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Cards:
   - {fileID: 4907638515242736693}
   m_IsStatic: 0
+  m_Dead: 0
+  m_Difficulty: 0
   m_MovementActions: 1
   m_VisisonDistance: 3
   m_PlayerInVision: 0
@@ -129,7 +131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
