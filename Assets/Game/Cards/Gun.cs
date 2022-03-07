@@ -9,8 +9,8 @@ public class Gun : Card {
     public override bool Effect(Board board, Vector2Int origin, Vector2Int target) {
         base.Effect(board, origin, target);
 
-        Character character = board.GetAt<Character>(target);
-        if (character == null) {
+        Piece piece = board.GetAt<Piece>(target);
+        if (piece == null) {
             Debug.Log("Nothing at targetted location.");
             return false; // Should cards use charges if they don't do anything?
         }
@@ -18,11 +18,17 @@ public class Gun : Card {
         float distance = (origin - target).magnitude;
         float maxDistance = Mathf.Sqrt(2) * m_Range;
         float actualSpeed = maxDistance / board.TurnDelay;
-        float timeInterval = distance / actualSpeed;
+        float delay = distance / actualSpeed;
 
-        Effect newEffect = m_ProjectileEffect.Create(origin, timeInterval);
-        newEffect.MoveTo(target, timeInterval);
-        character.TakeDamage(m_Value, timeInterval);
+        Effect newEffect = m_ProjectileEffect.Create(origin, delay);
+        newEffect.MoveTo(target, delay);
+
+        piece.TakeDamage(m_Value, delay);
+
+        Character character = piece.GetComponent<Character>();
+        if (character != null && m_StatusEffect != Status.None && m_Duration > 0) {
+            character.ApplyStatus(m_StatusEffect, m_Duration);
+        }
 
         return true;
     }

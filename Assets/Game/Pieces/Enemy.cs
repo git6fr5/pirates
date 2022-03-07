@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Action = Character.Action;
-
 [RequireComponent(typeof(BoxCollider2D))]
 public class Enemy : Character {
 
@@ -99,6 +97,26 @@ public class Enemy : Character {
                     return moves[Random.Range(0, moves.Count - 1)];
                 }
             }
+        }
+        return Action.Pass;
+    }
+
+    protected Action MoveTowards(Piece target) {
+        List<Vector2Int> path = m_Board.ManhattanPath(m_Position, target.Position);
+        if (path.Count < 1) { return Action.None; }
+
+        Vector2Int direction = path[1] - m_Position;
+        if (direction.x > 0) {
+            return Action.MoveRight;
+        }
+        if (direction.y > 0) {
+            return Action.MoveUp;
+        }
+        if (direction.x < 0) {
+            return Action.MoveLeft;
+        }
+        if (direction.y < 0) {
+            return Action.MoveDown;
         }
         return Action.Pass;
     }

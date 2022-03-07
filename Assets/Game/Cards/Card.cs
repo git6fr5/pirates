@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class Card : Piece { // Is there any reason for this to be derived from a piece? I guess.
+public class Card : MonoBehaviour { // Is there any reason for this to be derived from a piece? I guess.
 
     /* --- Variables --- */
     #region Variables
@@ -24,9 +24,14 @@ public class Card : Piece { // Is there any reason for this to be derived from a
     // Range.
     [SerializeField] protected int m_Range;
     public int Range => m_Range;
-    // Value.
+    // Values.
     [SerializeField] protected int m_Value;
     public int Value => m_Value;
+    // Status.
+    [SerializeField] protected Status m_StatusEffect;
+    public Status StatusEffect => m_StatusEffect;
+    [SerializeField] protected int m_Duration;
+    public int DurationValue => m_Duration;
     // Charges.
     [SerializeField] private int m_Charges;
     public int Charges => m_Charges;
@@ -70,6 +75,10 @@ public class Card : Piece { // Is there any reason for this to be derived from a
         m_Charges = m_Charges + charges;
     }
 
+    public void SetCharges(int charges) {
+        m_Charges = charges;
+    }
+
     public void UseCharge() {
         m_Active = false;
         m_Charges = m_Charges - 1;
@@ -77,7 +86,7 @@ public class Card : Piece { // Is there any reason for this to be derived from a
 
     public virtual bool Effect(Board board, Vector2Int origin, Vector2Int target) {
         if (m_ActivationEffect != null) {
-            m_ActivationEffect.Create(origin, 2f * board.TurnDelay);
+            m_ActivationEffect.Create(origin);
         }
         return false;
     }
@@ -91,13 +100,13 @@ public class Card : Piece { // Is there any reason for this to be derived from a
         List<Vector2Int> targetablePositions = new List<Vector2Int>();
         switch (m_TargetType) {
             case TargetType.AOE:
-                targetablePositions = board.AllWithinRadius(origin, m_Range, ref targetablePositions);
+                targetablePositions = board.AOETargetting(origin, m_Range, ref targetablePositions);
                 break;
             case TargetType.Directional:
-                targetablePositions = board.OctaDirectional(origin, m_Range, ref targetablePositions);
+                targetablePositions = board.DirectionalTargetting(origin, m_Range, ref targetablePositions);
                 break;
             case TargetType.Melee:
-                targetablePositions = board.AdjacentPositions(origin, m_Range, ref targetablePositions);
+                targetablePositions = board.MeleeTargetting(origin, m_Range, ref targetablePositions);
                 break;
             case TargetType.Self:
                 targetablePositions.Add(origin);

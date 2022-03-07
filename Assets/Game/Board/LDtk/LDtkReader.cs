@@ -37,9 +37,6 @@ public class LDtkReader : MonoBehaviour {
     public PieceData[] Get(int depth) {
 
         m_PieceData = new List<PieceData>();
-        PieceData playerPiece = new PieceData(m_Environment.MainPlayer, m_Environment.m_PlayerStartPosition);
-        m_PieceData.Add(playerPiece);
-
         Vector2Int quadrant = new Vector2Int(0, 0);
         int index = m_Environment.Jumble(depth, quadrant, 20);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
@@ -119,8 +116,6 @@ public class LDtkReader : MonoBehaviour {
 
     private List<PieceData> AddPieces(List<LDtkTileData> data) {
         for (int i = 0; i < data.Count; i++) {
-            // Get the entity based on the environment.
-
             Piece piece = GetPieceByVectorID(data[i].vectorID);
             Vector2Int position = data[i].gridPosition;
             if (piece != null) {

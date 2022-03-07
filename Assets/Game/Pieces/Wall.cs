@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class Wall : Character {
+public class Wall : Piece {
 
     /* --- Variables --- */
     #region Variables
@@ -27,23 +27,17 @@ public class Wall : Character {
 
     #endregion
 
-    /* --- Decision --- */
-    #region Decision
-
-    protected override Action GetAction() {
-        return Action.Pass;
-    }
-
-    #endregion
-
     /* --- UI --- */
     #region UI
+    void OnDestroy() {
+        ClearUI();
+    }
 
-    protected override void SetUI() {
+    private void SetUI() {
         BoardUI.DrawHealthUI(m_Hearts, m_Position, ref m_HeartIndicators, m_MouseOver);
     }
 
-    protected override void ClearUI() {
+    private void ClearUI() {
         BoardUI.DrawHealthUI(m_Hearts, m_Position, ref m_HeartIndicators, false);
     }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8944977435393100480}
   - component: {fileID: 8944977435393100482}
   - component: {fileID: 8944977435393100509}
+  - component: {fileID: 192615459714740809}
   m_Layer: 0
   m_Name: Ranged Zombie
   m_TagString: Untagged
@@ -46,18 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69741eefd9954a54cb10636babdfde82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_MaxHearts: 1
   m_Hearts: 1
+  m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CompletedTurn: 0
+  m_PerformingAction: 0
   m_CurrAction: 0
   m_ActionsTaken: 0
   m_ActionsPerTurn: 1
-  m_PerformingAction: 0
   m_CardSlots: 1
   m_Cards:
   - {fileID: 4961174355996992458}
-  m_IsStatic: 0
-  m_Dead: 0
+  m_StatusModifiers: []
+  m_Hexed: 0
+  m_Burning: 0
+  m_Paralyzed: 0
   m_Difficulty: 0
   m_MovementActions: 1
   m_VisisonDistance: 3
@@ -140,6 +144,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &192615459714740809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944977435393100481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontAnimate: 1
+  m_SpriteRenderer: {fileID: 0}
+  m_Character: {fileID: 0}
+  m_Sprites: []
+  m_IndexOffset: 0
+  m_IdleFrames: 0
+  m_ActionFrames: 0
+  m_BuffFrames: 0
+  m_MovementFrames: 0
+  m_IdleFrameRate: 0
+  m_ActionFrameRate: 0
+  m_BuffFrameRate: 0
+  m_MoveFrameRate: 0
+  m_FrameRate: 0
+  m_DirectionIndex: 0
+  m_CurrentFrame: 0
+  m_Ticks: 0
 --- !u!1001 &3840208123733959325
 PrefabInstance:
   m_ObjectHideFlags: 0

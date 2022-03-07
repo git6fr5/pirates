@@ -3,15 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* --- Definitions --- */
-using Action = Character.Action;
-
 /// <summary>
 /// 
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Character))]
 public class Spritesheet : MonoBehaviour {
+
+    public bool dontAnimate = false;
 
     /* --- Components --- */
     [Space(2), Header("Components")]
@@ -50,6 +49,10 @@ public class Spritesheet : MonoBehaviour {
     [Space(2), Header("Ticks")]
     [SerializeField, ReadOnly] private float m_Ticks;
 
+    private Effect m_HexEffect;
+    private Effect m_BurningEffect;
+    private Effect m_ParalyzeEffect;
+
     /* --- Unity --- */
     // Runs once before the first frame.
     void Start() {
@@ -57,15 +60,65 @@ public class Spritesheet : MonoBehaviour {
     }
 
     void Update() {
+        AnimateStatus();
+
+        if (dontAnimate) {
+            return;
+        }
+
         float deltaTime = Time.deltaTime;
         Animate(deltaTime);
     }
+
+    #region Status Animations
+
+    private void AnimateStatus() {
+
+        if (m_Character.Hexed) {
+            m_SpriteRenderer.enabled = false;
+        }
+        else {
+            m_SpriteRenderer.enabled = true;
+        }
+
+        if (m_Character.Hexed && m_HexEffect == null) {
+            m_HexEffect = StatusEffects.HexEffect.Create(m_Character.Position);
+            m_HexEffect.transform.SetParent(transform);
+        }
+        else if (!m_Character.Hexed && m_HexEffect != null) {
+            Destroy(m_HexEffect.gameObject);
+        }
+
+        if (m_Character.Burning && m_BurningEffect == null) {
+            m_BurningEffect = StatusEffects.BurningEffect.Create(m_Character.Position);
+            m_BurningEffect.transform.SetParent(transform);
+        }
+        else if (!m_Character.Burning && m_BurningEffect != null) {
+            Destroy(m_BurningEffect.gameObject);
+        }
+
+        if (m_Character.Paralyzed && m_ParalyzeEffect == null) {
+            m_ParalyzeEffect = StatusEffects.ParalyzeEffect.Create(m_Character.Position);
+            m_ParalyzeEffect.transform.SetParent(transform);
+        }
+        else if (!m_Character.Paralyzed && m_ParalyzeEffect != null) {
+            Destroy(m_ParalyzeEffect.gameObject);
+        }
+
+    }
+
+    #endregion
 
     /* --- Methods --- */
     public void Init() {
         // Caching components.
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_Character = GetComponent<Character>();
+
+        if (dontAnimate) {
+            return;
+        }
+
         Organize();
     }
 
@@ -89,7 +142,6 @@ public class Spritesheet : MonoBehaviour {
         }
         else if ((int)character.CurrAction < 7) {
             m_FrameRate = m_ActionFrameRate;
-            print("ACtion Animation");
             return m_ActionAnimation;
         }
         else {

@@ -6,30 +6,45 @@ public class Environment : MonoBehaviour {
 
     public int m_Seed;
 
-    [SerializeField] private Player m_Player;
-    public Player MainPlayer => m_Player;
-    public Vector2Int m_PlayerStartPosition;
-
+    // Walls.
     [SerializeField] private Piece[] m_Walls;
     public Piece Wall => GetRandomWall();
-
+    
+    // Bushes.
     [SerializeField] private Piece[] m_Bushes;
     public Piece Bush => GetRandomBush();
 
+    // Treasure Chests.
     [SerializeField] private Piece[] m_TreasureChests;
     public Piece TreasureChest => m_TreasureChests[0];
 
+    // Enemies.
     [SerializeField] private Enemy[] m_Enemies;
+
     [HideInInspector] private List<Piece> m_EasyEnemies;
+    public Piece EasyEnemy => GetRandomEnemy(m_EasyEnemies);
+
     [HideInInspector] private List<Piece> m_MidEnemies;
     [HideInInspector] private List<Piece> m_HardEnemies;
-
-    public Piece EasyEnemy => GetRandomEnemy(m_EasyEnemies);
     public Piece MidEnemy => GetRandomEnemy(m_MidEnemies);
     public Piece HardEnemy => GetRandomEnemy(m_HardEnemies);
 
+    /* --- Unity --- */
+    #region Unity
+
     void Awake() {
         SortEnemies();
+    }
+
+    #endregion
+
+    /* --- Sorting --- */
+    #region Sorting
+
+    public int Jumble(int depth, Vector2Int quadrant, int modulo) {
+        int quad = 2 * quadrant.y + quadrant.x;
+        int index = (m_Seed * 7919 + depth * 7907 + quad * 7901) % modulo;
+        return index;
     }
 
     private void SortEnemies() {
@@ -50,21 +65,12 @@ public class Environment : MonoBehaviour {
                     break;
             }
         }
-
     }
 
-    public int Jumble(int depth, Vector2Int quadrant, int modulo) {
-        int quad = 2 * quadrant.y + quadrant.x;
-        int index = (m_Seed * 7919 + depth * 7907 + quad * 7901) % modulo;
-        print(index);
-        return index;
-    }
+    #endregion
 
-    public void SetPlayer(Player player) {
-        Player newPlayer = Instantiate(player.gameObject).GetComponent<Player>();
-        newPlayer.gameObject.SetActive(false);
-        m_Player = newPlayer;
-    }
+    /* --- Pieces --- */
+    #region Pieces
 
     private Piece GetRandomWall() {
         if (m_Walls == null || m_Walls.Length == 0) {
@@ -89,5 +95,7 @@ public class Environment : MonoBehaviour {
         int index = Random.Range(0, enemies.Count);
         return enemies[index];
     }
+
+    #endregion
 
 }

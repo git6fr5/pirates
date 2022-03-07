@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Action = Character.Action;
+public enum Status {
 
-public class Zombie : Enemy {
-
-    
+    None,
+    Hexed,
+    Burning,
+    Paralyzed
 
 }

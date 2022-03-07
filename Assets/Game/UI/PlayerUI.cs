@@ -56,13 +56,6 @@ public class PlayerUI : MonoBehaviour {
             }
         }
 
-        //// Refresh the cards.
-        //for (int i = 0; i < m_PlayerCards.Count; i++) {
-        //    if (m_PlayerCards[i] == null) {
-        //        CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
-        //    }
-        //}
-
         // While not the players turn, deactivate the card ui interactability.
         if (player.CompletedTurn) {
             for (int i = 0; i < m_PlayerCards.Length; i++) {
@@ -74,7 +67,6 @@ public class PlayerUI : MonoBehaviour {
                 m_PlayerCards[i].gameObject.SetActive(true);
             }
         }
-        
 
     }
 

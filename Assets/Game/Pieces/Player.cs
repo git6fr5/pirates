@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Action = Character.Action;
-
 public class Player : Character {
 
     /* --- Variables --- */
@@ -64,6 +62,10 @@ public class Player : Character {
 
     /* --- Cards --- */
     #region Card
+    public override void ReplaceCard(Card oldCard, Card newCard) {
+        base.ReplaceCard(oldCard, newCard);
+        m_PlayerUI.ResetCards(this);
+    }
 
     public override void RemoveCard(int index) {
         base.RemoveCard(index);

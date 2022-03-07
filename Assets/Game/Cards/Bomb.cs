@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Bomb : AOE {
 
-    public override bool AOEEffect(Board board, Vector2Int target) {
-        base.AOEEffect(board, target);
+    public override bool AOEEffect(Board board, Vector2Int target, float delay) {
+        base.AOEEffect(board, target, delay);
 
-        Character character = board.GetAt<Character>(target);
-        if (character == null) {
-            Debug.Log("Nothing at targetted location.");
-            return false; // Should cards use charges if they don't do anything?
+        Piece piece = board.GetAt<Piece>(target);
+        Debug.Log("Doing damage");
+        if (piece != null) {
+            piece.TakeDamage(m_Value);
+
+            Character character = piece.GetComponent<Character>();
+            if (character != null && m_StatusEffect != Status.None && m_Duration > 0) {
+                character.ApplyStatus(m_StatusEffect, m_Duration);
+            }
+
+            float duration = board.TurnDelay;
+            piece.StartShake(delay, duration);
+
         }
 
-        Debug.Log("Doing damage");
-        character.TakeDamage(m_Value);
         return true;
     }
 

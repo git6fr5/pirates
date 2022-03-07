@@ -22,19 +22,24 @@ public class AOE : Card {
 
     public override bool Effect(Board board, Vector2Int origin, Vector2Int target) {
         List<Vector2Int> areaOfEffect = new List<Vector2Int>();
-        areaOfEffect = board.AllWithinRadius(target, m_Radius, ref areaOfEffect);
+        areaOfEffect = board.AOETargetting(target, m_Radius, ref areaOfEffect);
 
         Effect newEffect = m_ProjectileEffect.Create(origin, board.TurnDelay);
         newEffect.MoveTo(target, board.TurnDelay);
 
+        float distance = (origin - target).magnitude;
+        float maxDistance = Mathf.Sqrt(2) * m_Range;
+        float actualSpeed = maxDistance / board.TurnDelay;
+        float timeInterval = distance / actualSpeed;
+
         for (int i = 0; i < areaOfEffect.Count; i++) {
             base.Effect(board, origin, areaOfEffect[i]);
-            AOEEffect(board, areaOfEffect[i]);
+            AOEEffect(board, areaOfEffect[i], timeInterval);
         }        
         return true;
     }
 
-    public virtual bool AOEEffect(Board board, Vector2Int target) {
+    public virtual bool AOEEffect(Board board, Vector2Int target, float delay) {
         return true;
     }
 

@@ -38,7 +38,7 @@ public class CameraShake : MonoBehaviour {
             return false;
         }
         float strength = m_ShakeStrength * m_Curve.Evaluate(m_Ticks / m_Duration);
-        transform.position += (Vector3)Random.insideUnitCircle * m_ShakeStrength;
+        transform.position += (Vector3)Random.insideUnitCircle * strength;
         return true;
     }
 

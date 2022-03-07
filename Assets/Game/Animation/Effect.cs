@@ -23,7 +23,8 @@ public class Effect : MonoBehaviour {
     [SerializeField] private Vector3 m_Target;
     [SerializeField, ReadOnly] private float m_Speed;
 
-    // Ticks.
+    // Animation.
+    [SerializeField, ReadOnly] private int m_FrameRate = 12;
     [SerializeField, ReadOnly] private int m_Frame;
     [SerializeField, ReadOnly] private float m_Ticks;
 
@@ -44,10 +45,12 @@ public class Effect : MonoBehaviour {
     /* --- Initialization --- */
     #region Initialization
 
-    public Effect Create(Vector2Int position, float lifeTime) {
+    public Effect Create(Vector2Int position, float lifeTime = -1f) {
         Effect newEffect = Instantiate(gameObject, (Vector3)(Vector2)position, Quaternion.identity, null).GetComponent<Effect>();
         newEffect.Init();
-        Destroy(newEffect.gameObject, lifeTime);
+        if (lifeTime > 0f) {
+            Destroy(newEffect.gameObject, lifeTime);
+        }
         return newEffect;
     }
 
@@ -70,7 +73,7 @@ public class Effect : MonoBehaviour {
 
     private void Animate(float deltaTime) {
         // Set the current frame.
-        m_Frame = (int)Mathf.Floor(m_Ticks * AnimationController.FrameRate);
+        m_Frame = (int)Mathf.Floor(m_Ticks * m_FrameRate);
         if (!m_Loop && m_Frame >= m_Sprites.Length) {
             Destroy(gameObject);
         }
@@ -80,10 +83,6 @@ public class Effect : MonoBehaviour {
         m_Ticks += deltaTime;
 
     }
-
-    #endregion
-
-    #region 
 
     private void Move(float deltaTime) {
         Vector3 displacement = m_Target - transform.position;

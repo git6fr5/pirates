@@ -188,6 +188,50 @@ public class Network {
 
     #endregion
 
+    /* --- Generics --- */
+    #region Generics
+
+    public Node GetNodeAt(Vector2Int target) {
+        bool verticalBounds = target.y >= 0 && target.y < m_Array.Length;
+        bool horizontalBounds = target.x >= 0 && target.x < m_Array[0].Length;
+        if (verticalBounds && horizontalBounds) {
+            return m_Array[target.y][target.x];
+        }
+        return null;
+    }
+
+    public List<NodeLink> GetAllLinks(Node node) {
+        List<NodeLink> links = new List<NodeLink>();
+
+        for (int i = 0; i < node.Links.Count; i++) {
+            links.Add(node.Links[i]);
+        }
+
+        int height = Array.Length;
+        int width = Array[0].Length;
+        Vector2Int position = node.Position;
+
+        CheckBackLinking(height, width, position, new Vector2Int(1, 0), ref links);
+        CheckBackLinking(height, width, position, new Vector2Int(-1, 0), ref links);
+        CheckBackLinking(height, width, position, new Vector2Int(0, 1), ref links);
+        CheckBackLinking(height, width, position, new Vector2Int(0, -1), ref links);
+        return links;
+    }
+
+    public void CheckBackLinking(int height, int width, Vector2Int position, Vector2Int direction, ref List<NodeLink> links) {
+        Vector2Int target = position + direction;
+
+        NodeLink fromLink = Node.VectorIntToLink(-direction);
+        NodeLink toLink = Node.VectorIntToLink(direction);
+
+        Node targetNode = GetNodeAt(target);
+        if (targetNode != null && targetNode.Links.Contains(fromLink) && !links.Contains(toLink)) {
+            links.Add(toLink);
+        }
+    }
+
+    #endregion
+
     /* --- Pathing --- */
     #region Pathing
 
