@@ -30,29 +30,30 @@ public class LDtkReader : MonoBehaviour {
 
     [SerializeField] private LDtkComponentProject m_LDtkData;
     [HideInInspector] private LdtkJson m_JSON;
-    [SerializeField] private Randomizer m_Randomizer;
+    [SerializeField] private Environment m_Environment;
     [SerializeField] private List<PieceData> m_PieceData;
+
 
     public PieceData[] Get(int depth) {
 
         m_PieceData = new List<PieceData>();
-        PieceData playerPiece = new PieceData(m_Randomizer.MainPlayer, new Vector2Int(0, 0));
+        PieceData playerPiece = new PieceData(m_Environment.MainPlayer, m_Environment.m_PlayerStartPosition);
         m_PieceData.Add(playerPiece);
 
         Vector2Int quadrant = new Vector2Int(0, 0);
-        int index = m_Randomizer.Jumble(depth, quadrant, 20);
+        int index = m_Environment.Jumble(depth, quadrant, 20);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(1, 0);
-        index = m_Randomizer.Jumble(depth, quadrant, 20);
+        index = m_Environment.Jumble(depth, quadrant, 20);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(0, 1);
-        index = m_Randomizer.Jumble(depth, quadrant, 20);
+        index = m_Environment.Jumble(depth, quadrant, 20);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(1, 1);
-        index = m_Randomizer.Jumble(depth, quadrant, 20);
+        index = m_Environment.Jumble(depth, quadrant, 20);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         return m_PieceData.ToArray();
@@ -85,7 +86,7 @@ public class LDtkReader : MonoBehaviour {
         List<LDtkTileData> layerData = new List<LDtkTileData>();
 
         Board board = Board.FindInstance();
-        Vector2Int offset = new Vector2Int(quadrant.x * board.Width / 2 - 1, quadrant.y * board.Height / 2);
+        Vector2Int offset = new Vector2Int(quadrant.x * board.Width / 2, quadrant.y * board.Height / 2);
 
         LDtkUnity.LayerInstance layer = GetLayer(ldtkLevel, layerName);
         if (layer != null) {
@@ -132,13 +133,24 @@ public class LDtkReader : MonoBehaviour {
 
     private Piece GetPieceByVectorID(Vector2Int vectorID) {
         if (vectorID == new Vector2Int(0, 1)) {
-            return m_Randomizer.WallPiece;
+            return m_Environment.Wall;
+        }
+        if (vectorID == new Vector2Int(1, 1)) {
+            return m_Environment.Bush;
         }
         if (vectorID.y == 2) {
-            return m_Randomizer.TreasureChest;
+            return m_Environment.TreasureChest;
         }
         if (vectorID.y == 3) {
-            return m_Randomizer.EasyEnemy;
+            if (vectorID.x == 0) {
+                return m_Environment.EasyEnemy;
+            }
+            if (vectorID.x == 1) {
+                return m_Environment.MidEnemy;
+            }
+            if (vectorID.x == 2) {
+                return m_Environment.HardEnemy;
+            }
         }
         return null;
     }

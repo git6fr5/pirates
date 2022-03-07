@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4671949854022746026}
   - component: {fileID: 4671949854022746027}
   m_Layer: 0
-  m_Name: Randomizer
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,12 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3022bf59b7daad468c7acbfb16e86ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Seed: 0
   m_Player: {fileID: 3070856426703930630, guid: e3509fcaf8d6c2d4881fdebb917628ca, type: 3}
-  m_WallPieces:
-  - {fileID: 2486913913233501541, guid: 08dccd87bf6dfe6439781167082b35f6, type: 3}
+  m_Walls:
+  - {fileID: 5074827496314021112, guid: 0712d2d0621a851408bb397008065068, type: 3}
+  - {fileID: 4877644082216786681, guid: d7e1191a17b3fb640a25773f94ec7ee0, type: 3}
+  - {fileID: 1801890199245204686, guid: 5f80cea11fc19a24284aefdea1298ab6, type: 3}
+  - {fileID: 7414897927498257464, guid: 0d3aa9add8629e3448e43a7b8327725a, type: 3}
+  m_Bushes:
+  - {fileID: 7474261382055634170, guid: 4fc707b4cd2bf84428a06112184b2fa4, type: 3}
   m_TreasureChests:
   - {fileID: 1557082091236399950, guid: 1f019bfe729afe747b66da1fae934430, type: 3}
   m_Enemies:
+  - {fileID: 8944977435393100480, guid: 1fe08be812c39a04e9bd4c6611d0d7b1, type: 3}
   - {fileID: 7159194883666230284, guid: 2d9717856ef4aee44a4aa1141c6a4ff1, type: 3}
 --- !u!1 &4671949855152317407
 GameObject:
@@ -96,5 +103,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelName: Level_0
   m_LDtkData: {fileID: -7380091861003297383, guid: 14bfa4e70fd68a14181ac2c949427978, type: 3}
-  m_Randomizer: {fileID: 4671949854022746027}
+  m_Environment: {fileID: 4671949854022746027}
   m_PieceData: []

@@ -13,6 +13,8 @@ public class CardUI : MonoBehaviour {
     // Icons.
     [Space(2), Header("Icons")]
     [SerializeField] private Sprite m_EmptyCard;
+    [SerializeField] private Sprite m_AOEIcon;
+    [SerializeField] private Sprite m_DirectionalIcon;
     [SerializeField] private Sprite m_MeleeIcon;
     [SerializeField] private Sprite m_BuffIcon;
 
@@ -217,6 +219,10 @@ public class CardUI : MonoBehaviour {
 
     private Sprite GetCardTargetTypeIcon(TargetType targetType) {
         switch (targetType) {
+            case TargetType.AOE:
+                return m_AOEIcon;
+            case TargetType.Directional:
+                return m_DirectionalIcon;
             case TargetType.Melee:
                 return m_MeleeIcon;
             case TargetType.Self:

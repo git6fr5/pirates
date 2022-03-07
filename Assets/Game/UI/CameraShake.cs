@@ -48,6 +48,15 @@ public class CameraShake : MonoBehaviour {
     }
 
     /* --- Events --- */
+    public static void DelayedShake(float delay, float duration) {
+        Instance.StartCoroutine(Instance.IEDelayedShake(delay, duration));
+    }
+
+    IEnumerator IEDelayedShake(float delay, float duration) {
+        yield return new WaitForSeconds(delay);
+        ActivateShake(delay);
+    }
+
     public static void ActivateShake(float duration) {
         if (!Instance.Shake) {
             Instance.StartShake(duration);

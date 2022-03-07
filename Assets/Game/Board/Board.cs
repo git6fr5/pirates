@@ -50,10 +50,13 @@ public class Board : MonoBehaviour {
     public float m_TurnDelay;
     public float TurnDelay => m_TurnDelay;
 
-    // UI.
+    // Tilemap.
     public Tilemap m_Background;
     public TileBase m_BackgroundTile;
-    public PlayerUI m_PlayerUI;
+    public NetworkDebugger m_NetworkDebugger;
+    public List<Vector2Int> m_Exits;
+    public TileBase m_ExitTile;
+
 
     #endregion
 
@@ -61,27 +64,69 @@ public class Board : MonoBehaviour {
     #region Unity
 
     void Start() {
-        Init();
+        // Init();
     }
 
     void Update() {
-        if (m_Reset) {
-            Reset();
-            Init();
-            m_Reset = false;
-        }
+        //if (m_Reset) {
+        //    Reset();
+        //    Init();
+        //    m_Reset = false;
+        //}
     }
 
     public void Reset() {
-        StopCoroutine(m_GameLoop);
+        if (m_GameLoop != null) {
+            StopCoroutine(m_GameLoop);
+        }
         for (int i = 0; i < m_Pieces.Count; i++) {
-            Destroy(m_Pieces[i].gameObject);
+            if (m_Pieces[i] != null) {
+                Destroy(m_Pieces[i].gameObject);
+            }
         }
         for (int i = 0; i < m_Height; i++) {
             for (int j = 0; j < m_Width; j++) {
                 m_Background.SetTile(new Vector3Int(j, i, 0), null);
             }
         }
+    }
+
+    public void AddExits(List<NodeLink> nodeLinks) {
+
+        m_Exits = new List<Vector2Int>();
+        for (int i = 0; i < nodeLinks.Count; i++) {
+            Vector2 v = Node.LinkToVector(nodeLinks[i]);
+            
+            if (v.x == 1) {
+                v.x = m_Width;
+            }
+            else if (v.x == -1) {
+                v.x = -1; // This is just a coincidence right? lol.
+            }
+
+            if (v.y == 1) {
+                v.y = m_Height;
+            }
+            else if (v.y == -1) {
+                v.y = -1;
+            }
+
+            if (v.x == 0) {
+                m_Exits.Add(new Vector2Int((int)Mathf.Ceil((float)(m_Width - 1) / 2f), (int)v.y));
+                m_Exits.Add(new Vector2Int((int)Mathf.Floor((float)(m_Width - 1) / 2f), (int)v.y));
+            }
+            else if (v.y == 0) {
+                m_Exits.Add(new Vector2Int((int)v.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+                m_Exits.Add(new Vector2Int((int)v.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+            }
+
+        }
+
+        // Background.
+        for (int i = 0; i < m_Exits.Count; i++) {
+            m_Background.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
+        }
+
     }
 
     public void Init() {
@@ -96,6 +141,15 @@ public class Board : MonoBehaviour {
 
         // Loop.
         m_Characters = GetAll<Character>();
+        for (int i = 0; i < m_Characters.Length; i++) {
+            if (m_Characters[i].GetComponent<Player>() != null) {
+                Character temp = m_Characters[0];
+                m_Characters[0] = m_Characters[i];
+                m_Characters[i] = temp;
+                break;
+            }
+        }
+
         m_MaxTurnNumber = m_Characters.Length;
         m_GameLoop = StartCoroutine(IEGameLoop());
 
@@ -105,6 +159,10 @@ public class Board : MonoBehaviour {
                 m_Background.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
             }
         }
+    }
+
+    public void SetDepth(int depth) {
+        m_Depth = depth;
     }
 
     #endregion
@@ -151,10 +209,11 @@ public class Board : MonoBehaviour {
                 m_Characters[i].NewTurn();
                 yield return new WaitUntil(() => m_Characters[i] == null || (m_Characters[i] != null && m_Characters[i].CompletedTurn));
                 if (m_Characters[i] != null && !m_Characters[i].IsStatic) {
-                    yield return new WaitForSeconds(0.025f);
+                    // yield return new WaitForSeconds(m_TurnDelay);
+                    // yield return new WaitForSeconds(m_TurnDelay / 10f);
                 }
             }
-            yield return new WaitForSeconds(m_TurnDelay);
+            // yield return new WaitForSeconds(m_TurnDelay / 2f);
             m_RoundNumber += 1;
         }
     }
@@ -162,10 +221,15 @@ public class Board : MonoBehaviour {
     public bool CheckMove(Vector2Int origin, Vector2Int direction) {
 
         Vector2Int target = origin + direction;
+        if (m_Exits.Contains(target) && GetAt<Player>(origin) != null) {
+            // Debug.Log("Moving through to another level.");
+            m_NetworkDebugger.Move(direction);
+        }
+
         bool horizontalBoundCheck = target.x >= 0 && target.x < m_Width;
         bool verticalBoundCheck = target.y >= 0 && target.y < m_Height;
         if (!horizontalBoundCheck || !verticalBoundCheck) {
-            Debug.Log("Trying to move out of bounds.");
+            // Debug.Log("Trying to move out of bounds.");
             return false;
         }
 
@@ -174,7 +238,7 @@ public class Board : MonoBehaviour {
             return true;
         }
         else {
-            Debug.Log("Trying to move to an occupied square.");
+            // Debug.Log("Trying to move to an occupied square.");
             return false;
         }
 
@@ -200,15 +264,15 @@ public class Board : MonoBehaviour {
         return false;
     }
 
-    public List<Vector2Int> AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> adjacentPositions) {
+    public List<Vector2Int> AdjacentPositions(Vector2Int origin, int depth, ref List<Vector2Int> positions) {
         
-        List<Vector2Int> adjacentDirections = new List<Vector2Int>() {
+        List<Vector2Int> directions = new List<Vector2Int>() {
             Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
         };
 
-        for (int i = 0; i < adjacentDirections.Count; i++) {
-            if (CheckTarget(origin, adjacentDirections[i])) {
-                adjacentPositions.Add(origin + adjacentDirections[i]);
+        for (int i = 0; i < directions.Count; i++) {
+            if (CheckTarget(origin, directions[i])) {
+                positions.Add(origin + directions[i]);
             }
         }
 
@@ -219,7 +283,42 @@ public class Board : MonoBehaviour {
         //    }
         //}
 
-        return adjacentPositions;
+        return positions;
+    }
+
+    public List<Vector2Int> OctaDirectional(Vector2Int origin, int depth, ref List<Vector2Int> positions) {
+
+        List<Vector2Int> directions = new List<Vector2Int>() {
+            Vector2Int.right, Vector2Int.right + Vector2Int.up,
+            Vector2Int.up, Vector2Int.up + Vector2Int.left,
+            Vector2Int.left, Vector2Int.left + Vector2Int.down,
+            Vector2Int.down, Vector2Int.down + Vector2Int.right
+        };
+
+        List<int> brokenPaths = new List<int>();
+        for (int i = 1; i <= depth; i++) {
+            for (int j = 0; j < directions.Count; j++) {
+                if (!brokenPaths.Contains(j) && CheckTarget(origin, i * directions[j])) {
+                    positions.Add(origin + i * directions[j]);
+                    if (GetAt<Piece>(origin + i * directions[j])) {
+                        brokenPaths.Add(j);
+                    }
+                }
+            }
+        }
+
+        return positions;
+    }
+
+    public List<Vector2Int> AllWithinRadius(Vector2Int origin, int range, ref List<Vector2Int> positions) {
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                if (CheckTarget(origin, new Vector2Int(j, i))) {
+                    positions.Add(origin + new Vector2Int(j, i));
+                }
+            }
+        }
+        return positions;
     }
 
     public bool WithinRadius(Piece pieceA, Piece pieceB, int radius) {
@@ -286,6 +385,11 @@ public class Board : MonoBehaviour {
             for (int j = 0; j < m_Width; j++) {
                 Gizmos.DrawWireCube(new Vector3(j, i, 0), new Vector3(1, 1, 1));
             }
+        }
+
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < m_Exits.Count; i++) {
+            Gizmos.DrawWireCube((Vector3)(Vector2)m_Exits[i], new Vector3(1.25f, 1.25f, 1));
         }
     }
 
