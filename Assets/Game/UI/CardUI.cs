@@ -10,6 +10,9 @@ public class CardUI : MonoBehaviour {
     // References.
     [SerializeField] protected Card m_Card;
 
+    [Space(2), Header("Rarity")]
+    [SerializeField] private Sprite[] m_Frames;
+
     // Icons.
     [Space(2), Header("Icons")]
     [SerializeField] private Sprite m_EmptyCard;
@@ -21,12 +24,14 @@ public class CardUI : MonoBehaviour {
     // Design.
     [Space(2), Header("Design")]
     [SerializeField] private Label m_CardName;
+    [SerializeField] private Label m_CardDescription;
     [SerializeField] public Label m_Charges;
-    [SerializeField] public Label m_Value;
+    [SerializeField] public IconsWriter m_DamageValue;
+    [SerializeField] public IconsWriter m_StatusValue;
     [SerializeField] private SpriteRenderer m_CardFace;
     [SerializeField] private SpriteRenderer m_CardTargetType;
     public SpriteRenderer CardTargetType => m_CardTargetType;
-
+    
     // Selection.
     [Space(2), Header("Interaction")]
     [SerializeField, ReadOnly] private bool m_MouseOver = false;
@@ -43,6 +48,11 @@ public class CardUI : MonoBehaviour {
 
     /* --- Unity --- */
     #region Unity
+
+    void Start() {
+        m_Origin = transform.position;
+        m_IconPosition = m_CardTargetType.transform.localPosition;
+    }
 
     void Update() {
         if (m_Card == null) {
@@ -85,7 +95,7 @@ public class CardUI : MonoBehaviour {
     }
 
     public void SetOrigin(int i) {
-        transform.position += i * Vector3.right * 4f;
+        transform.position += i * Vector3.right * 6f;
         m_Origin = transform.position;
         m_IconPosition = m_CardTargetType.transform.localPosition;
     }
@@ -154,9 +164,9 @@ public class CardUI : MonoBehaviour {
 
     private void SetScale(float deltaTime) {
 
-        Vector2 displacement = ((Vector2)transform.position - m_Origin);
-        float distance = displacement.magnitude > 0.5f ? displacement.magnitude : 0f;
-        float targetScale = Mathf.Max(0f, 1f - distance);
+        //Vector2 displacement = ((Vector2)transform.position - m_Origin);
+        //float distance = displacement.magnitude > 0.5f ? displacement.magnitude : 0f;
+        float targetScale = m_Active ? 0f : 1f; // Mathf.Max(0f, 1f - distance);
 
         m_Scale = m_Scale != targetScale ? m_Scale + Mathf.Sign(targetScale - m_Scale) * m_ScaleSpeed * deltaTime : m_Scale;
         if (Mathf.Abs(targetScale - m_Scale) < 0.05f) {
@@ -187,12 +197,25 @@ public class CardUI : MonoBehaviour {
     void Draw() {
         // Draw the name.
         m_CardName.SetText(m_Card.CardName);
-        // Draw the sprites.
-        m_CardTargetType.sprite = GetCardTargetTypeIcon(m_Card.CardTargetType);
+        // Draw the frame.
+        GetComponent<SpriteRenderer>().sprite = m_Frames[(int)m_Card.CardRarity];   
+        // Draw the face.
         m_CardFace.sprite = m_Card.Face;
+        // Draw the type.
+        m_CardTargetType.sprite = GetCardTargetTypeIcon(m_Card.CardTargetType);
         // Draw the values.
-        m_Value.SetText(m_Card.Value.ToString());
+        m_DamageValue.SetIcons(m_Card.Value, 0);
+        if (m_Card.StatusEffect != Status.None) {
+            m_StatusValue.SetIcons(m_Card.DurationValue, (int)m_Card.StatusEffect);
+        }
+        else {
+            m_StatusValue.gameObject.SetActive(false);
+        }
+        // Write the charges.
         m_Charges.SetText(m_Card.Charges.ToString());
+        // Draw the description.
+        m_CardDescription.SetText(m_Card.CardDescription);
+
         // Draw the targets.
         DrawTarget();
     }
@@ -206,15 +229,15 @@ public class CardUI : MonoBehaviour {
 
     void DrawEmpty() {
         // Draw the name.
-        m_CardFace.sprite = m_EmptyCard;
-        m_CardName.gameObject.SetActive(false);
+        // m_CardFace.sprite = m_EmptyCard;
+        // m_CardName.gameObject.SetActive(false);
         // Draw the sprites.
-        m_CardTargetType.gameObject.SetActive(false);
+        // m_CardTargetType.gameObject.SetActive(false);
         // Draw the values.
-        m_Value.gameObject.SetActive(false);
-        m_Charges.gameObject.SetActive(false);
-        transform.localScale = new Vector3(1f, 1f, 1f);
-        transform.position = (Vector3)m_Origin;
+        // m_DamageValue.gameObject.SetActive(false);
+        // m_Charges.gameObject.SetActive(false);
+        // transform.localScale = new Vector3(1f, 1f, 1f);
+        // transform.position = (Vector3)m_Origin;
     }
 
     private Sprite GetCardTargetTypeIcon(TargetType targetType) {

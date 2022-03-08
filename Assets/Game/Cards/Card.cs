@@ -38,6 +38,9 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     // Face.
     [SerializeField] private Sprite m_Face;
     public Sprite Face => m_Face;
+    // Description.
+    [SerializeField] private string m_Description;
+    public string CardDescription => m_Description;
 
     [Header("Activation")]
     // Activation.

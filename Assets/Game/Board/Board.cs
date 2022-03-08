@@ -139,7 +139,7 @@ public class Board : MonoBehaviour {
             }
             else if (direction.y == 0) {
                 m_Exits.Add(new Vector2Int((int)direction.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
-                m_Exits.Add(new Vector2Int((int)direction.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+                m_Exits.Add(new Vector2Int((int)direction.x, (int)Mathf.Floor((float)(m_Height - 1) / 2f)));
             }
         }
 

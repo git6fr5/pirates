@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Duration: 4
   m_Charges: 2
   m_Face: {fileID: 0}
+  m_Description: Sheep > Pirates
   m_Active: 0
   m_ActivationEffect: {fileID: 5552403729135705010}
   m_ProjectileEffect: {fileID: 2035775123478268534}
