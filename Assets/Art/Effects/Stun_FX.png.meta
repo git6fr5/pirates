@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: c96ebc9229185a74b8cba4c0bd856439
+guid: 1fe3dd7727218b24f8bbe9eb7b6a52a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5398032142923382104
-    second: Demo Flame_0
+      213: -9161881903775923084
+    second: Stun_FX_0
   - first:
-      213: 8793224633320918445
-    second: Demo Flame_1
+      213: 4638851686459744458
+    second: Stun_FX_1
   - first:
-      213: -5407937173757727129
-    second: Demo Flame_2
+      213: 5427124570251913464
+    second: Stun_FX_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,7 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Demo Flame_0
+      name: Stun_FX_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85db61d42a9a9ea40800000000000000
-      internalID: 5398032142923382104
+      spriteID: 4744b5343f47ad080800000000000000
+      internalID: -9161881903775923084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demo Flame_1
+      name: Stun_FX_1
       rect:
         serializedVersion: 2
         x: 16
@@ -183,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dadce4b273fc70a70800000000000000
-      internalID: 8793224633320918445
+      spriteID: ac0a729f703806040800000000000000
+      internalID: 4638851686459744458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demo Flame_2
+      name: Stun_FX_2
       rect:
         serializedVersion: 2
         x: 32
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76e6a8efac523f4b0800000000000000
-      internalID: -5407937173757727129
+      spriteID: 8f8e8a1ea05015b40800000000000000
+      internalID: 5427124570251913464
       vertices: []
       indices: 
       edges: []

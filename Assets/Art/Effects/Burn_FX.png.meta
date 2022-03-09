@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: b4297622e734ecb4e8bb1f5c6891f080
+guid: 0f4a2d41f9598784c9e5031913c7999a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -450419650314425412
-    second: Treasure Chest_0
+      213: -8975955972721471868
+    second: Burn_FX_0
   - first:
-      213: -5024867174691523077
-    second: Treasure Chest_1
+      213: 6994625482702765475
+    second: Burn_FX_1
   - first:
-      213: 3891611125662317351
-    second: Treasure Chest_2
+      213: -4952261031587800942
+    second: Burn_FX_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,7 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Treasure Chest_0
+      name: Burn_FX_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbb2727e6b9cfb9f0800000000000000
-      internalID: -450419650314425412
+      spriteID: 48e0466799ffe6380800000000000000
+      internalID: -8975955972721471868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Treasure Chest_1
+      name: Burn_FX_1
       rect:
         serializedVersion: 2
         x: 16
@@ -183,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf5bdf07de5144ab0800000000000000
-      internalID: -5024867174691523077
+      spriteID: 3adb46141d6e11160800000000000000
+      internalID: 6994625482702765475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Treasure Chest_2
+      name: Burn_FX_2
       rect:
         serializedVersion: 2
         x: 32
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72b7f0d33b7c10630800000000000000
-      internalID: 3891611125662317351
+      spriteID: 298133974d8064bb0800000000000000
+      internalID: -4952261031587800942
       vertices: []
       indices: 
       edges: []

@@ -35,15 +35,15 @@ public class CardUI : MonoBehaviour {
     
     // Selection.
     [Space(2), Header("Interaction")]
-    [SerializeField, ReadOnly] private bool m_MouseOver = false;
-    [SerializeField, ReadOnly] private bool m_Active = false;
+    [SerializeField, ReadOnly] protected bool m_MouseOver = false;
+    [SerializeField, ReadOnly] protected bool m_Active = false;
     private List<SpriteRenderer> m_TargetIndicators;
 
     // Transformation.
-    [SerializeField, ReadOnly] private Vector2 m_Origin;
+    [SerializeField, ReadOnly] protected Vector2 m_Origin;
     [SerializeField, ReadOnly] private Vector2 m_IconPosition;
-    [SerializeField, ReadOnly] private float m_Scale;
-    [SerializeField] private float m_ScaleSpeed = 5f;
+    [SerializeField, ReadOnly] protected float m_Scale;
+    [SerializeField] protected float m_ScaleSpeed = 5f;
     Dictionary<Transform, Vector3> m_LocalOrigins;
 
 
@@ -161,7 +161,7 @@ public class CardUI : MonoBehaviour {
     }
 
 
-    void SetPosition(float deltaTime) {
+    protected virtual void SetPosition(float deltaTime) {
 
         if (m_Active) {
             Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -190,10 +190,14 @@ public class CardUI : MonoBehaviour {
         }
 
         m_SpriteRenderer.material.SetVector("_Offset", new Vector4(0f, currY, 0f, 0f));
-        
+
+        if (m_Active) {
+            m_CardTargetType.transform.position = transform.position;
+        }
+
     }
 
-    private void SetScale(float deltaTime) {
+    protected virtual void SetScale(float deltaTime) {
 
         float targetScale = m_Active ? 0f : 1f; // Mathf.Max(0f, 1f - distance);
 
@@ -207,15 +211,14 @@ public class CardUI : MonoBehaviour {
         if (m_Scale <= 0f) {
             m_CardTargetType.transform.SetParent(null);
             m_CardTargetType.gameObject.SetActive(true);
-            m_CardTargetType.transform.position = transform.position;
             m_CardTargetType.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else {
             // m_CardTargetType.gameObject.SetActive(false);
             m_CardTargetType.transform.SetParent(transform);
             m_CardTargetType.transform.localScale = new Vector3(1f, 1f, 1f);
-            m_CardTargetType.transform.localPosition = m_IconPosition;
         }
+        
     }
 
     #endregion

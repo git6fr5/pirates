@@ -6,10 +6,14 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
+[RequireComponent(typeof(SpriteRenderer))]
 public class Treasure : Piece {
 
     /* --- Variables --- */
     #region Variables
+
+    // References.
+    [HideInInspector] private SpriteRenderer m_SpriteRenderer;
 
     // Rarity.
     [SerializeField] private Rarity m_Rarity;
@@ -27,6 +31,12 @@ public class Treasure : Piece {
     private List<SpriteRenderer> m_VisionIndicators;
     [SerializeField] private TreasureUI m_TreasureUI;
 
+    // Jumping.
+    [SerializeField, ReadOnly] private float m_BaseOffset;
+    [SerializeField, ReadOnly] private bool m_Jump;
+    [SerializeField] private float m_JumpDuration;
+    [SerializeField] private float m_JumpHeight;
+
     #endregion
 
     /* --- Unity --- */
@@ -37,6 +47,8 @@ public class Treasure : Piece {
     }
 
     void Update() {
+        float deltaTime = Time.deltaTime;
+        SetPosition(deltaTime);
         SetUI();
         CheckActivate();
     }
@@ -72,6 +84,39 @@ public class Treasure : Piece {
             m_Cards[2] = Random.Range(0f, 1f) < 0.5f ? TreasurePool.GetRandomCard(Rarity.Common) : TreasurePool.GetRandomCard(Rarity.Rare);
         }
 
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        m_BaseOffset = m_SpriteRenderer.material.GetVector("_Offset").y;
+        StartCoroutine(IEJump());
+    }
+
+    #endregion
+
+    #region Polish
+
+    private void SetPosition(float deltaTime) {
+        float targetY = m_BaseOffset;
+        if (m_Jump) {
+            targetY = m_JumpHeight;
+        }
+
+        float currY = m_SpriteRenderer.material.GetVector("_Offset").y;
+        if (currY > targetY + 0.05f || currY < targetY - 0.05f) {
+            currY += Mathf.Sign(targetY - currY) * (m_JumpHeight / m_JumpDuration) * deltaTime;
+        }
+        else {
+            currY = targetY;
+        }
+
+
+    }
+
+    private IEnumerator IEJump() {
+        while (true) {
+            m_Jump = true;
+            yield return new WaitForSeconds(m_JumpDuration);
+            m_Jump = false;
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+        }
     }
 
     #endregion
@@ -139,6 +184,5 @@ public class Treasure : Piece {
     }
 
     #endregion
-
 
 }
