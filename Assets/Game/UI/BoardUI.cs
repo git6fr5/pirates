@@ -10,9 +10,21 @@ public class BoardUI : MonoBehaviour {
     public static Sprite HeartIndicator;
     public Sprite m_HeartIndicator;
 
+    public static Material HeartMaterial;
+    public Material m_HeartMaterial;
+
+    public static float Ticks = 0f;
+
     void Start() {
         SquareIndicator = m_SquareIndicator;
         HeartIndicator = m_HeartIndicator;
+        HeartMaterial = m_HeartMaterial;
+    }
+
+    void Update() {
+
+        Ticks += Time.deltaTime;
+
     }
 
     public static void DrawTargetUI(Card card, Board board, Vector2Int origin, ref List<SpriteRenderer> targetIndicators, bool redraw = true) {
@@ -39,7 +51,7 @@ public class BoardUI : MonoBehaviour {
     public static void DrawTargets(Card card, Board board, Vector2Int origin, ref List<SpriteRenderer> targetIndicators) {
         List<Vector2Int> targettablePositions = card.GetTargetablePositions(board, origin);
         for (int i = 0; i < targettablePositions.Count; i++) {
-            DrawSquare(targettablePositions[i], new Color(1f, 0f, 0f, 0f), 0.25f, ref targetIndicators);
+            DrawSquare(targettablePositions[i], new Color(1f, 0f, 0f, 0f), 0.25f, ref targetIndicators, 2);
         }
     }
 
@@ -49,7 +61,7 @@ public class BoardUI : MonoBehaviour {
                 Vector2Int position = origin + new Vector2Int(j, i);
                 bool validPosition = position.x >= 0 && position.y < board.Width && position.y >= 0 && position.y < board.Height;
                 if (validPosition) {
-                    DrawSquare(position, new Color(1f, 1f, 0f, 0f), 0.25f, ref visionIndicators);
+                    DrawSquare(position, new Color(1f, 1f, 0f, 0f), 0.25f, ref visionIndicators, 1);
                 }
             }
         }
@@ -57,29 +69,33 @@ public class BoardUI : MonoBehaviour {
 
     public static void DrawHealth(int hearts, Vector2Int origin, ref List<SpriteRenderer> healthIndicators) {
         for (int i = 0; i < hearts; i++) {
-            Vector3 position = (Vector3)(Vector2)origin + Vector3.up + Vector3.right * ((float)i - (float)hearts / 2f);
-            DrawSprite(HeartIndicator, position, new Color(1f, 1f, 0f, 0f), 0.5f, ref healthIndicators);
+            float bob = 1.2f + 0.05f * Mathf.Sin(Mathf.PI * (Ticks + i / 4f));
+            Vector3 offset = Vector3.up * bob + Vector3.right * ((float)i - (float)(hearts - 1f) / 2f) / 1.5f;
+            Vector3 position = (Vector3)(Vector2)origin + offset;
+            Sprite sprite = DrawSprite(HeartIndicator, position, new Color(1f, 1f, 0f, 0f), 1f, ref healthIndicators, HeartMaterial, 3);
         }
     }
 
-    public static void DrawSquare(Vector2Int position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers) {
+    public static void DrawSquare(Vector2Int position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers, int order = 1) {
         SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-        indicator.sortingOrder = 1;
+        indicator.sortingOrder = order;
         indicator.transform.position = (Vector3)(Vector2)position;
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = SquareIndicator;
         spriteRenderers.Add(indicator);
-        Destroy(indicator.gameObject, 0.05f);
     }
 
-    public static void DrawSprite(Sprite sprite, Vector3 position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers) {
+    public static Sprite DrawSprite(Sprite sprite, Vector3 position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers, Material material, int order = 1) {
         SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
         indicator.sortingOrder = 2;
         indicator.transform.position = position;
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = sprite;
         spriteRenderers.Add(indicator);
-        spriteRenderers.Add(indicator);
+        if (material != null) {
+            indicator.material = material;
+        }
+        return sprite;
     }
 
     public static void Reset(ref List<SpriteRenderer> spriteRenderers) {

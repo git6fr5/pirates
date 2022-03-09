@@ -8,6 +8,7 @@ public class CardUI : MonoBehaviour {
     #region Variables
 
     // References.
+    [HideInInspector] protected SpriteRenderer m_SpriteRenderer;
     [SerializeField] protected Card m_Card;
 
     [Space(2), Header("Rarity")]
@@ -43,6 +44,8 @@ public class CardUI : MonoBehaviour {
     [SerializeField, ReadOnly] private Vector2 m_IconPosition;
     [SerializeField, ReadOnly] private float m_Scale;
     [SerializeField] private float m_ScaleSpeed = 5f;
+    Dictionary<Transform, Vector3> m_LocalOrigins;
+
 
     #endregion
 
@@ -50,6 +53,7 @@ public class CardUI : MonoBehaviour {
     #region Unity
 
     void Start() {
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_Origin = transform.position;
         m_IconPosition = m_CardTargetType.transform.localPosition;
     }
@@ -98,6 +102,12 @@ public class CardUI : MonoBehaviour {
         transform.position += i * Vector3.right * 6f;
         m_Origin = transform.position;
         m_IconPosition = m_CardTargetType.transform.localPosition;
+
+        m_LocalOrigins = new Dictionary<Transform, Vector3>();
+        foreach (Transform child in transform) {
+            m_LocalOrigins.Add(child, child.localPosition);
+        }
+
     }
 
     #endregion
@@ -146,12 +156,13 @@ public class CardUI : MonoBehaviour {
             m_Active = false;
         }
 
-        SetPosition();
+        SetPosition(deltaTime);
         SetScale(deltaTime);
     }
 
 
-    void SetPosition() {
+    void SetPosition(float deltaTime) {
+
         if (m_Active) {
             Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition;
@@ -159,13 +170,31 @@ public class CardUI : MonoBehaviour {
         else {
             transform.position = (Vector3)m_Origin;
         }
+
+
+        float targetY = 0f;
+        if (m_MouseOver && !m_Active) {
+            targetY = 3f;
+        }
+
+        float currY = m_SpriteRenderer.material.GetVector("_Offset").y;
+        if (currY > targetY + 0.05f || currY < targetY - 0.05f) {
+            currY += Mathf.Sign(targetY - currY) * 3f * m_ScaleSpeed * deltaTime;
+        }
+        else {
+            currY = targetY;
+        }
+
+        foreach (KeyValuePair<Transform, Vector3> item in m_LocalOrigins) {
+            item.Key.localPosition = item.Value + Vector3.up * currY;
+        }
+
+        m_SpriteRenderer.material.SetVector("_Offset", new Vector4(0f, currY, 0f, 0f));
         
     }
 
     private void SetScale(float deltaTime) {
 
-        //Vector2 displacement = ((Vector2)transform.position - m_Origin);
-        //float distance = displacement.magnitude > 0.5f ? displacement.magnitude : 0f;
         float targetScale = m_Active ? 0f : 1f; // Mathf.Max(0f, 1f - distance);
 
         m_Scale = m_Scale != targetScale ? m_Scale + Mathf.Sign(targetScale - m_Scale) * m_ScaleSpeed * deltaTime : m_Scale;
