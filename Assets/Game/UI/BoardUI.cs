@@ -41,6 +41,20 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
+    public static void DrawVisionRowUI(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators, bool redraw = true) {
+        Reset(ref visionIndicators);
+        if (redraw) {
+            DrawVisionRow(width, board, origin, ref visionIndicators);
+        }
+    }
+
+    public static void DrawVisionCharactersUI(Vector2Int[] targets, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators, bool redraw = true) {
+        Reset(ref visionIndicators);
+        if (redraw) {
+            DrawVisionCharacters(board, targets, origin, ref visionIndicators);
+        }
+    }
+
     public static void DrawHealthUI(int hearts, Vector2Int origin, ref List<SpriteRenderer> healthIndicators, bool redraw = true) {
         Reset(ref healthIndicators);
         if (redraw) {
@@ -67,6 +81,29 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
+    public static void DrawVisionRow(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators) {
+        int row = origin.y;
+        Player player = board.Get<Player>();
+
+        for (int n = -width; n <= width; n++) {
+            if (row + n >= 0 && row + n < board.Height) {
+                for (int i = 0; i < board.Width; i++) {
+                    if (player.Position != new Vector2Int(i, row + n)) {
+                        DrawSquare(new Vector2Int(i, row + n), new Color(1f, 1f, 0f, 0f), 0.5f, ref visionIndicators, 1);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void DrawVisionCharacters(Board board, Vector2Int[] targets, Vector2Int origin, ref List<SpriteRenderer> visionIndicators) {
+        for (int i = 0; i < targets.Length; i++) {
+            if (targets[i] != origin) {
+                DrawSquare(targets[i], new Color(1f, 1f, 0f, 0f), 0.5f, ref visionIndicators, 1);
+            }
+        }
+    }
+
     public static void DrawHealth(int hearts, Vector2Int origin, ref List<SpriteRenderer> healthIndicators) {
         for (int i = 0; i < hearts; i++) {
             float bob = 1.2f + 0.05f * Mathf.Sin(Mathf.PI * (Ticks + i / 4f));
@@ -78,16 +115,19 @@ public class BoardUI : MonoBehaviour {
 
     public static void DrawSquare(Vector2Int position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers, int order = 1) {
         SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-        indicator.sortingOrder = order;
+        indicator.sortingOrder = order - 10;
+        indicator.sortingLayerName = "Characters";
         indicator.transform.position = (Vector3)(Vector2)position;
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = SquareIndicator;
         spriteRenderers.Add(indicator);
+        Destroy(indicator.gameObject, 1f/24f);
     }
 
     public static Sprite DrawSprite(Sprite sprite, Vector3 position, Color color, float opacity, ref List<SpriteRenderer> spriteRenderers, Material material, int order = 1) {
         SpriteRenderer indicator = new GameObject("Indicator", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
         indicator.sortingOrder = 2;
+        indicator.sortingLayerName = "UI";
         indicator.transform.position = position;
         indicator.color = new Color(color.r, color.g, color.b, opacity);
         indicator.sprite = sprite;

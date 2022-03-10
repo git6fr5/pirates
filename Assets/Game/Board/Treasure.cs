@@ -46,7 +46,7 @@ public class Treasure : Piece {
         Init();
     }
 
-    void Update() {
+    protected override void Think() {
         float deltaTime = Time.deltaTime;
         SetPosition(deltaTime);
         SetUI();
@@ -67,6 +67,8 @@ public class Treasure : Piece {
 
     private void Init() {
 
+        print("Initializing treasure chest");
+
         m_Cards = new Card[3];
         if (m_Rarity == Rarity.Common) {
             m_Cards[0] = TreasurePool.GetRandomCard(Rarity.Common);
@@ -85,8 +87,9 @@ public class Treasure : Piece {
         }
 
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        m_BaseOffset = m_SpriteRenderer.material.GetVector("_Offset").y;
+        // m_BaseOffset = m_SpriteRenderer.material.GetVector("_Offset").y;
         StartCoroutine(IEJump());
+
     }
 
     #endregion
@@ -95,8 +98,9 @@ public class Treasure : Piece {
 
     private void SetPosition(float deltaTime) {
         float targetY = m_BaseOffset;
+
         if (m_Jump) {
-            targetY = m_JumpHeight;
+            targetY = m_JumpHeight + m_BaseOffset;
         }
 
         float currY = m_SpriteRenderer.material.GetVector("_Offset").y;
@@ -107,15 +111,23 @@ public class Treasure : Piece {
             currY = targetY;
         }
 
+        m_SpriteRenderer.material.SetVector("_Offset", new Vector4(0f, currY, 0f, 0f));
+
+        //if (m_Jump) {
+        //    m_SpriteRenderer.material.SetVector("_Offset", new Vector4(Random.Range(-0.1f, 0.1f), currY, 0f, 0f));
+        //}
 
     }
 
     private IEnumerator IEJump() {
+        yield return new WaitForSeconds(Random.Range(7.5f, 10f));
         while (true) {
+            m_Shake = true;
+            yield return new WaitForSeconds(m_ShakeDuration);
             m_Jump = true;
             yield return new WaitForSeconds(m_JumpDuration);
             m_Jump = false;
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            yield return new WaitForSeconds(Random.Range(1f, 5f));
         }
     }
 
@@ -126,7 +138,7 @@ public class Treasure : Piece {
     private void CheckActivate() {
         bool input0 = Input.GetMouseButtonDown(0);
         bool releaseInput0 = Input.GetMouseButtonUp(0);
-        bool input1 = Input.GetMouseButtonDown(1);
+        bool input1 = m_TreasureUI.Exit.Active || Input.GetMouseButtonDown(1);
 
         bool empty = true;
         for (int i = 0; i < m_Cards.Length; i++) {

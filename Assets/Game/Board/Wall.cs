@@ -12,10 +12,26 @@ public class Wall : Piece {
     private bool m_MouseOver = false;
     private List<SpriteRenderer> m_HeartIndicators;
 
+    //bool m_InitDelay = false;
+    //float m_InitDelayTicks = 0f;
+
     #endregion
 
     /* --- Unity --- */
     #region Unity
+
+    //protected override void Think() {
+    //    if (!m_InitDelay) {
+    //        m_InitDelayTicks += Time.deltaTime;
+    //        if (m_InitDelayTicks > 5f) {
+    //            m_InitDelay = true;
+    //        }
+    //    }
+
+    //    if (m_InitDelay) {
+    //        Snap();
+    //    }
+    //}
 
     void OnMouseOver() {
         m_MouseOver = true;

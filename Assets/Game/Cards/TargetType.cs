@@ -10,5 +10,6 @@ public enum TargetType {
     Self,
     Melee,
     Directional,
-    AOE
+    Throw,
+    Global
 }

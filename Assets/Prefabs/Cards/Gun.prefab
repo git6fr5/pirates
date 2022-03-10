@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d6ccd04b86db94c89866d4831f2efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardName: Gun
+  m_CardName: Flintlock
   m_Rariry: 0
   m_TargetType: 2
   m_Range: 3

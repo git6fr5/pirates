@@ -25,6 +25,9 @@ public class Board : MonoBehaviour {
     /* --- Variables --- */
     #region Variables
 
+    public static int Frames;
+    public static float Ticks;
+
     // Generation.
     public LDtkReader m_LDtkReader;
     public PieceData[] m_PieceData;
@@ -56,6 +59,7 @@ public class Board : MonoBehaviour {
 
     // Tilemap.
     public Tilemap m_Tilemap;
+    public Tilemap m_Exitmap;
     public TileBase m_BackgroundTile;
     public TileBase m_ExitTile;
 
@@ -67,6 +71,11 @@ public class Board : MonoBehaviour {
     void Awake() {
         m_Player = (Player)m_PlayerBase.Create(this, m_PlayerStartPosition.x, m_PlayerStartPosition.y);
         m_Player.SetPosition(m_PlayerStartPosition, true);
+    }
+
+    void Update() {
+        Frames += 1;
+        Ticks += Time.deltaTime;
     }
 
     #endregion
@@ -88,30 +97,49 @@ public class Board : MonoBehaviour {
             }
         }
 
+        // Reset the exits.
+        for (int i = 0; i < m_Exits.Count; i++) {
+            m_Exitmap.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), null);
+        }
+
         // Reset the tilemap.
-        for (int i = 0; i < m_Height; i++) {
-            for (int j = 0; j < m_Width; j++) {
-                m_Tilemap.SetTile(new Vector3Int(j, i, 0), null);
+        for (int i = -1; i < m_Height + 1; i++) {
+            for (int j = -1; j < m_Width + 1; j++) {
+                // m_Tilemap.SetTile(new Vector3Int(j, i, 0), null);
+            }
+        }
+
+        m_Player.gameObject.SetActive(false);
+    }
+
+    public void GenerateMap() {
+        // Draw the background.
+        for (int i = -1; i < m_Height + 1; i++) {
+            for (int j = -1; j < m_Width + 1; j++) {
+                m_Tilemap.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
             }
         }
     }
 
-    public void Generate(int depth, List<NodeLink> nodeLinks, Vector2Int playerDirection) {
+    public void Generate(int depth, List<NodeLink> nodeLinks, Vector2Int playerDirection, int diffiulty) {
 
         // Set the depth.
         m_Depth = depth;
 
         // Add the player.
         Vector2Int newPosition = m_Player.Position - new Vector2Int((m_Width - 1) * playerDirection.x, (m_Height - 1) * playerDirection.y);
-        m_Player.SetPosition(newPosition, true);
+        m_Player.SetPosition(newPosition, false);
+        m_Player.gameObject.SetActive(true);
+        m_Player.transform.position = (Vector3)(Vector2)m_Player.Position + (17.5f) * Vector3.up;
         m_Pieces = new List<Piece>();
         m_Pieces.Add(m_Player);
 
         // Generate all the other pieces.
-        m_PieceData = m_LDtkReader.Get(m_Depth);
+        m_PieceData = m_LDtkReader.Get(m_Depth, diffiulty);
         for (int i = 0; i < m_PieceData.Length; i++) {
             Piece newPiece = m_PieceData[i].m_Piece.Create(this, m_PieceData[i].m_Position.x, m_PieceData[i].m_Position.y);
-            newPiece.SetPosition(m_PieceData[i].m_Position, true);
+            newPiece.transform.position = (Vector3)(Vector2)m_PieceData[i].m_Position + (18f + i * 0.3f) * Vector3.up;
+            // newPiece.SetPosition(m_PieceData[i].m_Position, true);
             m_Pieces.Add(newPiece);
         }
 
@@ -120,13 +148,6 @@ public class Board : MonoBehaviour {
         m_MaxTurnNumber = m_Enemies.Length;
         m_GameLoop = StartCoroutine(IEGameLoop());
 
-        // Draw the background.
-        for (int i = 0; i < m_Height; i++) {
-            for (int j = 0; j < m_Width; j++) {
-                m_Tilemap.SetTile(new Vector3Int(j, i, 0), m_BackgroundTile);
-            }
-        }
-
         // Get the exits.
         m_Exits = new List<Vector2Int>();
         for (int i = 0; i < nodeLinks.Count; i++) {
@@ -134,18 +155,22 @@ public class Board : MonoBehaviour {
             direction.x = direction.x == 1 ? m_Width : (direction.x == -1 ? -1 : 0);
             direction.y = direction.y == 1 ? m_Height : (direction.y == -1 ? -1 : 0);
             if (direction.x == 0) {
-                m_Exits.Add(new Vector2Int((int)Mathf.Ceil((float)(m_Width - 1) / 2f), (int)direction.y));
-                m_Exits.Add(new Vector2Int((int)Mathf.Floor((float)(m_Width - 1) / 2f), (int)direction.y));
+                for (int j = 0; j < 3; j++) {
+                    m_Exits.Add(new Vector2Int((int)Mathf.Ceil((float)(m_Width - 1) / 2f), (int)direction.y + (int)Mathf.Sign(direction.y) * j));
+                    m_Exits.Add(new Vector2Int((int)Mathf.Floor((float)(m_Width - 1) / 2f), (int)direction.y + (int)Mathf.Sign(direction.y) * j));
+                }
             }
             else if (direction.y == 0) {
-                m_Exits.Add(new Vector2Int((int)direction.x, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
-                m_Exits.Add(new Vector2Int((int)direction.x, (int)Mathf.Floor((float)(m_Height - 1) / 2f)));
+                for (int j = 0; j < 3; j++) {
+                    m_Exits.Add(new Vector2Int((int)direction.x + (int)Mathf.Sign(direction.x) * j, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
+                    m_Exits.Add(new Vector2Int((int)direction.x + (int)Mathf.Sign(direction.x) * j, (int)Mathf.Floor((float)(m_Height - 1) / 2f)));
+                }
             }
         }
 
         // Draw the exits.
         for (int i = 0; i < m_Exits.Count; i++) {
-            m_Tilemap.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
+            m_Exitmap.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
         }
     }
 
@@ -161,8 +186,18 @@ public class Board : MonoBehaviour {
     public T[] GetAll<T>() {
         List<T> newList = new List<T>();
         for (int i = 0; i < m_Pieces.Count; i++) {
-            if (m_Pieces[i].GetComponent<T>() != null) {
+            if (m_Pieces[i] != null && m_Pieces[i].GetComponent<T>() != null) {
                 newList.Add(m_Pieces[i].GetComponent<T>());
+            }
+        }
+        return newList.ToArray();
+    }
+
+    public Vector2Int[] GetAllLocations<T>() {
+        List<Vector2Int> newList = new List<Vector2Int>();
+        for (int i = 0; i < m_Pieces.Count; i++) {
+            if (m_Pieces[i] != null && m_Pieces[i].GetComponent<T>() != null) {
+                newList.Add(m_Pieces[i].Position);
             }
         }
         return newList.ToArray();
@@ -215,6 +250,12 @@ public class Board : MonoBehaviour {
             m_RoundNumber += 1;
 
         }
+    }
+
+    public void AddPiece(Piece piece, Vector2Int location) {
+        Piece newPiece = piece.Create(this, location.x, location.y);
+        newPiece.transform.position = (Vector3)(Vector2)location + 18f * Vector3.up;
+        m_Pieces.Add(newPiece);
     }
 
     #endregion
@@ -307,12 +348,32 @@ public class Board : MonoBehaviour {
         return positions;
     }
 
+    public List<Vector2Int> ThrowTargetting(Vector2Int origin, int range, ref List<Vector2Int> positions) {
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                if (CheckTarget(origin, new Vector2Int(j, i))) {
+                    positions.Add(origin + new Vector2Int(j, i));
+                }
+            }
+        }
+        return positions;
+    }
+
     public List<Vector2Int> AOETargetting(Vector2Int origin, int range, ref List<Vector2Int> positions) {
         for (int i = -range; i <= range; i++) {
             for (int j = -range; j <= range; j++) {
                 if (CheckTarget(origin, new Vector2Int(j, i))) {
                     positions.Add(origin + new Vector2Int(j, i));
                 }
+            }
+        }
+        return positions;
+    }
+
+    public List<Vector2Int> GlobalTargetting(ref List<Vector2Int> positions) {
+        for (int i = 0; i < m_Height; i++) {
+            for (int j = 0; j < m_Width; j++) {
+                positions.Add(new Vector2Int(j, i));
             }
         }
         return positions;

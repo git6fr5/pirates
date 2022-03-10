@@ -17,7 +17,7 @@ public class CardUI : MonoBehaviour {
     // Icons.
     [Space(2), Header("Icons")]
     [SerializeField] private Sprite m_EmptyCard;
-    [SerializeField] private Sprite m_AOEIcon;
+    [SerializeField] private Sprite m_ThrowIcon;
     [SerializeField] private Sprite m_DirectionalIcon;
     [SerializeField] private Sprite m_MeleeIcon;
     [SerializeField] private Sprite m_BuffIcon;
@@ -44,7 +44,7 @@ public class CardUI : MonoBehaviour {
     [SerializeField, ReadOnly] private Vector2 m_IconPosition;
     [SerializeField, ReadOnly] protected float m_Scale;
     [SerializeField] protected float m_ScaleSpeed = 5f;
-    Dictionary<Transform, Vector3> m_LocalOrigins;
+    protected Dictionary<Transform, Vector3>  m_LocalOrigins;
 
 
     #endregion
@@ -274,8 +274,8 @@ public class CardUI : MonoBehaviour {
 
     private Sprite GetCardTargetTypeIcon(TargetType targetType) {
         switch (targetType) {
-            case TargetType.AOE:
-                return m_AOEIcon;
+            case TargetType.Throw:
+                return m_ThrowIcon;
             case TargetType.Directional:
                 return m_DirectionalIcon;
             case TargetType.Melee:

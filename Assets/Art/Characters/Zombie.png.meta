@@ -71,6 +71,39 @@ TextureImporter:
   - first:
       213: -5258981793333451929
     second: Zombie-Sheet_22
+  - first:
+      213: 6019453725058403666
+    second: Zombie_0
+  - first:
+      213: -2485871483528494817
+    second: Zombie_1
+  - first:
+      213: 6284166523789267160
+    second: Zombie_2
+  - first:
+      213: -8585762769051335824
+    second: Zombie_3
+  - first:
+      213: -980516788960830398
+    second: Zombie_4
+  - first:
+      213: 9211052458692073003
+    second: Zombie_5
+  - first:
+      213: -1977811604655986376
+    second: Zombie_6
+  - first:
+      213: 2485403828518691469
+    second: Zombie_7
+  - first:
+      213: 9155892958683192943
+    second: Zombie_8
+  - first:
+      213: -8024741306827218347
+    second: Zombie_9
+  - first:
+      213: -5531462376642689062
+    second: Zombie_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -208,11 +241,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zombie-Sheet_0
+      name: Zombie_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -222,18 +255,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06e65aa4981229150800000000000000
-      internalID: 5877797337218510432
+      spriteID: 25d02004545698350800000000000000
+      internalID: 6019453725058403666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_1
+      name: Zombie_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 80
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -243,18 +276,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb820c6b4fd3ee760800000000000000
-      internalID: 7488991351611074748
+      spriteID: f11c2037e09608dd0800000000000000
+      internalID: -2485871483528494817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_2
+      name: Zombie_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -264,18 +297,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4568b42240a6d05b0800000000000000
-      internalID: -5400543812159568300
+      spriteID: 8d05cdf8828d53750800000000000000
+      internalID: 6284166523789267160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_3
+      name: Zombie_3
       rect:
         serializedVersion: 2
         x: 16
-        y: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -285,18 +318,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6db7b599d58b3e1a0800000000000000
-      internalID: -6781373901745456170
+      spriteID: 073cbe8304e39d880800000000000000
+      internalID: -8585762769051335824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_4
+      name: Zombie_4
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -306,18 +339,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0c40a046196178c0800000000000000
-      internalID: -4003303049461216246
+      spriteID: 24cdea9ec218462f0800000000000000
+      internalID: -980516788960830398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_5
+      name: Zombie_5
       rect:
         serializedVersion: 2
         x: 48
-        y: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -327,206 +360,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d26bda18d3c7937c0800000000000000
-      internalID: -4091102182878890451
+      spriteID: b2654dfa86b34df70800000000000000
+      internalID: 9211052458692073003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_6
+      name: Zombie_6
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 29d4459b2a24a6b70800000000000000
-      internalID: 8892993680857910674
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76346ad04c78175b0800000000000000
-      internalID: -5372363604363951257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e79a011bee80173c0800000000000000
-      internalID: -4363696742679402114
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bacda918532b588a0800000000000000
-      internalID: -6303436160557720405
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 56d027cf74ec8cf70800000000000000
-      internalID: 9207836246732311909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_11
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52d5ac47af2242460800000000000000
-      internalID: 7215930962050964773
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d73fab2f0171a650800000000000000
-      internalID: 6242394868483569621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 44a66fc0626283690800000000000000
-      internalID: -7622300424456476092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_14
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d182cc5d95906880800000000000000
-      internalID: -8619725183688474160
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_15
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 16
         width: 16
         height: 16
@@ -537,77 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba4649255fae05690800000000000000
-      internalID: -7615328630510164821
+      spriteID: 839a5df03d66d84e0800000000000000
+      internalID: -1977811604655986376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_16
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 661009e425b45dda0800000000000000
-      internalID: -5920743318231187098
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_17
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a736c1f06fb7d2000800000000000000
-      internalID: 12802670697669498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_18
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1474ca5a6f3b36400800000000000000
-      internalID: 316294270768924481
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie-Sheet_19
+      name: Zombie_7
       rect:
         serializedVersion: 2
         x: 0
@@ -621,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a60ace4f06d547c0800000000000000
-      internalID: -4087625725534140761
+      spriteID: d82a0422d9ded7220800000000000000
+      internalID: 2485403828518691469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_20
+      name: Zombie_8
       rect:
         serializedVersion: 2
         x: 16
@@ -642,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 306a7de2c6e2da1f0800000000000000
-      internalID: -1032117697420745213
+      spriteID: f6edfcbc224401f70800000000000000
+      internalID: 9155892958683192943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_21
+      name: Zombie_9
       rect:
         serializedVersion: 2
         x: 32
@@ -663,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c43500d52cb0d8250800000000000000
-      internalID: 5948423612238156620
+      spriteID: 552e8206c4462a090800000000000000
+      internalID: -8024741306827218347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zombie-Sheet_22
+      name: Zombie_10
       rect:
         serializedVersion: 2
         x: 48
@@ -684,8 +465,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 763ec181ce75407b0800000000000000
-      internalID: -5258981793333451929
+      spriteID: ad746cf764c4c33b0800000000000000
+      internalID: -5531462376642689062
       vertices: []
       indices: 
       edges: []

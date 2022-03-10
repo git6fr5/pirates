@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2828822325662629474}
   - component: {fileID: 2828822325662629477}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Cutlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
-  m_Description: 
+  m_Description: A Pirate's Bestfriend
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_SlashEffect: {fileID: 1818899138390246187}

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TreasureCardUI : CardUI {
 
+    private int m_Offset;
+
+    public void SetIndex(int index) {
+        m_Offset = index;
+    }
+
     protected override void Activate() {
         Board board = Board.FindInstance();
         Player player = board.Get<Player>();
@@ -24,7 +30,7 @@ public class TreasureCardUI : CardUI {
 
     protected override void SetScale(float deltaTime) {
 
-        float targetScale = m_MouseOver ? 1f : 1.25f; // Mathf.Max(0f, 1f - distance);
+        float targetScale = m_MouseOver ? 1.5f : 1f; // Mathf.Max(0f, 1f - distance);
 
         m_Scale = m_Scale != targetScale ? m_Scale + Mathf.Sign(targetScale - m_Scale) * m_ScaleSpeed * deltaTime : m_Scale;
         if (Mathf.Abs(targetScale - m_Scale) < 0.05f) {
@@ -79,6 +85,13 @@ public class TreasureCardUI : CardUI {
         //if (m_Active) {
         //    m_CardTargetType.transform.position = transform.position;
         //}
+
+        float y = 0.25f * Mathf.Sin( Mathf.PI * (Board.Ticks + m_Offset / 3f));
+        m_SpriteRenderer.material.SetVector("_Offset", new Vector4(0f, y, 0f, 0f));
+
+        foreach (KeyValuePair<Transform, Vector3> item in m_LocalOrigins) {
+            item.Key.localPosition = item.Value + Vector3.up * y;
+        }
 
     }
 

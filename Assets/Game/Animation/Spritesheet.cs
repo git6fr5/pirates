@@ -31,7 +31,7 @@ public class Spritesheet : MonoBehaviour {
     [HideInInspector] private Sprite[] m_IdleAnimation;
     [HideInInspector] private Sprite[] m_ActionAnimation;
     [HideInInspector] private Sprite[] m_BuffAnimation;
-    [HideInInspector] private Sprite[][] m_MoveAnimations;
+    [HideInInspector] private Sprite[] m_MoveAnimations;
 
     [Space(2), Header("Properties")]
     [SerializeField, ReadOnly] private float m_IdleFrameRate;
@@ -53,6 +53,8 @@ public class Spritesheet : MonoBehaviour {
     private Effect m_BurningEffect;
     private Effect m_ParalyzeEffect;
 
+    private int m_PrevHearts;
+
     /* --- Unity --- */
     // Runs once before the first frame.
     void Start() {
@@ -68,6 +70,7 @@ public class Spritesheet : MonoBehaviour {
 
         float deltaTime = Time.deltaTime;
         Animate(deltaTime);
+
     }
 
     #region Status Animations
@@ -105,6 +108,21 @@ public class Spritesheet : MonoBehaviour {
             Destroy(m_ParalyzeEffect.gameObject);
         }
 
+        if (m_Character.TookDamage) {
+            StartCoroutine(IEHurt());
+            m_Character.TookDamage = false;
+        }
+
+    }
+
+    private IEnumerator IEHurt() {
+        for (int i = 0; i < 4; i++) {
+            m_SpriteRenderer.material.SetColor("_AddColor", Color.red);
+            yield return new WaitForSeconds(0.1f);
+            m_SpriteRenderer.material.SetColor("_AddColor", Vector4.zero);
+            yield return new WaitForSeconds(0.1f);
+        }
+        m_SpriteRenderer.material.SetColor("_AddColor", Vector4.zero);
     }
 
     #endregion
@@ -124,10 +142,11 @@ public class Spritesheet : MonoBehaviour {
 
     private void Animate(float deltaTime) {
 
+        Rotate(m_Character);
         m_CurrentAnimation = GetAnimation(m_Character);
 
         m_Ticks = m_PreviousAnimation == m_CurrentAnimation ? m_Ticks + deltaTime : 0f;
-        m_CurrentFrame = (int)Mathf.Floor(m_Ticks * m_FrameRate) % m_CurrentAnimation.Length;
+        m_CurrentFrame = (int)Mathf.Floor(Board.Ticks * m_FrameRate) % m_CurrentAnimation.Length;
 
         // Set the current frame.
         m_SpriteRenderer.sprite = m_CurrentAnimation[m_CurrentFrame];
@@ -136,9 +155,9 @@ public class Spritesheet : MonoBehaviour {
 
     // Gets the current animation info.
     public Sprite[] GetAnimation(Character character) {
-        if ((int)character.CurrAction < 4 && (int)character.CurrAction <= m_MoveAnimations.Length) {
+        if ((int)character.CurrAction < 4) {
             m_FrameRate = m_MoveFrameRate;
-            return m_MoveAnimations[(int)character.CurrAction];
+            return m_MoveAnimations;
         }
         else if ((int)character.CurrAction < 7) {
             m_FrameRate = m_ActionFrameRate;
@@ -147,6 +166,15 @@ public class Spritesheet : MonoBehaviour {
         else {
             m_FrameRate = m_IdleFrameRate;
             return m_IdleAnimation;
+        }
+    }
+
+    private void Rotate(Character character) {
+        if ((int)character.CurrAction == 2) {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
+        if ((int)character.CurrAction == 0) {
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -163,11 +191,8 @@ public class Spritesheet : MonoBehaviour {
         startIndex = SliceSheet(startIndex, m_BuffFrames, ref m_BuffAnimation);
         m_BuffFrameRate = m_BuffFrames / (Board.FindInstance().TurnDelay);
 
-        m_MoveAnimations = new Sprite[4][];
-        for (int i = 0; i < 4; i++) {
-            startIndex = SliceSheet(startIndex, m_MovementFrames, ref m_MoveAnimations[i]);
-        }
-        m_MoveFrameRate = 3f * m_MovementFrames;
+        startIndex = SliceSheet(startIndex, m_MovementFrames, ref m_MoveAnimations);
+        m_MoveFrameRate = 6f * m_MovementFrames;
 
     }
 

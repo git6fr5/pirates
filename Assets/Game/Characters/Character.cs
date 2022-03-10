@@ -69,6 +69,8 @@ public class Character : Piece {
                 m_Cards[i] = cards[i];
             }
         }
+
+        m_CompletedTurn = true;
     }
 
     #endregion

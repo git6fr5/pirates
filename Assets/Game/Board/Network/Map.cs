@@ -21,13 +21,24 @@ public class Map : MonoBehaviour {
     [SerializeField] private Board m_Board;
     [SerializeField] private Environment m_Environment;
 
+    // Resetting.
+    [SerializeField] private Background m_Background;
+    public bool generate = false;
+
     #endregion
 
     /* --- Unity --- */
     #region Unity
 
     void Start() {
-        Generate();
+        // Generate();
+    }
+
+    void Update() {
+        if (generate) {
+            Generate();
+            generate = false;
+        }
     }
 
     #endregion
@@ -57,9 +68,32 @@ public class Map : MonoBehaviour {
 
         List<NodeLink> links = m_Network.GetAllLinks(m_CurrNode);
         int depth = m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
+        int difficulty = m_CurrNode.Position.x;
 
         m_Board.Reset();
-        m_Board.Generate(depth, links, direction);
+        m_Background.Close();
+
+        StartCoroutine(IEDelayedGeneration(depth, links, direction, difficulty));
+    }
+
+    private IEnumerator IEDelayedGeneration(int depth, List<NodeLink> links, Vector2Int direction, int difficulty) {
+        yield return new WaitForSeconds(m_Background.GetCloseDelay() + 0.2f);
+        m_Board.Reset();
+        m_Board.GenerateMap();
+        m_Background.Open();
+
+        yield return new WaitForSeconds(m_Background.GetOpenDelay());
+
+        m_Board.Generate(depth, links, direction, difficulty);
+
+        Time.timeScale = 2f;
+        yield return new WaitForSeconds(2.5f);
+        Time.timeScale = 1.5f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1.25f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
+
     }
 
     #endregion
@@ -73,10 +107,12 @@ public class Map : MonoBehaviour {
 
         for (int i = 0; i < array.Length; i++) {
             for (int j = 0; j < array[i].Length; j++) {
+
                 // Circle.
                 Vector3 position = (Vector3)(Vector2)array[i][j].Position + transform.localPosition;
                 Gizmos.color = GetColor(array[i][j]);
                 Gizmos.DrawWireSphere(position, 0.35f);
+
                 // Lines.
                 Gizmos.color = Color.blue;
                 foreach (NodeLink link in array[i][j].Links) {

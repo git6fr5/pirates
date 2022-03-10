@@ -18,6 +18,7 @@ public class Piece : MonoBehaviour {
     [SerializeField] protected int m_MaxHearts;
     [SerializeField] protected int m_Hearts;
     public int Hearts => m_Hearts;
+    public bool TookDamage = false;
 
     // Position.
     protected Vector2Int m_Position;
@@ -28,9 +29,9 @@ public class Piece : MonoBehaviour {
     public Color DebugColor => m_DebugColor;
 
     // Shake.
-    [HideInInspector] private bool m_Shake;
-    [HideInInspector] private float m_ShakeStrength;
-    [HideInInspector] private float m_ShakeDuration;
+    [HideInInspector] protected bool m_Shake;
+    [SerializeField] protected float m_ShakeStrength;
+    [SerializeField] protected float m_ShakeDuration;
     [HideInInspector] private float m_ShakeTicks;
 
     #endregion
@@ -39,6 +40,7 @@ public class Piece : MonoBehaviour {
     #region Unity
 
     void Update() {
+        // m_TookDamage = false;
         if (m_Shake) {
             m_Shake = WhileShake();
         }
@@ -80,7 +82,7 @@ public class Piece : MonoBehaviour {
     }
 
     public void Snap() {
-        transform.position = (Vector3)(Vector2)m_Position;
+        transform.localPosition = (Vector3)(Vector2)m_Position;
     }
 
     public void Move(float deltaTime) {
@@ -88,7 +90,7 @@ public class Piece : MonoBehaviour {
             return;
         }
 
-        Vector2 displacement = (Vector2)m_Position - (Vector2)transform.position;
+        Vector2 displacement = (Vector2)m_Position - (Vector2)transform.localPosition;
         if (displacement.sqrMagnitude > 0.05f * 0.05f) {
             transform.position += (Vector3)(displacement.normalized) / m_Board.TurnDelay * deltaTime;
         }
@@ -101,7 +103,7 @@ public class Piece : MonoBehaviour {
 
     public void TakeDamage(int damage, float delay = 0f) {
         m_Hearts -= damage;
-        CameraShake.ActivateShake(m_Board.TurnDelay);
+        CameraShake.ActivateShake(m_Board.TurnDelay * 2f);
 
         CheckDeath(delay);
     }
@@ -114,14 +116,16 @@ public class Piece : MonoBehaviour {
     }
 
     private void CheckDeath(float delay) {
-        if (m_Hearts <= 0 && this != null) {
-            StartCoroutine(IEDeathDelay(delay));
-        }
+        bool die = m_Hearts <= 0 && this != null;
+        StartCoroutine(IEDeathDelay(delay, die));
     }
 
-    private IEnumerator IEDeathDelay(float delay) {
+    private IEnumerator IEDeathDelay(float delay, bool die) {
         yield return new WaitForSeconds(delay);
-        Die();
+        TookDamage = true;
+        if (die) {
+            Die();
+        }
     }
 
     private void Die() {

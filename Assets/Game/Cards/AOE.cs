@@ -21,26 +21,53 @@ public class AOE : Card {
     }
 
     public override bool Effect(Board board, Vector2Int origin, Vector2Int target) {
+        base.Effect(board, origin, target);
+
         List<Vector2Int> areaOfEffect = new List<Vector2Int>();
         areaOfEffect = board.AOETargetting(target, m_Radius, ref areaOfEffect);
 
-        Effect newEffect = m_ProjectileEffect.Create(origin, board.TurnDelay);
-        newEffect.MoveTo(target, board.TurnDelay);
+        float delay = 0f;
 
-        float distance = (origin - target).magnitude;
-        float maxDistance = Mathf.Sqrt(2) * m_Range;
-        float actualSpeed = maxDistance / board.TurnDelay;
-        float timeInterval = distance / actualSpeed;
+        if (m_ProjectileEffect != null) {
+            Effect newEffect = m_ProjectileEffect.Create(origin, board.TurnDelay);
+            newEffect.MoveTo(target, board.TurnDelay);
+
+            float distance = (origin - target).magnitude;
+            float maxDistance = Mathf.Sqrt(2) * m_Range;
+            float actualSpeed = maxDistance / board.TurnDelay;
+            delay = distance / actualSpeed;
+        }
 
         for (int i = 0; i < areaOfEffect.Count; i++) {
-            base.Effect(board, origin, areaOfEffect[i]);
-            AOEEffect(board, areaOfEffect[i], timeInterval);
+            AOEEffect(board, areaOfEffect[i], delay);
         }        
         return true;
     }
 
     public virtual bool AOEEffect(Board board, Vector2Int target, float delay) {
+        StartCoroutine(IEDelayedEffectAnim(delay, target, board));
+
+        Piece piece = board.GetAt<Piece>(target);
+        Debug.Log("Doing damage");
+        if (piece != null) {
+            piece.TakeDamage(m_Value, delay);
+
+            Character character = piece.GetComponent<Character>();
+            if (character != null && m_StatusEffect != Status.None && m_Duration > 0) {
+                character.ApplyStatus(m_StatusEffect, m_Duration);
+            }
+
+            float duration = board.TurnDelay;
+            piece.StartShake(delay, duration);
+
+        }
+
         return true;
+    }
+
+    private IEnumerator IEDelayedEffectAnim(float delay, Vector2Int target, Board board) {
+        yield return new WaitForSeconds(delay);
+        Effect newEffect = m_ExplodeEffect.Create(target, board.TurnDelay);
     }
 
 }

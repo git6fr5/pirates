@@ -707,19 +707,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Card: {fileID: 0}
-  m_Frames: []
+  m_Frames:
+  - {fileID: -2541545257365837973, guid: 0cdd1fba2bb4ddc4c9dfcd3f6455573e, type: 3}
+  - {fileID: -6407714468422981231, guid: 0cdd1fba2bb4ddc4c9dfcd3f6455573e, type: 3}
+  - {fileID: 533177413809491475, guid: 0cdd1fba2bb4ddc4c9dfcd3f6455573e, type: 3}
   m_EmptyCard: {fileID: 0}
-  m_AOEIcon: {fileID: 0}
-  m_DirectionalIcon: {fileID: 0}
-  m_MeleeIcon: {fileID: 0}
-  m_BuffIcon: {fileID: 0}
-  m_CardName: {fileID: 0}
-  m_CardDescription: {fileID: 0}
-  m_Charges: {fileID: 0}
-  m_DamageValue: {fileID: 0}
-  m_StatusValue: {fileID: 0}
-  m_CardFace: {fileID: 0}
-  m_CardTargetType: {fileID: 0}
+  m_AOEIcon: {fileID: 184950751378207249, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
+  m_DirectionalIcon: {fileID: 2130535880278150251, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
+  m_MeleeIcon: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
+  m_BuffIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
+  m_CardName: {fileID: 6999868185471994710}
+  m_CardDescription: {fileID: 7860305772044835355}
+  m_Charges: {fileID: 6999868186574994592}
+  m_DamageValue: {fileID: 3462468698039820784}
+  m_StatusValue: {fileID: 2666254016840305953}
+  m_CardFace: {fileID: 5105310396301992560}
+  m_CardTargetType: {fileID: 6999868186849212799}
   m_MouseOver: 0
   m_Active: 0
   m_Origin: {x: 0, y: 0}

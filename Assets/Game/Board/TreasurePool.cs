@@ -6,30 +6,35 @@ public class TreasurePool : MonoBehaviour
 {
 
     // Treasure Pool.
-    [SerializeField] private Card[] m_AllCards;
+    [SerializeField] private Transform[] m_AllCards;
     [SerializeField] private static List<Card> AllCards;
     [SerializeField] private static List<Card> CommonCards;
     [SerializeField] private static List<Card> RareCards;
     [SerializeField] private static List<Card> LegendaryCards;
 
-    void Start() {
+    void Awake() {
         AllCards = new List<Card>();
         CommonCards = new List<Card>();
         RareCards = new List<Card>();
         LegendaryCards = new List<Card>();
 
         for (int i = 0; i < m_AllCards.Length; i++) {
-            AllCards.Add(m_AllCards[i]);
-            switch (m_AllCards[i].CardRarity) {
-                case Rarity.Common:
-                    CommonCards.Add(m_AllCards[i]);
-                    break;
-                case Rarity.Rare:
-                    RareCards.Add(m_AllCards[i]);
-                    break;
-                case Rarity.Legendary:
-                    LegendaryCards.Add(m_AllCards[i]);
-                    break;
+            foreach(Transform child in m_AllCards[i]) {
+                Card card = child.GetComponent<Card>();
+                if (card != null) {
+                    AllCards.Add(card);
+                    switch (card.CardRarity) {
+                        case Rarity.Common:
+                            CommonCards.Add(card);
+                            break;
+                        case Rarity.Rare:
+                            RareCards.Add(card);
+                            break;
+                        case Rarity.Legendary:
+                            LegendaryCards.Add(card);
+                            break;
+                    }
+                }
             }
         }
 

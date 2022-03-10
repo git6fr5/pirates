@@ -102,8 +102,11 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     public List<Vector2Int> GetTargetablePositions(Board board, Vector2Int origin) {
         List<Vector2Int> targetablePositions = new List<Vector2Int>();
         switch (m_TargetType) {
-            case TargetType.AOE:
-                targetablePositions = board.AOETargetting(origin, m_Range, ref targetablePositions);
+            case TargetType.Global:
+                targetablePositions = board.GlobalTargetting(ref targetablePositions);
+                break;
+            case TargetType.Throw:
+                targetablePositions = board.ThrowTargetting(origin, m_Range, ref targetablePositions);
                 break;
             case TargetType.Directional:
                 targetablePositions = board.DirectionalTargetting(origin, m_Range, ref targetablePositions);

@@ -84,7 +84,7 @@ Shader "Custom/WavyShader"
                 // float x = sin(UNITY_PI * _Time[1] * i.u);
                 float y = i.uv.y + _WaveAmplitude * sin(UNITY_PI * _WaveSpeed * _Time[1] * i.uv.x);
                 fixed4 col = tex2D(_MainTex, float2(i.uv.x, y));
-
+                col = col * col.a;
                 return col;
             }
             ENDCG

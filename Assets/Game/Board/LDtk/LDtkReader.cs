@@ -24,7 +24,7 @@ public class LDtkReader : MonoBehaviour {
 
     }
 
-    public static string PieceLayer = "Asset";
+    public static string PieceLayer = "Layer_1";
 
     public string m_LevelName;
 
@@ -33,27 +33,108 @@ public class LDtkReader : MonoBehaviour {
     [SerializeField] private Environment m_Environment;
     [SerializeField] private List<PieceData> m_PieceData;
 
+    public int m_Easy;
+    public int m_Mid;
+    public int m_Hard;
 
-    public PieceData[] Get(int depth) {
+
+    public PieceData[] Get(int depth, int difficulty) {
 
         m_PieceData = new List<PieceData>();
         Vector2Int quadrant = new Vector2Int(0, 0);
-        int index = m_Environment.Jumble(depth, quadrant, 20);
+
+        int[][] qs;
+        int index;
+        GetDifficulty(depth, difficulty, quadrant, out qs, out index);
+        print(difficulty);
+
+        index = qs[0][0] + (m_Environment.Jumble(depth, quadrant, qs[0][1]) % qs[0][1]);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(1, 0);
-        index = m_Environment.Jumble(depth, quadrant, 20);
+        index = qs[1][0] + (m_Environment.Jumble(depth, quadrant, qs[1][1]) % qs[1][1]);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(0, 1);
-        index = m_Environment.Jumble(depth, quadrant, 20);
+        index = qs[2][0] + (m_Environment.Jumble(depth, quadrant, qs[2][1]) % qs[2][1]);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         quadrant = new Vector2Int(1, 1);
-        index = m_Environment.Jumble(depth, quadrant, 20);
+        index = qs[3][0] + (m_Environment.Jumble(depth, quadrant, qs[3][1]) % qs[3][1]);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
         return m_PieceData.ToArray();
+    }
+
+    private void GetDifficulty(int depth, int difficulty, Vector2Int quadrant, out int[][] qs, out int index) {
+        int[] easy = new int[] { 0, m_Easy };
+        int[] mid = new int[] { m_Easy + 1, m_Mid };
+        int[] hard = new int[] { m_Mid + 1, m_Hard };
+
+        qs = new int[][] { easy, easy, easy, easy };
+        index = 0;
+        if (difficulty == 1) {
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            qs[index] = mid;
+        }
+        if (difficulty == 2) {
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            qs[index] = mid;
+            index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+            qs[index] = mid;
+        }
+        if (difficulty == 3) {
+            // BOSS
+            // return m_PieceData.ToArray();
+        }
+        if (difficulty == 4) {
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            for (int i = 0; i < qs.Length; i++) {
+                if (i != index) {
+                    qs[i] = mid;
+                }
+            }
+        }
+        if (difficulty == 5) {
+            for (int i = 0; i < qs.Length; i++) {
+                qs[i] = mid;
+            }
+        }
+        if (difficulty == 6) {
+            // BOSS
+            // return m_PieceData.ToArray();
+        }
+        if (difficulty == 7) {
+            for (int i = 0; i < qs.Length; i++) {
+                qs[i] = mid;
+            }
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            qs[index] = hard;
+        }
+        if (difficulty == 8) {
+            for (int i = 0; i < qs.Length; i++) {
+                qs[i] = mid;
+            }
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            qs[index] = hard;
+            index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+            qs[index] = hard;
+        }
+        if (difficulty > 8) {
+            for (int i = 0; i < qs.Length; i++) {
+                qs[i] = mid;
+            }
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            for (int i = 0; i < qs.Length; i++) {
+                if (i != index) {
+                    qs[i] = hard;
+                }
+            }
+        }
+        if (difficulty == 10) {
+            // Boss.
+            // return m_PieceData.ToArray();
+        }
     }
 
     public void OpenLevelByName(string levelName, Vector2Int quadrant) {
@@ -68,7 +149,7 @@ public class LDtkReader : MonoBehaviour {
                 return json.Levels[i];
             }
         }
-       // Debug.Log("Could not find room");
+        Debug.Log("Could not find room");
         return null;
     }
 
@@ -127,16 +208,28 @@ public class LDtkReader : MonoBehaviour {
     }
 
     private Piece GetPieceByVectorID(Vector2Int vectorID) {
-        if (vectorID == new Vector2Int(0, 1)) {
+        if (vectorID == new Vector2Int(0, 0)) {
             return m_Environment.Wall;
         }
-        if (vectorID == new Vector2Int(1, 1)) {
-            return m_Environment.Bush;
+        if (vectorID == new Vector2Int(1, 0)) {
+            return m_Environment.Bush0;
+        }
+        if (vectorID == new Vector2Int(2, 0)) {
+            return m_Environment.Bush1;
         }
         if (vectorID.y == 2) {
-            return m_Environment.TreasureChest;
+            print("Treasure");
+            if (vectorID.x == 0) {
+                return m_Environment.CommonTreasureChest;
+            }
+            if (vectorID.x == 1) {
+                return m_Environment.RareTreasureChest;
+            }
+            if (vectorID.x == 2) {
+                return m_Environment.LegendaryTreasureChest;
+            }
         }
-        if (vectorID.y == 3) {
+        if (vectorID.y == 4) {
             if (vectorID.x == 0) {
                 return m_Environment.EasyEnemy;
             }

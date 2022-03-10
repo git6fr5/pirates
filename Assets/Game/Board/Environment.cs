@@ -13,10 +13,14 @@ public class Environment : MonoBehaviour {
     // Bushes.
     [SerializeField] private Piece[] m_Bushes;
     public Piece Bush => GetRandomBush();
+    public Piece Bush0 => m_Bushes[0];
+    public Piece Bush1 => m_Bushes[1];
 
     // Treasure Chests.
     [SerializeField] private Piece[] m_TreasureChests;
-    public Piece TreasureChest => m_TreasureChests[0];
+    public Piece CommonTreasureChest => m_TreasureChests[0];
+    public Piece RareTreasureChest => m_TreasureChests[1];
+    public Piece LegendaryTreasureChest => m_TreasureChests[2];
 
     // Enemies.
     [SerializeField] private Enemy[] m_Enemies;

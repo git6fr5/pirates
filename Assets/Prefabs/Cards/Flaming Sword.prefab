@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Rariry: 1
   m_TargetType: 1
   m_Range: 1
-  m_Value: 3
+  m_Value: 12
   m_StatusEffect: 2
   m_Duration: 3
   m_Charges: 2
-  m_Face: {fileID: 0}
-  m_Description: 
+  m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
+  m_Description: Burn! Burn! Burn!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_SlashEffect: {fileID: 7944248813890272454}
