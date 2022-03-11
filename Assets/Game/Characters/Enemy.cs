@@ -16,13 +16,14 @@ public class Enemy : Character {
     [SerializeField] private int m_MovementActions;
     [SerializeField] private int m_VisisonDistance;
     [SerializeField, ReadOnly] private bool m_PlayerInVision;
-    [SerializeField, ReadOnly] private bool m_TookCardAction = false;
+    [SerializeField, ReadOnly] public bool m_TookCardAction = false;
 
     // UI.
     private bool m_MouseOver = false;
     private List<SpriteRenderer> m_VisionIndicators;
     private List<SpriteRenderer> m_TargetIndicators;
     private List<SpriteRenderer> m_HeartIndicators;
+    private List<SpriteRenderer> m_DamageIndicators;
 
     #endregion
 
@@ -55,7 +56,6 @@ public class Enemy : Character {
         }
 
         if (m_TookCardAction) {
-            m_TookCardAction = false;
             return Action.Pass;
         }
 
@@ -148,6 +148,7 @@ public class Enemy : Character {
 
         bool hasCard = m_Cards != null && m_Cards.Length > 0 && m_Cards[0] != null;
         if (hasCard) {
+            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, m_MouseOver);
             BoardUI.DrawTargetUI(m_Cards[0], m_Board, m_Position, ref m_TargetIndicators, m_MouseOver && !playerHasActiveCard);
         }
     }
@@ -158,6 +159,7 @@ public class Enemy : Character {
 
         bool hasCard = m_Cards != null && m_Cards.Length > 0 && m_Cards[0] != null;
         if (hasCard) {
+            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, false);
             BoardUI.DrawTargetUI(m_Cards[0], m_Board, m_Position, ref m_TargetIndicators, false);
         }
     }

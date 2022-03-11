@@ -16,8 +16,9 @@ public class Storm : Card {
         Board board = Board.FindInstance();
         Vector2Int[] targets = board.GetAllLocations<Character>();
         Player player = board.Get<Player>();
-
-        BoardUI.DrawVisionCharactersUI(targets, board, player.Position, ref m_VisionIndicators, m_MouseOverTargetableSquare && m_Active);
+        if (player != null) {
+            BoardUI.DrawVisionCharactersUI(targets, board, player.Position, ref m_VisionIndicators, m_MouseOverTargetableSquare && m_Active);
+        }
 
     }
 

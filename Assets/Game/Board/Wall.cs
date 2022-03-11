@@ -8,6 +8,8 @@ public class Wall : Piece {
     /* --- Variables --- */
     #region Variables
 
+    public bool m_Immune;
+
     // UI.
     private bool m_MouseOver = false;
     private List<SpriteRenderer> m_HeartIndicators;
@@ -39,6 +41,12 @@ public class Wall : Piece {
 
     void OnMouseExit() {
         m_MouseOver = false;
+    }
+
+    public override void TakeDamage(int damage, float delay = 0f) {
+        if (!m_Immune) {
+            base.TakeDamage(damage, delay);
+        }
     }
 
     #endregion

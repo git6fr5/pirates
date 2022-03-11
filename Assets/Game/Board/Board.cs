@@ -76,6 +76,7 @@ public class Board : MonoBehaviour {
     void Update() {
         Frames += 1;
         Ticks += Time.deltaTime;
+
     }
 
     #endregion
@@ -84,6 +85,8 @@ public class Board : MonoBehaviour {
     #region Initialization
 
     public void Reset() {
+
+        SoundController.PlaySound(SoundController.BoardReset, 1);
 
         // Stop the game loop.
         if (m_GameLoop != null) {
@@ -109,7 +112,9 @@ public class Board : MonoBehaviour {
             }
         }
 
-        m_Player.gameObject.SetActive(false);
+        if (m_Player != null) {
+            m_Player.gameObject.SetActive(false);
+        }
     }
 
     public void GenerateMap() {
@@ -141,7 +146,9 @@ public class Board : MonoBehaviour {
             newPiece.transform.position = (Vector3)(Vector2)m_PieceData[i].m_Position + (18f + i * 0.3f) * Vector3.up;
             // newPiece.SetPosition(m_PieceData[i].m_Position, true);
             m_Pieces.Add(newPiece);
+            MakeSounds(18f + i * 0.3f, i % 2);
         }
+
 
         // Start the game loop.
         m_Enemies = GetAll<Enemy>();
@@ -172,6 +179,17 @@ public class Board : MonoBehaviour {
         for (int i = 0; i < m_Exits.Count; i++) {
             m_Exitmap.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
         }
+    }
+
+    private void MakeSounds(float fallDistance, int AorB) {
+        float fallSpeed = 1f / TurnDelay;
+        float soundDelay = (fallDistance - 1f) / fallSpeed;
+        StartCoroutine(IEDelayedSound(soundDelay, AorB));
+    }
+
+    private IEnumerator IEDelayedSound(float soundDelay, int AorB) {
+        yield return new WaitForSeconds(soundDelay);
+        SoundController.PlaySound(SoundController.PieceLandSound, AorB);
     }
 
     #endregion
@@ -233,6 +251,8 @@ public class Board : MonoBehaviour {
             }
             yield return new WaitUntil(() => m_Player == null || (m_Player != null && m_Player.CompletedTurn));
 
+            SoundController.PlaySound(m_RoundNumber % 2 == 0 ? SoundController.Walking1 : SoundController.Walking2);
+
             // Run through the enemies turns.
             for (int i = 0; i < m_Enemies.Length; i++) {
                 m_TurnNumber = i;
@@ -248,6 +268,11 @@ public class Board : MonoBehaviour {
             // Move to the next round.
             yield return new WaitForSeconds(m_TurnDelay / 2f);
             m_RoundNumber += 1;
+
+            Spike[] spikes = GetAll<Spike>();
+            for (int i = 0; i < spikes.Length; i++) {
+                spikes[i].Swap();
+            }
 
         }
     }
@@ -285,6 +310,7 @@ public class Board : MonoBehaviour {
         }
 
         bool collisionCheck = m_Pieces.Find(piece => piece.Position == target) != null;
+        collisionCheck = collisionCheck && GetAt<Spike>(target) == null;
         if (!collisionCheck) {
             return true;
         }
@@ -338,7 +364,7 @@ public class Board : MonoBehaviour {
             for (int j = 0; j < directions.Count; j++) {
                 if (!brokenPaths.Contains(j) && CheckTarget(origin, i * directions[j])) {
                     positions.Add(origin + i * directions[j]);
-                    if (GetAt<Piece>(origin + i * directions[j])) {
+                    if (GetAt<Piece>(origin + i * directions[j]) != null && GetAt<Spike>(origin + i * directions[j]) == null) {
                         brokenPaths.Add(j);
                     }
                 }

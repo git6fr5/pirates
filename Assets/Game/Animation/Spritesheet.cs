@@ -113,6 +113,31 @@ public class Spritesheet : MonoBehaviour {
             m_Character.TookDamage = false;
         }
 
+        if (m_Character.GetComponent<Player>() != null) {
+            if (Input.GetKeyDown(KeyCode.A)) {
+                transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            }
+            if (Input.GetKeyDown(KeyCode.D)) {
+                transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            bool activeCard = false;
+            for (int i = 0; i < m_Character.Cards.Length; i++) {
+                if (m_Character.Cards[i] != null && m_Character.Cards[i].Active) {
+                    activeCard = true;
+                    break;
+                }
+            }
+            if (activeCard) {
+                Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (mousePosition.x < m_Character.transform.position.x) {
+                    transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                }
+                else {
+                    transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                }
+            }
+        }
+
     }
 
     private IEnumerator IEHurt() {

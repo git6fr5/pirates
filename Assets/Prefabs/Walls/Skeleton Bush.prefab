@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHearts: 1
-  m_Hearts: 0
+  m_Hearts: 1
+  TookDamage: 0
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ShakeStrength: 0
+  m_ShakeDuration: 0
 --- !u!212 &8853277917777864158
 SpriteRenderer:
   m_ObjectHideFlags: 0

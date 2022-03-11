@@ -61,13 +61,17 @@ public class Treasure : Piece {
         m_MouseOver = false;
     }
 
+
+    public override void TakeDamage(int damage, float delay = 0f) {
+    }
+
     #endregion
 
     #region Initialization
 
     private void Init() {
 
-        print("Initializing treasure chest");
+        // print("Initializing treasure chest");
 
         m_Cards = new Card[3];
         if (m_Rarity == Rarity.Common) {
@@ -138,7 +142,7 @@ public class Treasure : Piece {
     private void CheckActivate() {
         bool input0 = Input.GetMouseButtonDown(0);
         bool releaseInput0 = Input.GetMouseButtonUp(0);
-        bool input1 = m_TreasureUI.Exit.Active || Input.GetMouseButtonDown(1);
+        bool input1 = m_TreasureUI.Exit.Active; //|| Input.GetMouseButtonDown(1);
 
         bool empty = true;
         for (int i = 0; i < m_Cards.Length; i++) {

@@ -48,6 +48,7 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     public bool Active => m_Active;
     // Activation Effect
     [SerializeField] private Effect m_ActivationEffect;
+    public AudioClip m_ActivationSound;
 
     [Header("Targetting")]
     // Indicator.
@@ -90,6 +91,9 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     public virtual bool Effect(Board board, Vector2Int origin, Vector2Int target) {
         if (m_ActivationEffect != null) {
             m_ActivationEffect.Create(origin);
+        }
+        if (m_ActivationSound != null) {
+            SoundController.PlaySound(m_ActivationSound, 1);
         }
         return false;
     }

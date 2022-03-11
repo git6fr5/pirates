@@ -54,8 +54,14 @@ public class Player : Character {
     }
 
     private bool IsMouseOver(Vector2Int position) {
-        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return (mousePosition - (Vector2)position).magnitude < 0.5f; // This is a bit weird, it'll miss the edges.
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f, 0f);
+        Vector3 snappedPosition = new Vector3(Mathf.Floor(mousePosition.x), Mathf.Floor(mousePosition.y), 0f);
+        if (mousePosition.x >= 0 && mousePosition.x < m_Board.Width && mousePosition.y >= 0 && mousePosition.y < m_Board.Height) {
+            if (snappedPosition == (Vector3)(Vector2)position) {
+                return true;
+            }
+        }
+        return false;
     }
 
     #endregion

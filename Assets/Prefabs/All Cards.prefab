@@ -56,6 +56,7 @@ MonoBehaviour:
   m_Description: 
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_ZapEffect: {fileID: 7399824048503379817}
 --- !u!1 &446425168140393164
 GameObject:
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Description: Pew Pew Pew?
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714106220987291}
+  m_ActivationSound: {fileID: 8300000, guid: 345f139c4e097a94291ea785f691aa41, type: 3}
   m_ProjectileEffect: {fileID: 6528522602151567136}
 --- !u!1 &1007203315398798610
 GameObject:
@@ -171,6 +173,7 @@ MonoBehaviour:
   m_Description: Burn! Burn! Burn!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 23df0e37f523f2949808fdfdec7b60d6, type: 3}
   m_SlashEffect: {fileID: 747323376256357394}
 --- !u!1 &2582239645405463595
 GameObject:
@@ -229,6 +232,7 @@ MonoBehaviour:
   m_Description: 
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_Radius: 1
   m_ProjectileEffect: {fileID: 456991811083511791}
   m_ExplodeEffect: {fileID: 220145240927886871}
@@ -288,6 +292,7 @@ MonoBehaviour:
   m_Description: Get 1 Random Rare
   m_Active: 0
   m_ActivationEffect: {fileID: 2787600126270677898}
+  m_ActivationSound: {fileID: 0}
   m_Rarity: 1
   m_NewCardCharges: 1
 --- !u!1 &3793124160689084136
@@ -345,6 +350,7 @@ MonoBehaviour:
   m_Description: Ah, breakfast!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
 --- !u!1 &4257364469530585696
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +407,7 @@ MonoBehaviour:
   m_Description: 
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_Radius: 4
   m_ProjectileEffect: {fileID: 0}
   m_ExplodeEffect: {fileID: 6741635974785493553}
@@ -460,6 +467,7 @@ MonoBehaviour:
   m_Description: Spawn a dummy
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_SpawnEffect: {fileID: 0}
   m_SpawnPiece: {fileID: 6409462054981122706, guid: f5b4c329e01e3224d99b8a181af324aa, type: 3}
 --- !u!1 &4629864550941537647
@@ -518,6 +526,7 @@ MonoBehaviour:
   m_Description: A Pirate's Bestfriend
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 23df0e37f523f2949808fdfdec7b60d6, type: 3}
   m_SlashEffect: {fileID: 747323377103849436}
 --- !u!1 &5314614613250071129
 GameObject:
@@ -575,6 +584,7 @@ MonoBehaviour:
   m_Description: A Pirate's Best Friend
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 23df0e37f523f2949808fdfdec7b60d6, type: 3}
   m_SlashEffect: {fileID: 8628531980571354897}
 --- !u!1 &5799427191189331979
 GameObject:
@@ -632,6 +642,7 @@ MonoBehaviour:
   m_Description: 
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_Radius: 2
   m_ProjectileEffect: {fileID: 0}
   m_ExplodeEffect: {fileID: 4486260232815157762}
@@ -728,6 +739,7 @@ MonoBehaviour:
   m_Description: The crew is here.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 0}
   m_Width: 1
   m_ProjectileEffect: {fileID: 6665781251322583512}
   m_ExplodeEffect: {fileID: 7597250459797136253}
@@ -787,6 +799,7 @@ MonoBehaviour:
   m_Description: Die! Die! Die!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 23df0e37f523f2949808fdfdec7b60d6, type: 3}
   m_SlashEffect: {fileID: 747323375650069857}
 --- !u!1 &8620044067616476039
 GameObject:
@@ -877,6 +890,7 @@ MonoBehaviour:
   m_Description: Ah, dinner!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
 --- !u!1 &8620044067850654135
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +948,7 @@ MonoBehaviour:
   m_Description: Sheeeeep
   m_Active: 0
   m_ActivationEffect: {fileID: 3486527377493000167}
+  m_ActivationSound: {fileID: 8300000, guid: 6924e597ded78db49a1068c3e0c8612c, type: 3}
   m_ProjectileEffect: {fileID: 6528522602678331579}
 --- !u!1 &8620044067944192646
 GameObject:
@@ -990,6 +1005,7 @@ MonoBehaviour:
   m_Description: Ah, breakfast!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
 --- !u!1 &8620044068109073961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1063,7 @@ MonoBehaviour:
   m_Description: Sheeeeep
   m_Active: 0
   m_ActivationEffect: {fileID: 2532178935676676346}
+  m_ActivationSound: {fileID: 8300000, guid: 6924e597ded78db49a1068c3e0c8612c, type: 3}
   m_ProjectileEffect: {fileID: 6528522603934512229}
 --- !u!1 &8620044068141111043
 GameObject:
@@ -1103,6 +1120,7 @@ MonoBehaviour:
   m_Description: Ah, dinner!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
+  m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
 --- !u!1 &8620044068149477356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1211,7 @@ MonoBehaviour:
   m_Description: Get 1 Random Legendary
   m_Active: 0
   m_ActivationEffect: {fileID: 7430652987143834975}
+  m_ActivationSound: {fileID: 0}
   m_Rarity: 2
   m_NewCardCharges: 1
 --- !u!1 &8620044068403064384
@@ -1319,6 +1338,7 @@ MonoBehaviour:
   m_Description: Ye cannoned, buster!
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714106513448017}
+  m_ActivationSound: {fileID: 8300000, guid: 345f139c4e097a94291ea785f691aa41, type: 3}
   m_ProjectileEffect: {fileID: 6528522602482218770}
 --- !u!1 &8620044068793363039
 GameObject:
@@ -1377,6 +1397,7 @@ MonoBehaviour:
   m_Description: Pew Pew Pew?
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714107490133457}
+  m_ActivationSound: {fileID: 8300000, guid: 345f139c4e097a94291ea785f691aa41, type: 3}
   m_ProjectileEffect: {fileID: 6528522603359676515}
 --- !u!1 &8620044068855750130
 GameObject:
@@ -1468,6 +1489,7 @@ MonoBehaviour:
   m_Description: Hexes fer all!
   m_Active: 0
   m_ActivationEffect: {fileID: 3486527377382351768}
+  m_ActivationSound: {fileID: 0}
   m_Radius: 0
   m_ProjectileEffect: {fileID: 6528522603870037506}
   m_ExplodeEffect: {fileID: 7375421686302423184}
@@ -1528,6 +1550,7 @@ MonoBehaviour:
   m_Description: Ye blundered, buster!
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714107112370244}
+  m_ActivationSound: {fileID: 8300000, guid: 345f139c4e097a94291ea785f691aa41, type: 3}
   m_ProjectileEffect: {fileID: 6528522603207135935}
 --- !u!1 &8862459590128067212
 GameObject:

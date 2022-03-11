@@ -10,6 +10,9 @@ public class BoardUI : MonoBehaviour {
     public static Sprite HeartIndicator;
     public Sprite m_HeartIndicator;
 
+    public static Sprite DamageIndicator;
+    public Sprite m_DamageIndicator;
+
     public static Material HeartMaterial;
     public Material m_HeartMaterial;
 
@@ -18,6 +21,7 @@ public class BoardUI : MonoBehaviour {
     void Start() {
         SquareIndicator = m_SquareIndicator;
         HeartIndicator = m_HeartIndicator;
+        DamageIndicator = m_DamageIndicator;
         HeartMaterial = m_HeartMaterial;
     }
 
@@ -59,6 +63,13 @@ public class BoardUI : MonoBehaviour {
         Reset(ref healthIndicators);
         if (redraw) {
             DrawHealth(hearts, origin, ref healthIndicators);
+        }
+    }
+
+    public static void DrawDamageUI(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators, bool redraw = true) {
+        Reset(ref damageIndicators);
+        if (redraw) {
+            DrawDamage(damage, origin, ref damageIndicators);
         }
     }
 
@@ -110,6 +121,15 @@ public class BoardUI : MonoBehaviour {
             Vector3 offset = Vector3.up * bob + Vector3.right * ((float)i - (float)(hearts - 1f) / 2f) / 1.5f;
             Vector3 position = (Vector3)(Vector2)origin + offset;
             Sprite sprite = DrawSprite(HeartIndicator, position, new Color(1f, 1f, 0f, 0f), 1f, ref healthIndicators, HeartMaterial, 3);
+        }
+    }
+
+    public static void DrawDamage(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators) {
+        for (int i = 0; i < damage; i++) {
+            float bob = -0.8f + 0.05f * Mathf.Sin(Mathf.PI * (Ticks + i / 4f));
+            Vector3 offset = Vector3.up * bob + Vector3.right * ((float)i - (float)(damage - 1f) / 2f) / 1.5f;
+            Vector3 position = (Vector3)(Vector2)origin + offset;
+            Sprite sprite = DrawSprite(DamageIndicator, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
         }
     }
 

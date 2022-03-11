@@ -15,6 +15,8 @@ public class Environment : MonoBehaviour {
     public Piece Bush => GetRandomBush();
     public Piece Bush0 => m_Bushes[0];
     public Piece Bush1 => m_Bushes[1];
+    public Piece Bush2 => m_Bushes[2];
+    public Piece Bush3 => m_Bushes[3];
 
     // Treasure Chests.
     [SerializeField] private Piece[] m_TreasureChests;
@@ -32,6 +34,8 @@ public class Environment : MonoBehaviour {
     [HideInInspector] private List<Piece> m_HardEnemies;
     public Piece MidEnemy => GetRandomEnemy(m_MidEnemies);
     public Piece HardEnemy => GetRandomEnemy(m_HardEnemies);
+
+    public Piece spike;
 
     /* --- Unity --- */
     #region Unity

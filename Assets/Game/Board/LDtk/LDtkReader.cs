@@ -209,16 +209,21 @@ public class LDtkReader : MonoBehaviour {
 
     private Piece GetPieceByVectorID(Vector2Int vectorID) {
         if (vectorID == new Vector2Int(0, 0)) {
-            return m_Environment.Wall;
+            return Random.Range(0f, 1f) < 0.5f ? m_Environment.Bush0 : m_Environment.Bush1;
         }
         if (vectorID == new Vector2Int(1, 0)) {
-            return m_Environment.Bush0;
+            return m_Environment.Bush2;
         }
         if (vectorID == new Vector2Int(2, 0)) {
-            return m_Environment.Bush1;
+            return m_Environment.Bush3;
+        }
+        if (vectorID == new Vector2Int(0, 1)) {
+            return m_Environment.Wall;
+        }
+        if (vectorID == new Vector2Int(1, 1)) {
+            return m_Environment.spike;
         }
         if (vectorID.y == 2) {
-            print("Treasure");
             if (vectorID.x == 0) {
                 return m_Environment.CommonTreasureChest;
             }
@@ -228,6 +233,9 @@ public class LDtkReader : MonoBehaviour {
             if (vectorID.x == 2) {
                 return m_Environment.LegendaryTreasureChest;
             }
+        }
+        if (vectorID == new Vector2Int(0, 3)) {
+            return m_Environment.RareTreasureChest;
         }
         if (vectorID.y == 4) {
             if (vectorID.x == 0) {

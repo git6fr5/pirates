@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Character : Piece {
 
     [System.Serializable]
@@ -41,6 +42,9 @@ public class Character : Piece {
     public bool Hexed => m_Hexed;
     public bool Burning => m_Burning;
     public bool Paralyzed => m_Paralyzed;
+
+    public AudioClip m_WalkingSound;
+    public AudioClip m_HitSound;
 
     /* --- Unity --- */
     #region Unity
@@ -102,6 +106,10 @@ public class Character : Piece {
         m_PerformingAction = false;
         if (m_Hearts > 0 && m_Burning) {
             TakeDamage(1);
+        }
+
+        if (GetComponent<Enemy>() != null) {
+            GetComponent<Enemy>().m_TookCardAction = false;
         }
     }
 
@@ -186,8 +194,19 @@ public class Character : Piece {
         Vector2 direction = (Vector2)(Quaternion.Euler(0f, 0f, 90f * index) * Vector2.right).normalized;
         bool tookAction = m_Board.Move(this, new Vector2Int((int)direction.x, (int)direction.y));
         if (tookAction) {
+
+            if (GetComponent<Player>() != null) {
+                Spike[] spikes = m_Board.GetAll<Spike>();
+                for (int i = 0; i < spikes.Length; i++) {
+                    if (spikes[i].Position == m_Position && spikes[i].active) {
+                        TakeDamage(1, 0);
+                    }
+                }
+            }
+
             m_ActionsTaken += 1;
             float duration = m_Board.TurnDelay;
+            PlaySound(m_WalkingSound);
             PerformAction(index, duration);
         }
     }
@@ -318,6 +337,18 @@ public class Character : Piece {
 
     protected virtual void ClearUI() {
 
+    }
+
+    public void PlaySound(AudioClip audioClip) {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip == audioClip && audioSource.isPlaying) {
+            return;
+        }
+        audioSource.clip = audioClip;
+        if (audioSource.isPlaying) {
+            audioSource.Stop();
+        }
+        audioSource.Play();
     }
 
 }

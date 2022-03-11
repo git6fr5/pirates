@@ -25,6 +25,9 @@ public class Map : MonoBehaviour {
     [SerializeField] private Background m_Background;
     public bool generate = false;
 
+    public int m_DifficultyOffset = 0;
+
+
     #endregion
 
     /* --- Unity --- */
@@ -68,7 +71,7 @@ public class Map : MonoBehaviour {
 
         List<NodeLink> links = m_Network.GetAllLinks(m_CurrNode);
         int depth = m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
-        int difficulty = m_CurrNode.Position.x;
+        int difficulty = m_CurrNode.Position.x + m_DifficultyOffset;
 
         m_Board.Reset();
         m_Background.Close();
@@ -78,7 +81,8 @@ public class Map : MonoBehaviour {
 
     private IEnumerator IEDelayedGeneration(int depth, List<NodeLink> links, Vector2Int direction, int difficulty) {
         yield return new WaitForSeconds(m_Background.GetCloseDelay() + 0.2f);
-        m_Board.Reset();
+        
+        SoundController.PlaySound(SoundController.BoardGenerate, 1);
         m_Board.GenerateMap();
         m_Background.Open();
 

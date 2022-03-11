@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd74e7d9b67441f4593a87a9c6183aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHearts: 2
+  m_MaxHearts: 0
   m_Hearts: 0
+  TookDamage: 0
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ShakeStrength: 0
+  m_ShakeDuration: 0
+  m_Immune: 1
 --- !u!212 &6455130718496813349
 SpriteRenderer:
   m_ObjectHideFlags: 0

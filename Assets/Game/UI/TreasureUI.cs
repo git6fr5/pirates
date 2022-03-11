@@ -33,7 +33,7 @@ public class TreasureUI : MonoBehaviour {
         transform.SetParent(null);
 
         RefreshCardUI(treasure);
-        // m_Exit.gameObject.SetActive(true);
+        m_Exit.gameObject.SetActive(true);
     }
 
     private void RefreshCardUI(Treasure treasure) {

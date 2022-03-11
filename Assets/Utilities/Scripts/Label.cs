@@ -13,7 +13,7 @@ public class Label : MonoBehaviour {
 
     /* --- Variables --- */
     [SerializeField] [ReadOnly] private SpriteRenderer[] characterRenderers; // Holds the currently rendered characters.
-    [SerializeField] [Range(0.05f, 0.5f)] private float spacing = 0.4f; // The spacing between the characters.
+    [SerializeField] [Range(0.05f, 10f)] private float spacing = 0.4f; // The spacing between the characters.
 
     /* --- Unity --- */
     void Start() {

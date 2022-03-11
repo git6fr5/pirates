@@ -91,19 +91,23 @@ public class Piece : MonoBehaviour {
         }
 
         Vector2 displacement = (Vector2)m_Position - (Vector2)transform.localPosition;
-        if (displacement.sqrMagnitude > 0.05f * 0.05f) {
+        if (displacement.sqrMagnitude > 0.1f * 0.1f) {
             transform.position += (Vector3)(displacement.normalized) / m_Board.TurnDelay * deltaTime;
         }
     }
 
     #endregion
 
+    /* --- Health --- */
     #region Health
     /* --- Health --- */
 
-    public void TakeDamage(int damage, float delay = 0f) {
+    public virtual void TakeDamage(int damage, float delay = 0f) {
         m_Hearts -= damage;
         CameraShake.ActivateShake(m_Board.TurnDelay * 2f);
+        if (GetComponent<Character>()) {
+            GetComponent<Character>().PlaySound(GetComponent<Character>().m_HitSound);
+        }
 
         CheckDeath(delay);
     }

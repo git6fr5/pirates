@@ -178,7 +178,7 @@ public class CardUI : MonoBehaviour {
         }
 
         float currY = m_SpriteRenderer.material.GetVector("_Offset").y;
-        if (currY > targetY + 0.05f || currY < targetY - 0.05f) {
+        if (currY > targetY + 0.1f || currY < targetY - 0.25f) {
             currY += Mathf.Sign(targetY - currY) * 3f * m_ScaleSpeed * deltaTime;
         }
         else {
@@ -202,7 +202,7 @@ public class CardUI : MonoBehaviour {
         float targetScale = m_Active ? 0f : 1f; // Mathf.Max(0f, 1f - distance);
 
         m_Scale = m_Scale != targetScale ? m_Scale + Mathf.Sign(targetScale - m_Scale) * m_ScaleSpeed * deltaTime : m_Scale;
-        if (Mathf.Abs(targetScale - m_Scale) < 0.05f) {
+        if (Mathf.Abs(targetScale - m_Scale) < 0.25f) {
             m_Scale = targetScale;
         }
 
