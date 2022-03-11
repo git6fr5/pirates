@@ -114,7 +114,10 @@ public class Board : MonoBehaviour {
 
         if (m_Player != null) {
             m_Player.gameObject.SetActive(false);
+            m_Player.UI.gameObject.SetActive(false);
         }
+
+        trash.SetActive(false);
     }
 
     public void GenerateMap() {
@@ -126,7 +129,10 @@ public class Board : MonoBehaviour {
         }
     }
 
+    public GameObject trash;
     public void Generate(int depth, List<NodeLink> nodeLinks, Vector2Int playerDirection, int diffiulty) {
+
+        trash.SetActive(true);
 
         // Set the depth.
         m_Depth = depth;
@@ -134,7 +140,10 @@ public class Board : MonoBehaviour {
         // Add the player.
         Vector2Int newPosition = m_Player.Position - new Vector2Int((m_Width - 1) * playerDirection.x, (m_Height - 1) * playerDirection.y);
         m_Player.SetPosition(newPosition, false);
+
         m_Player.gameObject.SetActive(true);
+        m_Player.UI.gameObject.SetActive(true);
+
         m_Player.transform.position = (Vector3)(Vector2)m_Player.Position + (17.5f) * Vector3.up;
         m_Pieces = new List<Piece>();
         m_Pieces.Add(m_Player);
@@ -277,6 +286,13 @@ public class Board : MonoBehaviour {
             Spike[] spikes = GetAll<Spike>();
             for (int i = 0; i < spikes.Length; i++) {
                 spikes[i].Swap();
+            }
+
+            // Bosses.
+            Parrot parrot = Get<Parrot>();
+            if (parrot != null) {
+                parrot.NewTurn();
+                yield return new WaitUntil(() => parrot == null || (parrot != null && parrot.CompletedTurn));
             }
 
         }

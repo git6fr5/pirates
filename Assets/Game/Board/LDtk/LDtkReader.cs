@@ -48,6 +48,11 @@ public class LDtkReader : MonoBehaviour {
         GetDifficulty(depth, difficulty, quadrant, out qs, out index);
         print(difficulty);
 
+        if (difficulty == 3) {
+            OpenLevelByName("Boss_Level_0", Vector2Int.zero);
+            return m_PieceData.ToArray();
+        }
+
         index = qs[0][0] + (m_Environment.Jumble(depth, quadrant, qs[0][1]) % qs[0][1]);
         OpenLevelByName("Level_" + index.ToString(), quadrant);
 
@@ -252,6 +257,17 @@ public class LDtkReader : MonoBehaviour {
                 return m_Environment.HardEnemy;
             }
         }
+
+        if (vectorID == new Vector2Int(0, 5)) {
+            return m_Environment.boss0;
+        }
+        if (vectorID == new Vector2Int(1, 5)) {
+            return m_Environment.boss1;
+        }
+        if (vectorID == new Vector2Int(2, 5)) {
+            return m_Environment.boss2;
+        }
+
         return null;
     }
 

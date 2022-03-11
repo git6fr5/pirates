@@ -19,30 +19,32 @@ public class Teleport : Card {
         List<Vector2Int> targets = new List<Vector2Int>();
         Player player = board.Get<Player>();
 
-        int a = -m_Range;
-        int b = m_Range + 1;
-        int c = m_Range + 1;
-        Vector2Int offset = player.Position;
-        if (m_TargetType == TargetType.Global) {
-            a = 0;
-            b = board.Height;
-            c = board.Width;
-            offset = Vector2Int.zero;
-        }
 
-        for (int i = a; i < b; i++) {
-            for (int j = a; j < c; j++) {
-                Vector2Int position = new Vector2Int(j, i) + offset;
-                if (board.Check(position)) {
-                    Piece piece = board.GetAt<Piece>(position);
-                    if (piece == null || piece.GetComponent<Spike>() != null) {
-                        targets.Add(position);
+        if (player != null) {
+
+            int a = -m_Range;
+            int b = m_Range + 1;
+            int c = m_Range + 1;
+            Vector2Int offset = player.Position;
+            if (m_TargetType == TargetType.Global) {
+                a = 0;
+                b = board.Height;
+                c = board.Width;
+                offset = Vector2Int.zero;
+            }
+
+            for (int i = a; i < b; i++) {
+                for (int j = a; j < c; j++) {
+                    Vector2Int position = new Vector2Int(j, i) + offset;
+                    if (board.Check(position)) {
+                        Piece piece = board.GetAt<Piece>(position);
+                        if (piece == null || piece.GetComponent<Spike>() != null) {
+                            targets.Add(position);
+                        }
                     }
                 }
             }
-        }
 
-        if (player != null) {
             BoardUI.DrawVisionCharactersUI(targets.ToArray(), board, player.Position, ref m_VisionIndicators, m_MouseOverTargetableSquare && m_Active);
         }
 

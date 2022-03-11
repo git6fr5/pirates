@@ -66,6 +66,18 @@ public class Effect : MonoBehaviour {
         m_Speed = (m_Target - transform.position).magnitude / duration;
     }
 
+    private bool falling = false;
+    private Vector3 origin;
+    private float height = 8f;
+    private float ratio = 0f;
+
+    public void FallTo(Vector2Int position, float duration) {
+        falling=true;
+        origin = transform.position;
+        ratio = 0f;
+        MoveTo(position, duration);
+    }
+
     #endregion
 
     /* --- Animation --- */
@@ -85,6 +97,21 @@ public class Effect : MonoBehaviour {
     }
 
     private void Move(float deltaTime) {
+        if (!falling) {
+            Vector3 displacement = m_Target - transform.position;
+            if (displacement.sqrMagnitude >= 0.05f * 0.05f) {
+                transform.position += displacement.normalized * m_Speed * deltaTime;
+            }
+        }
+        else {
+            Vector3 displacement = m_Target - origin;
+            ratio += (m_Speed * deltaTime) / displacement.magnitude;
+            float y = -((ratio - 0.5f) * (ratio - 0.5f) - (0.5f * 0.5f)) * height;
+            transform.position = origin + displacement * ratio + Vector3.up * y;
+        }
+    }
+
+    private void Fall(float deltaTime) {
         Vector3 displacement = m_Target - transform.position;
         if (displacement.sqrMagnitude >= 0.05f * 0.05f) {
             transform.position += displacement.normalized * m_Speed * deltaTime;

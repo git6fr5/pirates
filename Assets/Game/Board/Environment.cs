@@ -39,10 +39,15 @@ public class Environment : MonoBehaviour {
 
     public Piece plant;
 
+    public Piece boss0;
+    public Piece boss1;
+    public Piece boss2;
+
     /* --- Unity --- */
     #region Unity
 
     void Awake() {
+        m_Seed = Random.Range(0, 99);
         SortEnemies();
     }
 

@@ -25,7 +25,7 @@ public class Character : Piece {
     public Action CurrAction => m_CurrAction;
     [SerializeField, ReadOnly] protected int m_ActionsTaken;
     public int ActionsTaken => m_ActionsTaken;
-    [SerializeField] private int m_ActionsPerTurn;
+    [SerializeField] protected int m_ActionsPerTurn;
     public int ActionsPerTurn => m_ActionsPerTurn;
 
     // Cards.
@@ -160,7 +160,7 @@ public class Character : Piece {
 
     }
 
-    private void CompleteTurn() {
+    protected virtual void CompleteTurn() {
         IncrementStatusModifiers();
         m_CompletedTurn = true;
     }

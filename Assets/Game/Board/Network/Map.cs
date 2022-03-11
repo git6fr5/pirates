@@ -61,8 +61,9 @@ public class Map : MonoBehaviour {
     }
 
     public void Move(Vector2Int direction) {
-        Vector2Int target = m_CurrNode.Position + direction;
-        m_CurrNode = m_Network.GetNodeAt(target);
+        // Vector2Int target = m_CurrNode.Position + direction;
+        // m_CurrNode = m_Network.GetNodeAt(target);
+        m_DifficultyOffset += 1;
         GenerateBoard(direction);
     }
 
@@ -70,8 +71,8 @@ public class Map : MonoBehaviour {
         if (m_CurrNode == null) { return; }
 
         List<NodeLink> links = m_Network.GetAllLinks(m_CurrNode);
-        int depth = m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
-        int difficulty = m_CurrNode.Position.x + m_DifficultyOffset;
+        int depth = 0; // m_CurrNode.Position.y * m_Settings.Height + m_CurrNode.Position.x;
+        int difficulty = m_DifficultyOffset; // m_CurrNode.Position.x + m_DifficultyOffset;
 
         m_Board.Reset();
         m_Background.Close();

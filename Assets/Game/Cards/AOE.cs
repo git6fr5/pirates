@@ -10,6 +10,8 @@ public class AOE : Card {
     [SerializeField] private Effect m_ProjectileEffect;
     [SerializeField] private Effect m_ExplodeEffect;
 
+    public AudioClip explodeSound;
+
     void LateUpdate() {
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f, 0f);
@@ -29,27 +31,30 @@ public class AOE : Card {
         float delay = 0f;
 
         if (m_ProjectileEffect != null) {
-            Effect newEffect = m_ProjectileEffect.Create(origin, board.TurnDelay);
-            newEffect.MoveTo(target, board.TurnDelay);
+            Effect newEffect = m_ProjectileEffect.Create(origin, 3f * board.TurnDelay);
+            newEffect.FallTo(target, 3f * board.TurnDelay);
 
             float distance = (origin - target).magnitude;
-            float maxDistance = Mathf.Sqrt(2) * m_Range;
-            float actualSpeed = maxDistance / board.TurnDelay;
+            float maxDistance = Mathf.Sqrt(2) * (overrideRange > 0 ? overrideRange : m_Range);
+            float actualSpeed = maxDistance / (3f * board.TurnDelay);
             delay = distance / actualSpeed;
         }
 
         for (int i = 0; i < areaOfEffect.Count; i++) {
-            AOEEffect(board, areaOfEffect[i], delay);
+            AOEEffect(board, areaOfEffect[i], delay, i);
         }        
         return true;
     }
 
-    public virtual bool AOEEffect(Board board, Vector2Int target, float delay) {
-        StartCoroutine(IEDelayedEffectAnim(delay, target, board));
+    public int overrideRange = -1;
+
+    public virtual bool AOEEffect(Board board, Vector2Int target, float delay, int i) {
+        StartCoroutine(IEDelayedEffectAnim(delay, target, board, i));
 
         Piece piece = board.GetAt<Piece>(target);
         Debug.Log("Doing damage");
         if (piece != null) {
+
             piece.TakeDamage(m_Value, delay);
 
             Character character = piece.GetComponent<Character>();
@@ -65,9 +70,10 @@ public class AOE : Card {
         return true;
     }
 
-    private IEnumerator IEDelayedEffectAnim(float delay, Vector2Int target, Board board) {
+    private IEnumerator IEDelayedEffectAnim(float delay, Vector2Int target, Board board, int i) {
         yield return new WaitForSeconds(delay);
-        Effect newEffect = m_ExplodeEffect.Create(target, board.TurnDelay);
+        Effect newEffect = m_ExplodeEffect.Create(target, 2F * board.TurnDelay);
+        SoundController.PlaySound(explodeSound, i % 2);
     }
 
 }
