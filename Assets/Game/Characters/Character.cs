@@ -39,9 +39,11 @@ public class Character : Piece {
     [SerializeField, ReadOnly] private bool m_Hexed;
     [SerializeField, ReadOnly] private bool m_Burning;
     [SerializeField, ReadOnly] private bool m_Paralyzed;
+    [SerializeField, ReadOnly] private bool m_Angry;
     public bool Hexed => m_Hexed;
     public bool Burning => m_Burning;
     public bool Paralyzed => m_Paralyzed;
+    public bool Angry => m_Angry;
 
     public AudioClip m_WalkingSound;
     public AudioClip m_HitSound;
@@ -114,7 +116,8 @@ public class Character : Piece {
     }
 
     private void TakeTurn() {
-        if (m_ActionsTaken >= m_ActionsPerTurn) {
+        int actionsPerTurn = m_ActionsPerTurn + (m_Angry ? 1 : 0);
+        if (m_ActionsTaken >= actionsPerTurn) {
             CompleteTurn();
             return;
         }
@@ -185,6 +188,10 @@ public class Character : Piece {
 
     protected virtual bool WaitForEndOfAction() {
         return true;
+    }
+
+    public void AddAction() {
+        m_ActionsPerTurn += 1;
     }
 
     #endregion
@@ -309,6 +316,7 @@ public class Character : Piece {
         m_Hexed = m_StatusModifiers.Find(statusModifier => statusModifier.Modifier == Status.Hexed) != null;
         m_Burning = m_StatusModifiers.Find(statusModifier => statusModifier.Modifier == Status.Burning) != null;
         m_Paralyzed = m_StatusModifiers.Find(statusModifier => statusModifier.Modifier == Status.Paralyzed) != null;
+        m_Angry = m_StatusModifiers.Find(statusModifier => statusModifier.Modifier == Status.Angry) != null;
     }
 
     private void IncrementStatusModifiers() {

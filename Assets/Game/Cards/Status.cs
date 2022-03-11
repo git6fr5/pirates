@@ -7,6 +7,7 @@ public enum Status {
     None,
     Hexed,
     Burning,
-    Paralyzed
+    Paralyzed,
+    Angry
 
 }

@@ -11,12 +11,16 @@ public class PlayerUI : MonoBehaviour {
     private CardUI[] m_PlayerCards;
 
     [SerializeField] private SpriteRenderer m_PlayerHeart;
+    [SerializeField] private SpriteRenderer m_EmptyHeart;
     private List<SpriteRenderer> m_PlayerHearts;
 
     [SerializeField] private SpriteRenderer m_PlayerAction;
+    [SerializeField] private SpriteRenderer m_EmptyAction;
     private List<SpriteRenderer> m_PlayerActions;
 
     [SerializeField] private SpriteRenderer m_TargetSquare;
+
+    public Material uiMat;
 
     #endregion
 
@@ -102,11 +106,22 @@ public class PlayerUI : MonoBehaviour {
         }
 
         m_PlayerHearts = new List<SpriteRenderer>();
-        for (int i = 0; i < player.Hearts; i++) {
-            SpriteRenderer newHeart = Instantiate(m_PlayerHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-            newHeart.transform.position += i * 1f * Vector3.right;
-            newHeart.gameObject.SetActive(true);
-            m_PlayerHearts.Add(newHeart);
+        for (int i = 0; i < player.MaxHearts; i++) {
+            if (i >= player.MaxHearts - player.Hearts) {
+                SpriteRenderer newHeart = Instantiate(m_PlayerHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+                newHeart.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newHeart.material = uiMat;
+                newHeart.gameObject.SetActive(true);
+                m_PlayerHearts.Add(newHeart);
+            }
+            else {
+                SpriteRenderer newHeart = Instantiate(m_EmptyHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+                newHeart.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newHeart.material = uiMat;
+                newHeart.gameObject.SetActive(true);
+                m_PlayerHearts.Add(newHeart);
+            }
+            
         }
 
     }
@@ -121,12 +136,24 @@ public class PlayerUI : MonoBehaviour {
         }
 
         m_PlayerActions = new List<SpriteRenderer>();
-        int energy = player.ActionsPerTurn - player.ActionsTaken;
-        for (int i = 0; i < energy; i++) {
-            SpriteRenderer newEnergy = Instantiate(m_PlayerAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-            newEnergy.transform.position += i * 1f * Vector3.right;
-            newEnergy.gameObject.SetActive(true);
-            m_PlayerActions.Add(newEnergy);
+        int actions = player.ActionsPerTurn + (player.Angry ? 1 : 0);
+        int energy = actions - player.ActionsTaken;
+        for (int i = 0; i < actions; i++) {
+            if (i >= actions - energy) {
+                SpriteRenderer newEnergy = Instantiate(m_PlayerAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+                newEnergy.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                if (player.Angry && i == 0) {
+                    newEnergy.color = Color.red;
+                }
+                newEnergy.gameObject.SetActive(true);
+                m_PlayerActions.Add(newEnergy);
+            }
+            else {
+                SpriteRenderer newEnergy = Instantiate(m_EmptyAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
+                newEnergy.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newEnergy.gameObject.SetActive(true);
+                m_PlayerActions.Add(newEnergy);
+            }
         }
 
     }

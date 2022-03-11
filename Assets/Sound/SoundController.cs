@@ -42,6 +42,15 @@ public class SoundController : MonoBehaviour {
     public static AudioClip LoseSound2;
     public AudioClip loseSound2;
 
+    public static AudioClip OpenTrash;
+    public AudioClip openTrash;
+
+    public static AudioClip CloseTrash;
+    public AudioClip closeTrash;
+
+    public static AudioClip UseTrash;
+    public AudioClip useTrash;
+
     // Start is called before the first frame update
     void Start() {
         Init();
@@ -59,6 +68,10 @@ public class SoundController : MonoBehaviour {
         Walking2 = characterWalking2;
         LoseSound1 = loseSound1;
         LoseSound2 = loseSound2;
+
+        UseTrash = useTrash;
+        CloseTrash = closeTrash;
+        OpenTrash = openTrash;
     }
 
     // Update is called once per frame

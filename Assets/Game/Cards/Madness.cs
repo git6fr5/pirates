@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : Card {
+public class Madness : Card {
 
 
     public override bool Effect(Board board, Vector2Int origin, Vector2Int target) {
@@ -13,10 +13,8 @@ public class Potion : Card {
             return false; // Should cards use charges if they don't do anything?
         }
 
-        character.ApplyStatus(m_StatusEffect, m_Duration);
-        character.Heal(m_Value);
+        character.AddAction();
         return true;
     }
-
 
 }

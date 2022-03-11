@@ -37,6 +37,8 @@ public class Environment : MonoBehaviour {
 
     public Piece spike;
 
+    public Piece plant;
+
     /* --- Unity --- */
     #region Unity
 

@@ -265,6 +265,11 @@ public class Board : MonoBehaviour {
                 }
             }
 
+            Plant[] plants = GetAll<Plant>();
+            for (int i = 0; i < plants.Length; i++) {
+                plants[i].NewTurn();
+            }
+
             // Move to the next round.
             yield return new WaitForSeconds(m_TurnDelay / 2f);
             m_RoundNumber += 1;
@@ -325,6 +330,16 @@ public class Board : MonoBehaviour {
         Vector2Int target = origin + direction;
         bool horizontalBoundCheck = target.x >= 0 && target.x < m_Width;
         bool verticalBoundCheck = target.y >= 0 && target.y < m_Height;
+        if (!horizontalBoundCheck || !verticalBoundCheck) {
+            return false;
+        }
+        return true;
+    }
+
+    public bool Check(Vector2Int position) {
+
+        bool horizontalBoundCheck = position.x >= 0 && position.x < m_Width;
+        bool verticalBoundCheck = position.y >= 0 && position.y < m_Height;
         if (!horizontalBoundCheck || !verticalBoundCheck) {
             return false;
         }

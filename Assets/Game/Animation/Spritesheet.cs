@@ -52,6 +52,7 @@ public class Spritesheet : MonoBehaviour {
     private Effect m_HexEffect;
     private Effect m_BurningEffect;
     private Effect m_ParalyzeEffect;
+    private Effect m_AngryEffect;
 
     private int m_PrevHearts;
 
@@ -108,6 +109,14 @@ public class Spritesheet : MonoBehaviour {
             Destroy(m_ParalyzeEffect.gameObject);
         }
 
+        if (m_Character.Angry && m_AngryEffect == null) {
+            m_AngryEffect = StatusEffects.AngryEffect.Create(m_Character.Position);
+            m_AngryEffect.transform.SetParent(transform);
+        }
+        else if (!m_Character.Angry && m_AngryEffect != null) {
+            Destroy(m_AngryEffect.gameObject);
+        }
+
         if (m_Character.TookDamage) {
             StartCoroutine(IEHurt());
             m_Character.TookDamage = false;
@@ -138,7 +147,15 @@ public class Spritesheet : MonoBehaviour {
             }
         }
 
+        //if (m_Character.Angry) {
+        //    m_SpriteRenderer.material.SetColor("_OutlineColor", Color.red);
+        //}
+        //else {
+        //    m_SpriteRenderer.material.SetColor("_OutlineColor", Color.red);
+        //}
     }
+
+    // private Color originalColor;
 
     private IEnumerator IEHurt() {
         for (int i = 0; i < 4; i++) {
@@ -162,6 +179,7 @@ public class Spritesheet : MonoBehaviour {
             return;
         }
 
+        // originalColor = m_SpriteRenderer.material.GetColor("_OutlineColor");
         Organize();
     }
 

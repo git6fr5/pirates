@@ -19,7 +19,7 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     [SerializeField] private Rarity m_Rariry;
     public Rarity CardRarity => m_Rariry;
     // Target Type.
-    [SerializeField] private TargetType m_TargetType;
+    [SerializeField] protected TargetType m_TargetType;
     public TargetType CardTargetType => m_TargetType;
     // Range.
     [SerializeField] protected int m_Range;

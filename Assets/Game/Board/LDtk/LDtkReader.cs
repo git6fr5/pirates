@@ -66,68 +66,69 @@ public class LDtkReader : MonoBehaviour {
         return m_PieceData.ToArray();
     }
 
-    private void GetDifficulty(int depth, int difficulty, Vector2Int quadrant, out int[][] qs, out int index) {
+    private void GetDifficulty(int depth, int difficulty, Vector2Int quadrant, out int[][] quadrants, out int index) {
+        
         int[] easy = new int[] { 0, m_Easy };
         int[] mid = new int[] { m_Easy + 1, m_Mid };
         int[] hard = new int[] { m_Mid + 1, m_Hard };
 
-        qs = new int[][] { easy, easy, easy, easy };
+        quadrants = new int[][] { easy, easy, easy, easy };
         index = 0;
-        if (difficulty == 1) {
+        if (difficulty == 1) { // 3 easy, 1 medium
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            qs[index] = mid;
+            quadrants[index] = mid;
         }
-        if (difficulty == 2) {
+        if (difficulty == 2) { // 2 easy, 2 medium
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            qs[index] = mid;
+            quadrants[index] = mid;
             index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
-            qs[index] = mid;
+            quadrants[index] = mid;
         }
-        if (difficulty == 3) {
+        if (difficulty == 3) { 
             // BOSS
             // return m_PieceData.ToArray();
         }
-        if (difficulty == 4) {
+        if (difficulty == 4) { // 1 easy, 3 medium
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            for (int i = 0; i < qs.Length; i++) {
+            for (int i = 0; i < quadrants.Length; i++) {
                 if (i != index) {
-                    qs[i] = mid;
+                    quadrants[i] = mid;
                 }
             }
         }
-        if (difficulty == 5) {
-            for (int i = 0; i < qs.Length; i++) {
-                qs[i] = mid;
+        if (difficulty == 5) { // 4 medium
+            for (int i = 0; i < quadrants.Length; i++) {
+                quadrants[i] = mid;
             }
         }
         if (difficulty == 6) {
             // BOSS
             // return m_PieceData.ToArray();
         }
-        if (difficulty == 7) {
-            for (int i = 0; i < qs.Length; i++) {
-                qs[i] = mid;
+        if (difficulty == 7) { // 1 hard, 3 medium
+            for (int i = 0; i < quadrants.Length; i++) {
+                quadrants[i] = mid;
             }
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            qs[index] = hard;
+            quadrants[index] = hard;
         }
-        if (difficulty == 8) {
-            for (int i = 0; i < qs.Length; i++) {
-                qs[i] = mid;
+        if (difficulty == 8) { // 2 hard, 2 medium
+            for (int i = 0; i < quadrants.Length; i++) {
+                quadrants[i] = mid;
             }
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            qs[index] = hard;
+            quadrants[index] = hard;
             index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
-            qs[index] = hard;
+            quadrants[index] = hard;
         }
-        if (difficulty > 8) {
-            for (int i = 0; i < qs.Length; i++) {
-                qs[i] = mid;
+        if (difficulty > 8) { // 3 hard, 1 medium
+            for (int i = 0; i < quadrants.Length; i++) {
+                quadrants[i] = mid;
             }
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            for (int i = 0; i < qs.Length; i++) {
+            for (int i = 0; i < quadrants.Length; i++) {
                 if (i != index) {
-                    qs[i] = hard;
+                    quadrants[i] = hard;
                 }
             }
         }
@@ -222,6 +223,9 @@ public class LDtkReader : MonoBehaviour {
         }
         if (vectorID == new Vector2Int(1, 1)) {
             return m_Environment.spike;
+        }
+        if (vectorID == new Vector2Int(2, 1)) {
+            return m_Environment.plant;
         }
         if (vectorID.y == 2) {
             if (vectorID.x == 0) {

@@ -19,10 +19,11 @@ public class Spawn : Card {
             board.AddPiece(m_SpawnPiece, target);
 
             Debug.Log("Nothing at targetted location.");
-            return false; // Should cards use charges if they don't do anything?
+            return true; // Should cards use charges if they don't do anything?
         }
 
-        return true;
+        return false;
+
     }
 
 }

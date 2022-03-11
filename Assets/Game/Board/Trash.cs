@@ -15,6 +15,11 @@ public class Trash : MonoBehaviour {
     // UI.
     private bool m_MouseOver = false;
 
+    public Sprite closedSprite;
+    public Sprite openSprite;
+
+    public SpriteRenderer spriteRenderer;
+
     #endregion
 
     /* --- Unity --- */
@@ -25,11 +30,19 @@ public class Trash : MonoBehaviour {
     }
 
     void OnMouseOver() {
+        if (!m_MouseOver) {
+            SoundController.PlaySound(SoundController.OpenTrash);
+        }
         m_MouseOver = true;
+        spriteRenderer.sprite = openSprite;
     }
 
     void OnMouseExit() {
+        if (m_MouseOver) {
+            SoundController.PlaySound(SoundController.CloseTrash);
+        }
         m_MouseOver = false;
+        spriteRenderer.sprite = closedSprite;
     }
 
     #endregion
@@ -50,6 +63,7 @@ public class Trash : MonoBehaviour {
         Player player = board.Get<Player>();
         for (int i = 0; i < player.Cards.Length; i++) {
             if (player.Cards[i] != null && player.Cards[i].Active) {
+                SoundController.PlaySound(SoundController.UseTrash, 1);
                 player.RemoveCard(i);
             }
         }

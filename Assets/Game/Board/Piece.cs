@@ -17,6 +17,7 @@ public class Piece : MonoBehaviour {
     // Health.
     [SerializeField] protected int m_MaxHearts;
     [SerializeField] protected int m_Hearts;
+    public int MaxHearts => m_MaxHearts;
     public int Hearts => m_Hearts;
     public bool TookDamage = false;
 

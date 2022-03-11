@@ -16,10 +16,15 @@ public class StatusEffects : MonoBehaviour {
     public static Effect ParalyzeEffect;
     public Effect m_ParalyzeEffect;
 
+    // Anger.
+    public static Effect AngryEffect;
+    public Effect m_AngryEffect;
+
     void Start() {
         HexEffect = m_HexEffect;
         BurningEffect = m_BurningEffect;
         ParalyzeEffect = m_ParalyzeEffect;
+        AngryEffect = m_AngryEffect;
     }
 
 }
