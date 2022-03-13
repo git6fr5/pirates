@@ -37,9 +37,11 @@ public class LDtkReader : MonoBehaviour {
     public int m_Mid;
     public int m_Hard;
 
+    public int m_Difficulty;
 
     public PieceData[] Get(int depth, int difficulty) {
 
+        m_Difficulty = difficulty;
         m_PieceData = new List<PieceData>();
         Vector2Int quadrant = new Vector2Int(0, 0);
 
@@ -50,6 +52,14 @@ public class LDtkReader : MonoBehaviour {
 
         if (difficulty == 3) {
             OpenLevelByName("Boss_Level_0", Vector2Int.zero);
+            return m_PieceData.ToArray();
+        }
+        if (difficulty == 6) {
+            OpenLevelByName("Boss_Level_1", Vector2Int.zero);
+            return m_PieceData.ToArray();
+        }
+        if (difficulty == 10) {
+            OpenLevelByName("Boss_Level_2", Vector2Int.zero);
             return m_PieceData.ToArray();
         }
 
@@ -259,13 +269,15 @@ public class LDtkReader : MonoBehaviour {
         }
 
         if (vectorID == new Vector2Int(0, 5)) {
-            return m_Environment.boss0;
-        }
-        if (vectorID == new Vector2Int(1, 5)) {
-            return m_Environment.boss1;
-        }
-        if (vectorID == new Vector2Int(2, 5)) {
-            return m_Environment.boss2;
+            if (m_Difficulty < 4) {
+                return m_Environment.boss0;
+            }
+            if (m_Difficulty < 7) {
+                return m_Environment.boss1;
+            }
+            if (m_Difficulty > 9) {
+                return m_Environment.boss1;
+            }
         }
 
         return null;
