@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: 3891611125662317351
     second: Treasure Chest_2
+  - first:
+      213: 7373185587677494664
+    second: Treasure Chest_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -206,6 +209,27 @@ TextureImporter:
       bones: []
       spriteID: 72b7f0d33b7c10630800000000000000
       internalID: 3891611125662317351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Treasure Chest_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88dfb882a31d25660800000000000000
+      internalID: 7373185587677494664
       vertices: []
       indices: 
       edges: []

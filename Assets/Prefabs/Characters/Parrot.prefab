@@ -193,6 +193,8 @@ MonoBehaviour:
   m_HitSound: {fileID: 8300000, guid: f0924a253dd1cf140bd5bf93014f9829, type: 3}
   m_Difficulty: 0
   m_VisisonDistance: 0
+  init: 0
+  m_SpawnPiece: {fileID: 1189438098869539126, guid: ea2af6ceebcf18943b871d5c6050b808, type: 3}
 --- !u!212 &7255526599167988857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -212,7 +214,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bce5fe6e2ea57b348bcaa101e6189d37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -230,10 +232,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac08c35d4a81b7f4682c8a4ca4d65c3e, type: 3}
+  m_SortingLayerID: -1349157403
+  m_SortingLayer: 1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 7933297803874927483, guid: f0a899574fd335e4c90830623dab4827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -256,13 +258,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontAnimate: 1
+  dontAnimate: 0
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
-  m_Sprites: []
+  m_Sprites:
+  - {fileID: 7933297803874927483, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: 3986075857830472196, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: 4072537714416455174, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: 7488026498391855018, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: 9166445506090716298, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: -6795455443284794425, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: -2738278376284672429, guid: f0a899574fd335e4c90830623dab4827, type: 3}
+  - {fileID: 8512854966842253229, guid: f0a899574fd335e4c90830623dab4827, type: 3}
   m_IndexOffset: 0
-  m_IdleFrames: 0
-  m_ActionFrames: 0
+  m_IdleFrames: 2
+  m_ActionFrames: 5
   m_BuffFrames: 0
   m_MovementFrames: 0
   m_IdleFrameRate: 0
@@ -335,6 +345,7 @@ MonoBehaviour:
   m_ProjectileEffect: {fileID: 5747692496521348837}
   m_ExplodeEffect: {fileID: 8974638251376080111}
   explodeSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
+  notTargetEnemies: 1
   overrideRange: 32
 --- !u!1001 &7255526598912532801
 PrefabInstance:

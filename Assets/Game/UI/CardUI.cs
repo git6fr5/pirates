@@ -89,7 +89,16 @@ public class CardUI : MonoBehaviour {
     public CardUI Create(Card card, int i) {
         CardUI newCardUI = Instantiate(gameObject, transform.position, Quaternion.identity, null).GetComponent<CardUI>();
         newCardUI.SetCard(card);
-        newCardUI.SetOrigin(i);
+        newCardUI.SetOrigin(i, 0);
+        newCardUI.gameObject.SetActive(true);
+        return newCardUI;
+    }
+
+
+    public CardUI Create(Card card, int i, int num) {
+        CardUI newCardUI = Instantiate(gameObject, transform.position, Quaternion.identity, null).GetComponent<CardUI>();
+        newCardUI.SetCard(card);
+        newCardUI.SetOrigin(i, 0);
         newCardUI.gameObject.SetActive(true);
         return newCardUI;
     }
@@ -98,8 +107,8 @@ public class CardUI : MonoBehaviour {
         m_Card = card;
     }
 
-    public void SetOrigin(int i) {
-        transform.position += i * Vector3.right * 6f;
+    public void SetOrigin(int i, int num) {
+        transform.position += (i - (float)num  / 2f) * Vector3.right * 6f;
         m_Origin = transform.position;
         m_IconPosition = m_CardTargetType.transform.localPosition;
 

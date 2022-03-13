@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69741eefd9954a54cb10636babdfde82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHearts: 6
-  m_Hearts: 6
+  m_MaxHearts: 5
+  m_Hearts: 5
   TookDamage: 0
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_ShakeStrength: 0
@@ -149,9 +149,10 @@ MonoBehaviour:
   m_Hexed: 0
   m_Burning: 0
   m_Paralyzed: 0
+  m_Angry: 0
   m_WalkingSound: {fileID: 0}
   m_HitSound: {fileID: 8300000, guid: f0924a253dd1cf140bd5bf93014f9829, type: 3}
-  m_Difficulty: 1
+  m_Difficulty: 2
   m_MovementActions: 1
   m_VisisonDistance: 7
   m_PlayerInVision: 0

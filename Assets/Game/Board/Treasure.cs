@@ -13,7 +13,7 @@ public class Treasure : Piece {
     #region Variables
 
     // References.
-    [HideInInspector] private SpriteRenderer m_SpriteRenderer;
+    [HideInInspector] protected SpriteRenderer m_SpriteRenderer;
 
     // Rarity.
     [SerializeField] private Rarity m_Rarity;
@@ -69,7 +69,7 @@ public class Treasure : Piece {
 
     #region Initialization
 
-    private void Init() {
+    protected virtual void Init() {
 
         // print("Initializing treasure chest");
 
@@ -87,7 +87,7 @@ public class Treasure : Piece {
         else {
             m_Cards[0] = TreasurePool.GetRandomCard(Rarity.Rare);
             m_Cards[1] = TreasurePool.GetRandomCard(Rarity.Legendary);
-            m_Cards[2] = Random.Range(0f, 1f) < 0.5f ? TreasurePool.GetRandomCard(Rarity.Common) : TreasurePool.GetRandomCard(Rarity.Rare);
+            m_Cards[2] = Random.Range(0f, 1f) < 0.5f ? TreasurePool.GetRandomCard(Rarity.Legendary) : TreasurePool.GetRandomCard(Rarity.Rare);
         }
 
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
@@ -123,7 +123,7 @@ public class Treasure : Piece {
 
     }
 
-    private IEnumerator IEJump() {
+    public IEnumerator IEJump() {
         yield return new WaitForSeconds(Random.Range(7.5f, 10f));
         while (true) {
             m_Shake = true;

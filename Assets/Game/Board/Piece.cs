@@ -133,7 +133,7 @@ public class Piece : MonoBehaviour {
         }
     }
 
-    private void Die() {
+    protected virtual void Die() {
         if (gameObject != null) {
             Destroy(gameObject);
         }

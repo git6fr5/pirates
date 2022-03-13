@@ -89,7 +89,7 @@ public class PlayerUI : MonoBehaviour {
         if (redraw) {
             m_PlayerCards = new CardUI[player.Cards.Length];
             for (int i = 0; i < player.Cards.Length; i++) {
-                CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i);
+                CardUI newCardUI = m_PlayerCard.Create(player.Cards[i], i, player.Cards.Length);
                 m_PlayerCards[i] = newCardUI;
             }
         }

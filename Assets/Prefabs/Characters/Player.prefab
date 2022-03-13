@@ -61,7 +61,7 @@ MonoBehaviour:
   m_ActionsPerTurn: 2
   m_CardSlots: 3
   m_Cards:
-  - {fileID: 2561908735198429489}
+  - {fileID: 8734814330658529680}
   - {fileID: 6300198875888165554}
   - {fileID: 1232963113132182806}
   m_StatusModifiers: []
@@ -427,14 +427,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d6ccd04b86db94c89866d4831f2efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2561908735198429489 stripped
+--- !u!114 &8734814330658529680 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3793124160689084138, guid: 29dce5c6d969df84a8713af7fa68a7c7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7932549108698363467, guid: 29dce5c6d969df84a8713af7fa68a7c7, type: 3}
   m_PrefabInstance: {fileID: 1670369509454256091}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b75494e6e1703489b0e714bcc38bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dc1c0cc7ce3d5a4cac99bca7d0952ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

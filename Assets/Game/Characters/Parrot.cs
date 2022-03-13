@@ -26,9 +26,14 @@ public class Parrot : Character {
 
     List<Vector2Int> targets;
 
-    void Awake() {
-        m_TargetIndicators = new List<SpriteRenderer>[m_ActionsPerTurn];
-        GetRandomTargets();
+    public bool init;
+
+    void LateUpdate() {
+        if (!init) {
+            m_TargetIndicators = new List<SpriteRenderer>[m_ActionsPerTurn];
+            GetRandomTargets();
+            init = true;
+        }
     }
 
     void OnMouseOver() {
@@ -77,6 +82,22 @@ public class Parrot : Character {
             Vector2Int position = new Vector2Int(x, y);
             targets.Add(position);
         }
+    }
+
+    protected override void Die() {
+        Spawn(m_Board, m_Position);
+        base.Die();
+    }
+
+    public Piece m_SpawnPiece;
+
+    public void Spawn(Board board, Vector2Int target) {
+        Piece piece = board.GetAt<Piece>(target);
+        // Effect newEffect = m_SpawnEffect.Create(target);
+        board.AddPiece(m_SpawnPiece, target);
+
+        Debug.Log("Nothing at targetted location.");
+
     }
 
     #region UI

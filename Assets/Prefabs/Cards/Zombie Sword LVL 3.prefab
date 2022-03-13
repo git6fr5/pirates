@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Rariry: 1
   m_TargetType: 1
   m_Range: 1
-  m_Value: 15
-  m_StatusEffect: 2
+  m_Value: 3
+  m_StatusEffect: 0
   m_Duration: 10
   m_Charges: 10000
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}

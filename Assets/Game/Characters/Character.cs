@@ -332,6 +332,28 @@ public class Character : Piece {
         }
     }
 
+    public void AddHeart() {
+        m_MaxHearts += 1;
+        m_Hearts = m_MaxHearts;
+    }
+
+    public void AddCardSlot() {
+        m_CardSlots += 1;
+
+        Card[] cards = new Card[m_CardSlots];
+        if (cards.Length > m_Cards.Length) {
+            m_Cards.CopyTo(cards, 0);
+            m_Cards = cards;
+        }
+        else {
+            cards = m_Cards;
+            m_Cards = new Card[m_CardSlots];
+            for (int i = 0; i < m_Cards.Length; i++) {
+                m_Cards[i] = cards[i];
+            }
+        }
+    }
+
     #endregion
 
     /* --- UI --- */

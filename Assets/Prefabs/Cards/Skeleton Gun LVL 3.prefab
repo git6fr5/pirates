@@ -48,8 +48,8 @@ MonoBehaviour:
   m_CardName: Skeleton Gun LVL 2
   m_Rariry: 1
   m_TargetType: 2
-  m_Range: 10
-  m_Value: 15
+  m_Range: 4
+  m_Value: 2
   m_StatusEffect: 0
   m_Duration: 3
   m_Charges: 10000

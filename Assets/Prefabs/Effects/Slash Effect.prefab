@@ -96,10 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sprites:
-  - {fileID: -8665333345335829699, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
-  - {fileID: -4510197974434984190, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
-  - {fileID: -5225722690930191422, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
-  - {fileID: -6240489479977649262, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
+  - {fileID: -8295418599032484229, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
+  - {fileID: -2054304517242628049, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
+  - {fileID: -6772462309884053799, guid: 4e398233f4fca984e860f40c896bcd64, type: 3}
   m_Loop: 0
   m_Target: {x: 0, y: 0, z: 0}
   m_Speed: 0

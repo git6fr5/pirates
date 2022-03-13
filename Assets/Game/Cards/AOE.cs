@@ -12,6 +12,8 @@ public class AOE : Card {
 
     public AudioClip explodeSound;
 
+    public bool notTargetEnemies;
+
     void LateUpdate() {
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f, 0f);
@@ -35,8 +37,8 @@ public class AOE : Card {
             newEffect.FallTo(target, 3f * board.TurnDelay);
 
             float distance = (origin - target).magnitude;
-            float maxDistance = Mathf.Sqrt(2) * (overrideRange > 0 ? overrideRange : m_Range);
-            float actualSpeed = maxDistance / (3f * board.TurnDelay);
+            // float maxDistance = Mathf.Sqrt(2) * (overrideRange > 0 ? overrideRange : m_Range);
+            float actualSpeed = distance / (3f * board.TurnDelay);
             delay = distance / actualSpeed;
         }
 
@@ -53,7 +55,14 @@ public class AOE : Card {
 
         Piece piece = board.GetAt<Piece>(target);
         Debug.Log("Doing damage");
+
+        
+
         if (piece != null) {
+
+            if (notTargetEnemies && piece.GetComponent<Enemy>() || piece.GetComponent<Parrot>()) {
+                return true;
+            }
 
             piece.TakeDamage(m_Value, delay);
 
@@ -72,7 +81,7 @@ public class AOE : Card {
 
     private IEnumerator IEDelayedEffectAnim(float delay, Vector2Int target, Board board, int i) {
         yield return new WaitForSeconds(delay);
-        Effect newEffect = m_ExplodeEffect.Create(target, 2F * board.TurnDelay);
+        Effect newEffect = m_ExplodeEffect.Create(target, 3f * board.TurnDelay);
         SoundController.PlaySound(explodeSound, i % 2);
     }
 

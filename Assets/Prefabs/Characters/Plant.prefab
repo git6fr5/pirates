@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1349157403
   m_SortingLayer: 1
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: b2c314b9f18016c40a6c04cd28cb7bae, type: 3}
+  m_Sprite: {fileID: 3169996645572898058, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_ShakeDuration: 0
   m_CompletedTurn: 0
   m_PerformingAction: 0
-  m_CurrAction: 0
+  m_CurrAction: 7
   m_ActionsTaken: 0
   m_ActionsPerTurn: 1
   m_CardSlots: 1
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Hexed: 0
   m_Burning: 0
   m_Paralyzed: 0
+  m_Angry: 0
   m_WalkingSound: {fileID: 0}
   m_HitSound: {fileID: 8300000, guid: f0924a253dd1cf140bd5bf93014f9829, type: 3}
   m_VisisonDistance: 1
@@ -229,13 +230,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e82386c55c66a741b64735be1752c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontAnimate: 1
+  dontAnimate: 0
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
-  m_Sprites: []
+  m_Sprites:
+  - {fileID: 3169996645572898058, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: 2034337421683927082, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: -4181588547171646234, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: -1945933550387707853, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: -2907075895149815188, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: -6521297789527853654, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: 6487099352650360889, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
+  - {fileID: -4620043479399350304, guid: 72ff2510fac4dcd4ab354e5e0204203f, type: 3}
   m_IndexOffset: 0
-  m_IdleFrames: 0
-  m_ActionFrames: 0
+  m_IdleFrames: 2
+  m_ActionFrames: 6
   m_BuffFrames: 0
   m_MovementFrames: 0
   m_IdleFrameRate: 0
@@ -263,7 +272,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

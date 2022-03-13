@@ -239,7 +239,7 @@ public class Board : MonoBehaviour {
     }
 
     public T GetAt<T>(Vector2Int position) {
-        Piece piece = m_Pieces.Find(piece => piece != null && piece.Position == position);
+        Piece piece = m_Pieces.Find(piece => piece != null && piece.GetComponent<T>() != null && piece.Position == position);
         if (piece != null) {
             return piece.GetComponent<T>();
         }
@@ -293,6 +293,18 @@ public class Board : MonoBehaviour {
             if (parrot != null) {
                 parrot.NewTurn();
                 yield return new WaitUntil(() => parrot == null || (parrot != null && parrot.CompletedTurn));
+            }
+            Crocodile[] croc = GetAll<Crocodile>();
+            if (croc != null && croc.Length > 0) {
+                for (int i = 0; i < croc.Length; i++) {
+                    croc[i].NewTurn();
+                }
+                yield return new WaitUntil(() => croc[croc.Length -1] == null || (croc[croc.Length - 1] != null && croc[croc.Length - 1].CompletedTurn));
+            }
+            Goldbeard goldbeard = Get<Goldbeard>();
+            if (goldbeard != null) {
+                goldbeard.NewTurn();
+                yield return new WaitUntil(() => goldbeard == null || (goldbeard != null && goldbeard.CompletedTurn));
             }
 
         }
@@ -464,6 +476,54 @@ public class Board : MonoBehaviour {
             List<Vector2Int> possibleMovements = new List<Vector2Int>();
             for (int i = 0; i < movements.Count; i++) {
                 if (CheckMove(position, movements[i])) {
+                    possibleMovements.Add(position + movements[i]);
+                }
+            }
+
+            float minDistance = maxDistance;
+            List<Vector2Int> allMinMovements = new List<Vector2Int>();
+            for (int i = 0; i < possibleMovements.Count; i++) {
+                float tempDistance = GetManhattanDistance(possibleMovements[i], endPosition);
+                if (tempDistance == minDistance) {
+                    allMinMovements.Add(possibleMovements[i]);
+                }
+                if (tempDistance < minDistance) {
+                    position = possibleMovements[i];
+                    allMinMovements = new List<Vector2Int>();
+                    allMinMovements.Add(position);
+                    minDistance = tempDistance;
+                }
+            }
+
+            if (allMinMovements.Count > 1) {
+                position = allMinMovements[Random.Range(0, allMinMovements.Count)];
+            }
+            distance += 1;
+            path.Add(position);
+        }
+
+        return path;
+    }
+
+    public List<Vector2Int> DirectManhattanPath(Vector2Int startPosition, Vector2Int endPosition) {
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        List<Vector2Int> movements = new List<Vector2Int>() {
+            Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
+        };
+
+        int distance = 0;
+        int maxDistance = m_Height * m_Width;
+
+        Vector2Int position = startPosition;
+        path.Add(position);
+
+        while (position != endPosition && distance < maxDistance) {
+            List<Vector2Int> possibleMovements = new List<Vector2Int>();
+            for (int i = 0; i < movements.Count; i++) {
+                bool spikehere = GetAt<Spike>(position + movements[i]) != null;
+                bool treasurehere = GetAt<Treasure>(position + movements[i]) != null;
+                if (!spikehere && !treasurehere) {
                     possibleMovements.Add(position + movements[i]);
                 }
             }

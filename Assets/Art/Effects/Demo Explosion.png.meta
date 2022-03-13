@@ -11,6 +11,18 @@ TextureImporter:
   - first:
       213: 8282182832887054667
     second: Explosion Particle_2
+  - first:
+      213: -5465506969401098605
+    second: Demo Explosion_0
+  - first:
+      213: -1737938430351638944
+    second: Demo Explosion_1
+  - first:
+      213: -676459602911109598
+    second: Demo Explosion_2
+  - first:
+      213: 7610404130703257899
+    second: Demo Explosion_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,7 +160,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Explosion Particle_0
+      name: Demo Explosion_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd0b770cd678eec20800000000000000
-      internalID: 3237674087576219867
+      spriteID: 39efc6b6e5e9624b0800000000000000
+      internalID: -5465506969401098605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion Particle_1
+      name: Demo Explosion_1
       rect:
         serializedVersion: 2
         x: 16
@@ -183,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 274aa8d6c05154d10800000000000000
-      internalID: 2109115143614538866
+      spriteID: 06ef361a43a91e7e0800000000000000
+      internalID: -1737938430351638944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion Particle_2
+      name: Demo Explosion_2
       rect:
         serializedVersion: 2
         x: 32
@@ -204,8 +216,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b414217d76930f270800000000000000
-      internalID: 8282182832887054667
+      spriteID: 22ed49f339bbc96f0800000000000000
+      internalID: -676459602911109598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demo Explosion_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21bbb73c369d9960800000000000000
+      internalID: 7610404130703257899
       vertices: []
       indices: 
       edges: []

@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Hexed: 0
   m_Burning: 0
   m_Paralyzed: 0
+  m_Angry: 0
   m_WalkingSound: {fileID: 0}
   m_HitSound: {fileID: 8300000, guid: f0924a253dd1cf140bd5bf93014f9829, type: 3}
   m_Difficulty: 1
