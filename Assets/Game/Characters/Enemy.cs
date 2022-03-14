@@ -25,6 +25,8 @@ public class Enemy : Character {
     private List<SpriteRenderer> m_HeartIndicators;
     private List<SpriteRenderer> m_DamageIndicators;
 
+    public int AorB = 0;
+
     #endregion
 
     /* --- Unity --- */
@@ -148,7 +150,7 @@ public class Enemy : Character {
 
         bool hasCard = m_Cards != null && m_Cards.Length > 0 && m_Cards[0] != null;
         if (hasCard) {
-            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, m_MouseOver);
+            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, m_MouseOver, AorB);
             BoardUI.DrawTargetUI(m_Cards[0], m_Board, m_Position, ref m_TargetIndicators, m_MouseOver && !playerHasActiveCard);
         }
     }
@@ -159,7 +161,7 @@ public class Enemy : Character {
 
         bool hasCard = m_Cards != null && m_Cards.Length > 0 && m_Cards[0] != null;
         if (hasCard) {
-            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, false);
+            BoardUI.DrawDamageUI(m_Cards[0].Value, m_Position, ref m_DamageIndicators, false, AorB);
             BoardUI.DrawTargetUI(m_Cards[0], m_Board, m_Position, ref m_TargetIndicators, false);
         }
     }

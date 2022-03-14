@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 0
 --- !u!1 &160425282123321862
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Beheader's Blade
+  m_Text: Empty
 --- !u!1 &225642406180987330
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1792963591259160756
 Transform:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3821574888922016777
 Transform:
   m_ObjectHideFlags: 0
@@ -258,6 +258,7 @@ MonoBehaviour:
   - {fileID: -3792339887870337536, guid: 8fd8b53a09019a3478f8bbf3807191ae, type: 3}
   - {fileID: -8248184414856976584, guid: 8fd8b53a09019a3478f8bbf3807191ae, type: 3}
   - {fileID: -6140521989939545447, guid: 8fd8b53a09019a3478f8bbf3807191ae, type: 3}
+  - {fileID: -5810290663535272605, guid: 8fd8b53a09019a3478f8bbf3807191ae, type: 3}
   secondRow: 8
   value: 0
   characterRenderer: {fileID: 7865697997602800619}
@@ -933,7 +934,7 @@ SpriteRenderer:
   m_SortingLayerID: -302785997
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 533177413809491475, guid: 0cdd1fba2bb4ddc4c9dfcd3f6455573e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 054046d5b7435044186df809eb3eb325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1041,7 +1042,7 @@ SpriteRenderer:
   m_SortingLayerID: -302785997
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1049,7 +1050,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1546469505983996346
@@ -1570,7 +1571,7 @@ SpriteRenderer:
   m_SortingLayerID: -302785997
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2101191147135844891, guid: 768012d13d7f5f54f88b773345dfad4a, type: 3}
+  m_Sprite: {fileID: -4017403286846450815, guid: 768012d13d7f5f54f88b773345dfad4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1652,7 +1653,7 @@ SpriteRenderer:
   m_SortingLayerID: -302785997
   m_SortingLayer: 3
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1660,7 +1661,7 @@ SpriteRenderer:
   m_Size: {x: 4.5, y: 7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6011893162214456233
@@ -1925,4 +1926,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Fully Heals and Grants a Permant Extra Heart
+  m_Text: '
+
+'

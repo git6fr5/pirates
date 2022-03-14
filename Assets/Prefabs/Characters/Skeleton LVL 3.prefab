@@ -157,6 +157,7 @@ MonoBehaviour:
   m_VisisonDistance: 7
   m_PlayerInVision: 0
   m_TookCardAction: 0
+  AorB: 1
 --- !u!212 &4532621049444913136
 SpriteRenderer:
   m_ObjectHideFlags: 0

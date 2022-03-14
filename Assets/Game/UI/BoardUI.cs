@@ -13,6 +13,12 @@ public class BoardUI : MonoBehaviour {
     public static Sprite DamageIndicator;
     public Sprite m_DamageIndicator;
 
+    public static Sprite DamageIndicator2;
+    public Sprite m_DamageIndicator2;
+
+    public static Sprite DamageIndicator3;
+    public Sprite m_DamageIndicator3;
+
     public static Material HeartMaterial;
     public Material m_HeartMaterial;
 
@@ -22,6 +28,8 @@ public class BoardUI : MonoBehaviour {
         SquareIndicator = m_SquareIndicator;
         HeartIndicator = m_HeartIndicator;
         DamageIndicator = m_DamageIndicator;
+        DamageIndicator2 = m_DamageIndicator2;
+        DamageIndicator3 = m_DamageIndicator3;
         HeartMaterial = m_HeartMaterial;
     }
 
@@ -66,10 +74,10 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
-    public static void DrawDamageUI(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators, bool redraw = true) {
+    public static void DrawDamageUI(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators, bool redraw = true, int AorB = 0) {
         Reset(ref damageIndicators);
         if (redraw) {
-            DrawDamage(damage, origin, ref damageIndicators);
+            DrawDamage(damage, origin, ref damageIndicators, AorB);
         }
     }
 
@@ -124,12 +132,20 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
-    public static void DrawDamage(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators) {
+    public static void DrawDamage(int damage, Vector2Int origin, ref List<SpriteRenderer> damageIndicators, int AorB) {
         for (int i = 0; i < damage; i++) {
             float bob = -0.8f + 0.05f * Mathf.Sin(Mathf.PI * (Ticks + i / 4f));
             Vector3 offset = Vector3.up * bob + Vector3.right * ((float)i - (float)(damage - 1f) / 2f) / 1.5f;
             Vector3 position = (Vector3)(Vector2)origin + offset;
-            Sprite sprite = DrawSprite(DamageIndicator, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
+            if (AorB == 0) {
+                Sprite sprite = DrawSprite(DamageIndicator, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
+            }
+            else if (AorB == 1) {
+                Sprite sprite = DrawSprite(DamageIndicator2, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
+            }
+            else if (AorB == 2) {
+                Sprite sprite = DrawSprite(DamageIndicator3, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
+            }
         }
     }
 

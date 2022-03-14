@@ -18,6 +18,18 @@ public class Player : Character {
     #region Decision
 
     protected override Action GetAction() {
+        Treasure[] treasures = (Treasure[])GameObject.FindObjectsOfType(typeof(Treasure));
+        for (int i = 0; i < treasures.Length; i++) {
+            if (treasures[i].Active) {
+                for (int j = 0; j < m_Cards.Length; j++) {
+                    if (m_Cards[j] != null) {
+                        m_Cards[j].Deactivate();
+                    }
+                }
+                return Action.None;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.W)) {
             return Action.MoveUp;
         }

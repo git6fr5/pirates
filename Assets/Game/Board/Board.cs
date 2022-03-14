@@ -171,13 +171,13 @@ public class Board : MonoBehaviour {
             direction.x = direction.x == 1 ? m_Width : (direction.x == -1 ? -1 : 0);
             direction.y = direction.y == 1 ? m_Height : (direction.y == -1 ? -1 : 0);
             if (direction.x == 0) {
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < 2; j++) {
                     m_Exits.Add(new Vector2Int((int)Mathf.Ceil((float)(m_Width - 1) / 2f), (int)direction.y + (int)Mathf.Sign(direction.y) * j));
                     m_Exits.Add(new Vector2Int((int)Mathf.Floor((float)(m_Width - 1) / 2f), (int)direction.y + (int)Mathf.Sign(direction.y) * j));
                 }
             }
             else if (direction.y == 0) {
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < 2; j++) {
                     m_Exits.Add(new Vector2Int((int)direction.x + (int)Mathf.Sign(direction.x) * j, (int)Mathf.Ceil((float)(m_Height - 1) / 2f)));
                     m_Exits.Add(new Vector2Int((int)direction.x + (int)Mathf.Sign(direction.x) * j, (int)Mathf.Floor((float)(m_Height - 1) / 2f)));
                 }
