@@ -96,10 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sprites:
-  - {fileID: 21300000, guid: cdfd3a567b199894cb91f4ade66cfe4a, type: 3}
+  - {fileID: 7374845061861626600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Loop: 1
   m_Target: {x: 0, y: 0, z: 0}
   m_Speed: 0
   m_FrameRate: 12
   m_Frame: 0
   m_Ticks: 0
+  isProjectile: 0

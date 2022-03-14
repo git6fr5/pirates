@@ -109,14 +109,14 @@ public class PlayerUI : MonoBehaviour {
         for (int i = 0; i < player.MaxHearts; i++) {
             if (i >= player.MaxHearts - player.Hearts) {
                 SpriteRenderer newHeart = Instantiate(m_PlayerHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-                newHeart.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newHeart.transform.position += i * 1.125f * Vector3.down +bobAmp * Mathf.Sin(Mathf.PI * (Board.Ticks * bobSpeed + (float)i / 6)) * Vector3.up;
                 newHeart.material = uiMat;
                 newHeart.gameObject.SetActive(true);
                 m_PlayerHearts.Add(newHeart);
             }
             else {
                 SpriteRenderer newHeart = Instantiate(m_EmptyHeart.gameObject, m_PlayerHeart.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-                newHeart.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newHeart.transform.position += i * 1.125f * Vector3.down + bobAmp * Mathf.Sin(Mathf.PI * (Board.Ticks * bobSpeed + (float)i / 6)) * Vector3.up;
                 newHeart.material = uiMat;
                 newHeart.gameObject.SetActive(true);
                 m_PlayerHearts.Add(newHeart);
@@ -125,6 +125,9 @@ public class PlayerUI : MonoBehaviour {
         }
 
     }
+
+    private float bobSpeed = 1.25f;
+    private float bobAmp = 1.5f / 16f;
 
     private void RefreshEnergyUI(Player player) {
 
@@ -141,7 +144,7 @@ public class PlayerUI : MonoBehaviour {
         for (int i = 0; i < actions; i++) {
             if (i >= actions - energy) {
                 SpriteRenderer newEnergy = Instantiate(m_PlayerAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-                newEnergy.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newEnergy.transform.position += i * 1.125f * Vector3.down + bobAmp * Mathf.Sin(Mathf.PI * (Board.Ticks * bobSpeed + (float)i / 6)) * Vector3.up;
                 if (player.Angry && i == 0) {
                     newEnergy.color = Color.red;
                 }
@@ -150,7 +153,7 @@ public class PlayerUI : MonoBehaviour {
             }
             else {
                 SpriteRenderer newEnergy = Instantiate(m_EmptyAction.gameObject, m_PlayerAction.transform.position, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
-                newEnergy.transform.position += i * 1.125f * Vector3.down + 0.125f * Mathf.Sin(Mathf.PI * (Board.Ticks * 1.5f + (float)i / 6)) * Vector3.up;
+                newEnergy.transform.position += i * 1.125f * Vector3.down + bobAmp * Mathf.Sin(Mathf.PI * (Board.Ticks * bobSpeed + (float)i / 6)) * Vector3.up;
                 newEnergy.gameObject.SetActive(true);
                 m_PlayerActions.Add(newEnergy);
             }

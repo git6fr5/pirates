@@ -28,6 +28,8 @@ public class Effect : MonoBehaviour {
     [SerializeField, ReadOnly] private int m_Frame;
     [SerializeField, ReadOnly] private float m_Ticks;
 
+    public bool isProjectile;
+
     #endregion
 
     /* --- Unity --- */
@@ -38,6 +40,9 @@ public class Effect : MonoBehaviour {
         float deltaTime = Time.deltaTime;
         Animate(deltaTime);
         Move(deltaTime);
+        if (isProjectile) {
+            Rotate(deltaTime);
+        }
     }
 
     #endregion
@@ -116,6 +121,10 @@ public class Effect : MonoBehaviour {
         if (displacement.sqrMagnitude >= 0.05f * 0.05f) {
             transform.position += displacement.normalized * m_Speed * deltaTime;
         }
+    }
+
+    private void Rotate(float deltaTime) {
+        transform.eulerAngles += m_Speed * Vector3.forward;
     }
 
     #endregion

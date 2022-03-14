@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Environment: {fileID: 4671949854994942017}
   m_Background: {fileID: 2029905020}
   generate: 1
-  m_DifficultyOffset: 7
+  m_DifficultyOffset: 3
 --- !u!4 &1864293866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7238638559355904602, guid: 29dce5c6d969df84a8713af7fa68a7c7, type: 3}

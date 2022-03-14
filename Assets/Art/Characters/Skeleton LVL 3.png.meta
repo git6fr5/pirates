@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 2b8c2d1839e7aec408efba81a373838a
+guid: 582a380ce0d5a9b44b328580d597eecb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1161201145128540330
-    second: Icons_0
+      213: 8344587235065293499
+    second: Skeleton LVL 3_0
   - first:
-      213: 2130535880278150251
-    second: Icons_1
+      213: -3192479557420241913
+    second: Skeleton LVL 3_1
   - first:
-      213: 184950751378207249
-    second: Icons_2
+      213: 3531672611314297733
+    second: Skeleton LVL 3_2
   - first:
-      213: 1202984965197363600
-    second: Icons_3
+      213: 3184771602141376011
+    second: Skeleton LVL 3_3
   - first:
-      213: 5543941588292853863
-    second: Icons_4
+      213: 3280585590507519808
+    second: Skeleton LVL 3_4
   - first:
-      213: -1863859237976802683
-    second: Icons_5
+      213: 1099467671062392269
+    second: Skeleton LVL 3_5
   - first:
-      213: 7576617242518483205
-    second: Icons_6
+      213: -8615559039262979253
+    second: Skeleton LVL 3_6
   - first:
-      213: 7374845061861626600
-    second: Icons_7
+      213: -8087492247711843617
+    second: Skeleton LVL 3_7
   - first:
-      213: -6931339683150358059
-    second: Icons_8
+      213: -7156070439076620829
+    second: Skeleton LVL 3_8
   - first:
-      213: -8179040606652740800
-    second: Icons_9
+      213: 2161539149114932261
+    second: Skeleton LVL 3_9
   - first:
-      213: 3220665290143086019
-    second: Icons_10
+      213: -5280457522516144310
+    second: Skeleton LVL 3_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -172,7 +172,154 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icons_0
+      name: Skeleton LVL 3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba6357f0ededc370800000000000000
+      internalID: 8344587235065293499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70c254bc1c802b3d0800000000000000
+      internalID: -3192479557420241913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58b6d544785030130800000000000000
+      internalID: 3531672611314297733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e636406e4923c20800000000000000
+      internalID: 3184771602141376011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f3779963bf68d20800000000000000
+      internalID: 3280585590507519808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcd23b78508124f00800000000000000
+      internalID: 1099467671062392269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b035373b26f6880800000000000000
+      internalID: -8615559039262979253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton LVL 3_7
       rect:
         serializedVersion: 2
         x: 0
@@ -186,14 +333,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa8d9280a4a6d1010800000000000000
-      internalID: 1161201145128540330
+      spriteID: fdaf86b66a473cf80800000000000000
+      internalID: -8087492247711843617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_1
+      name: Skeleton LVL 3_8
       rect:
         serializedVersion: 2
         x: 16
@@ -207,14 +354,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6c0435581f219d10800000000000000
-      internalID: 2130535880278150251
+      spriteID: 3e51a23a9d780bc90800000000000000
+      internalID: -7156070439076620829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_2
+      name: Skeleton LVL 3_9
       rect:
         serializedVersion: 2
         x: 32
@@ -228,14 +375,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 112f6dc7ab3119200800000000000000
-      internalID: 184950751378207249
+      spriteID: 52c781f57645ffd10800000000000000
+      internalID: 2161539149114932261
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_3
+      name: Skeleton LVL 3_10
       rect:
         serializedVersion: 2
         x: 48
@@ -249,155 +396,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09979b0c37cd1b010800000000000000
-      internalID: 1202984965197363600
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 760e5b1608900fc40800000000000000
-      internalID: 5543941588292853863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58aff01f5ed3226e0800000000000000
-      internalID: -1863859237976802683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 501f96b4d3d852960800000000000000
-      internalID: 7576617242518483205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e25ec99286b85660800000000000000
-      internalID: 7374845061861626600
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d91140384feecf90800000000000000
-      internalID: -6931339683150358059
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_9
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04bc7f417e53e7e80800000000000000
-      internalID: -8179040606652740800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_10
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c5b86f740a12bc20800000000000000
-      internalID: 3220665290143086019
+      spriteID: a4fc2ee3cdb08b6b0800000000000000
+      internalID: -5280457522516144310
       vertices: []
       indices: 
       edges: []

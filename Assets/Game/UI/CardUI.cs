@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class CardUI : MonoBehaviour {
 
     [Space(2), Header("Rarity")]
     [SerializeField] private Sprite[] m_Frames;
+    [SerializeField] private Sprite[] m_Circles;
 
     // Icons.
     [Space(2), Header("Icons")]
@@ -24,13 +26,14 @@ public class CardUI : MonoBehaviour {
 
     // Design.
     [Space(2), Header("Design")]
-    [SerializeField] private Label m_CardName;
-    [SerializeField] private Label m_CardDescription;
-    [SerializeField] public Label m_Charges;
+    [SerializeField] private Text m_CardName;
+    [SerializeField] private Text m_CardDescription;
+    [SerializeField] public Text m_Charges;
     [SerializeField] public IconsWriter m_DamageValue;
     [SerializeField] public IconsWriter m_StatusValue;
     [SerializeField] private SpriteRenderer m_CardFace;
     [SerializeField] private SpriteRenderer m_CardTargetType;
+    [SerializeField] private SpriteRenderer m_CircleRenderer;
     public SpriteRenderer CardTargetType => m_CardTargetType;
     
     // Selection.
@@ -46,6 +49,7 @@ public class CardUI : MonoBehaviour {
     [SerializeField] protected float m_ScaleSpeed = 5f;
     protected Dictionary<Transform, Vector3>  m_LocalOrigins;
 
+    private int index;
 
     #endregion
 
@@ -116,7 +120,9 @@ public class CardUI : MonoBehaviour {
         foreach (Transform child in transform) {
             m_LocalOrigins.Add(child, child.localPosition);
         }
+        m_LocalOrigins.Add(m_CircleRenderer.transform, m_CircleRenderer.transform.localPosition);
 
+        index = i;
     }
 
     #endregion
@@ -200,6 +206,8 @@ public class CardUI : MonoBehaviour {
 
         m_SpriteRenderer.material.SetVector("_Offset", new Vector4(0f, currY, 0f, 0f));
 
+        m_CircleRenderer.transform.localPosition = m_LocalOrigins[m_CircleRenderer.transform] + bobAmp * Mathf.Sin(Mathf.PI * (Board.Ticks * bobSpeed + (float)index / 6)) * Vector3.up;
+
         if (m_Active) {
             m_CardTargetType.transform.position = transform.position;
         }
@@ -235,15 +243,21 @@ public class CardUI : MonoBehaviour {
     /* --- Drawing --- */
     #region Drawing
 
+    private float bobSpeed = 1.25f;
+    private float bobAmp = 1.5f / 160f;
+
     void Draw() {
         // Draw the name.
-        m_CardName.SetText(m_Card.CardName);
+        // m_CardName.SetText(m_Card.CardName);
+        m_CardName.text = m_Card.CardName;
         // Draw the frame.
-        GetComponent<SpriteRenderer>().sprite = m_Frames[(int)m_Card.CardRarity];   
+        GetComponent<SpriteRenderer>().sprite = m_Frames[(int)m_Card.CardRarity];
+        m_CircleRenderer.sprite = m_Circles[(int)m_Card.CardRarity];
+
         // Draw the face.
         m_CardFace.sprite = m_Card.Face;
         // Draw the type.
-        m_CardTargetType.sprite = GetCardTargetTypeIcon(m_Card.CardTargetType);
+        m_CardTargetType.sprite = m_Card.CardIcon; // GetCardTargetTypeIcon(m_Card.CardTargetType);
         // Draw the values.
         m_DamageValue.SetIcons(m_Card.Value, 0);
         if (m_Card.StatusEffect != Status.None) {
@@ -253,9 +267,10 @@ public class CardUI : MonoBehaviour {
             m_StatusValue.gameObject.SetActive(false);
         }
         // Write the charges.
-        m_Charges.SetText(m_Card.Charges.ToString());
+        m_Charges.text = m_Card.Charges.ToString();
+        // m_Charges.SetText(m_Card.Charges.ToString());
         // Draw the description.
-        m_CardDescription.SetText(m_Card.CardDescription);
+        m_CardDescription.text = m_Card.CardDescription;
 
         // Draw the targets.
         DrawTarget();

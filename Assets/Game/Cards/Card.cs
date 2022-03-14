@@ -15,6 +15,9 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     // Name.
     [SerializeField] private string m_CardName;
     public string CardName => m_CardName;
+    // Icon.
+    [SerializeField] private Sprite m_CardIcon;
+    public Sprite CardIcon => m_CardIcon;
     // Rarity.
     [SerializeField] private Rarity m_Rariry;
     public Rarity CardRarity => m_Rariry;
@@ -39,6 +42,7 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     [SerializeField] private Sprite m_Face;
     public Sprite Face => m_Face;
     // Description.
+    [SerializeField] private bool m_DisplayDescription;
     [SerializeField] private string m_Description;
     public string CardDescription => m_Description;
 

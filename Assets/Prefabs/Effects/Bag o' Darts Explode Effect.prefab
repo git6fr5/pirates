@@ -105,3 +105,4 @@ MonoBehaviour:
   m_FrameRate: 12
   m_Frame: 0
   m_Ticks: 0
+  isProjectile: 1

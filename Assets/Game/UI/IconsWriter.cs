@@ -35,12 +35,18 @@ public class IconsWriter : MonoBehaviour {
             }
         }
 
+        float yoff = 0f;
+        if (value > secondRow) {
+            yoff = spacing;
+        }
+
         // Create the new characters
         characterRenderers = new SpriteRenderer[value];
         for (int i = 0; i < value; i++) {
             SpriteRenderer newCharacterRenderer = Instantiate(characterRenderer.gameObject, Vector3.zero, Quaternion.identity, transform).GetComponent<SpriteRenderer>();
             // newCharacterRenderer.transform.localPosition = new Vector3(spacing * i, Mathf.Pow(-1f, i) * spacing / 2f, 0f);
             float y = i > secondRow ? -2f * spacing : 0f;
+            y += yoff;
             float x = 2f * spacing * i + (i >= secondRow ? -2f * spacing * i : 0f);
             newCharacterRenderer.transform.localPosition = new Vector3(x, y, 0f);
 

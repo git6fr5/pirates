@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Storm
+  m_CardIcon: {fileID: 5543941588292853863, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 4
   m_Range: 0
@@ -53,7 +54,8 @@ MonoBehaviour:
   m_Duration: 3
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Zappity Zap Zap
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -104,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Flintlock
+  m_CardIcon: {fileID: 2130535880278150251, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 2
   m_Range: 2
@@ -112,6 +115,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 42d35cd12aebfaf4386d82798a8a6b00, type: 3}
+  m_DisplayDescription: 0
   m_Description: Pew Pew Pew?
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714106220987291}
@@ -195,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Flamin' Edge
+  m_CardIcon: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 1
   m_Range: 1
@@ -203,6 +208,7 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: d98a348d7f8d34142a23d0030a8703a1, type: 3}
+  m_DisplayDescription: 0
   m_Description: Burn! Burn! Burn!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -350,6 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Dynamite
+  m_CardIcon: {fileID: 7576617242518483205, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 3
   m_Range: 2
@@ -358,7 +365,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: eab43b0d46b18ec45a9058ed80aa3702, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Boom!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -413,6 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Roulette
+  m_CardIcon: {fileID: 0}
   m_Rariry: 0
   m_TargetType: 0
   m_Range: 0
@@ -421,7 +430,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 41e9b3cdf408ea24ab685a42addd1452, type: 3}
-  m_Description: Get 1 Random Rare
+  m_DisplayDescription: 0
+  m_Description: Get 1 Random Rare Card
   m_Active: 0
   m_ActivationEffect: {fileID: 2787600126270677898}
   m_ActivationSound: {fileID: 0}
@@ -472,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Frenzy
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 0
   m_Range: 0
@@ -480,7 +491,8 @@ MonoBehaviour:
   m_Duration: 4
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5f8ab28fe9e469c4da6c634885961ed1, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Get a bonus action for the next 4 turns.
   m_Active: 0
   m_ActivationEffect: {fileID: 2270136243054383281}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -530,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: TNT
+  m_CardIcon: {fileID: 7576617242518483205, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 3
   m_Range: 3
@@ -538,7 +551,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: eab43b0d46b18ec45a9058ed80aa3702, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Boom!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -592,6 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Bottle o' Rum
+  m_CardIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 0
   m_Range: 0
@@ -600,7 +615,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: 9157dca4534641f4ea66b9584bb8b1c0, type: 3}
-  m_Description: Ah, breakfast!
+  m_DisplayDescription: 0
+  m_Description: Heals you
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -649,6 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Angry Cloud
+  m_CardIcon: {fileID: 5543941588292853863, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 4
   m_Range: 0
@@ -657,7 +674,8 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Zappity Zap
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -712,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Training Dummy
+  m_CardIcon: {fileID: 0}
   m_Rariry: 0
   m_TargetType: 3
   m_Range: 2
@@ -720,6 +739,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: 9cc5c4a99f4e62b4095111635f6fe318, type: 3}
+  m_DisplayDescription: 0
   m_Description: Spawn a dummy
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -771,6 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Misty Step LVL 2
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 3
   m_Range: 3
@@ -779,7 +800,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3ee407f0930ebed4ca9d69c2d147689b, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Teleport to a square.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
@@ -829,6 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Cutlass
+  m_CardIcon: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 1
   m_Range: 1
@@ -837,6 +860,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
+  m_DisplayDescription: 0
   m_Description: A Pirate's Bestfriend
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -887,6 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Misty Step
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 3
   m_Range: 2
@@ -895,7 +920,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3ee407f0930ebed4ca9d69c2d147689b, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Teleport to a square.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
@@ -945,6 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Madness
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 0
   m_Range: 0
@@ -953,7 +980,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 0
   m_Face: {fileID: 21300000, guid: 5f8ab28fe9e469c4da6c634885961ed1, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Get a permanent extra action.
   m_Active: 0
   m_ActivationEffect: {fileID: 9056967828846106082}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1002,6 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Anger
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 0
   m_Range: 0
@@ -1010,7 +1039,8 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5f8ab28fe9e469c4da6c634885961ed1, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Get a bonus action for the next 2 turns.
   m_Active: 0
   m_ActivationEffect: {fileID: 6261216992634431991}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1058,6 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Nectar of the Gods
+  m_CardIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 0
   m_Range: 0
@@ -1066,7 +1097,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 9157dca4534641f4ea66b9584bb8b1c0, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Fully heals and grants a permanent extra heart
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1115,6 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Cutlass LVL 2
+  m_CardIcon: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 1
   m_Range: 1
@@ -1123,6 +1156,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 3
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
+  m_DisplayDescription: 0
   m_Description: A Pirate's Best Friend
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -1173,6 +1207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Cloud
+  m_CardIcon: {fileID: 5543941588292853863, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 4
   m_Range: 0
@@ -1181,7 +1216,8 @@ MonoBehaviour:
   m_Duration: 1
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Zappity Zap
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -1235,6 +1271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Treasure Bag
+  m_CardIcon: {fileID: -8179040606652740800, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 0
   m_Range: 0
@@ -1243,6 +1280,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 41e9b3cdf408ea24ab685a42addd1452, type: 3}
+  m_DisplayDescription: 0
   m_Description: Get an extra card slot.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -1292,6 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Misty Step LVL 3
+  m_CardIcon: {fileID: -6931339683150358059, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 4
   m_Range: 0
@@ -1300,7 +1339,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 3ee407f0930ebed4ca9d69c2d147689b, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Teleport to a square.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
@@ -1384,6 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Dynamite LVL 2
+  m_CardIcon: {fileID: 7576617242518483205, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 3
   m_Range: 3
@@ -1392,7 +1433,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: eab43b0d46b18ec45a9058ed80aa3702, type: 3}
-  m_Description: 
+  m_DisplayDescription: 0
+  m_Description: Boom!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -1489,6 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Ghostship
+  m_CardIcon: {fileID: 3220665290143086019, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 4
   m_Range: 0
@@ -1497,7 +1540,8 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: f8e9d1d7e10395f4583ddde9e98c113e, type: 3}
-  m_Description: The crew is here.
+  m_DisplayDescription: 0
+  m_Description: Summons a ship.
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 0}
@@ -1549,6 +1593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Beheader's Blade
+  m_CardIcon: {fileID: 1161201145128540330, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 1
   m_Range: 1
@@ -1557,6 +1602,7 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
+  m_DisplayDescription: 0
   m_Description: Die! Die! Die!
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
@@ -1641,6 +1687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Barrel o' Rum LVL 2
+  m_CardIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 0
   m_Range: 0
@@ -1649,7 +1696,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 9157dca4534641f4ea66b9584bb8b1c0, type: 3}
-  m_Description: Ah, dinner!
+  m_DisplayDescription: 0
+  m_Description: Heals you
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1699,6 +1747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Hexin' Dart LVL 2
+  m_CardIcon: {fileID: -1863859237976802683, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 2
   m_Range: 4
@@ -1707,6 +1756,7 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
+  m_DisplayDescription: 0
   m_Description: Sheeeeep
   m_Active: 0
   m_ActivationEffect: {fileID: 3486527377493000167}
@@ -1756,6 +1806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Bottle o' Rum LVL 2
+  m_CardIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 0
   m_Range: 0
@@ -1764,7 +1815,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 5
   m_Face: {fileID: 21300000, guid: 9157dca4534641f4ea66b9584bb8b1c0, type: 3}
-  m_Description: Ah, breakfast!
+  m_DisplayDescription: 0
+  m_Description: Heals you
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1814,6 +1866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Hexin' Dart
+  m_CardIcon: {fileID: -1863859237976802683, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 2
   m_Range: 3
@@ -1822,6 +1875,7 @@ MonoBehaviour:
   m_Duration: 1
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
+  m_DisplayDescription: 0
   m_Description: Sheeeeep
   m_Active: 0
   m_ActivationEffect: {fileID: 2532178935676676346}
@@ -1871,6 +1925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Barrel o' Rum
+  m_CardIcon: {fileID: 1202984965197363600, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 0
   m_Range: 0
@@ -1879,7 +1934,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 9157dca4534641f4ea66b9584bb8b1c0, type: 3}
-  m_Description: Ah, dinner!
+  m_DisplayDescription: 0
+  m_Description: Heals you
   m_Active: 0
   m_ActivationEffect: {fileID: 0}
   m_ActivationSound: {fileID: 8300000, guid: 8b918429595a4bc42a3e964fab60ac1b, type: 3}
@@ -1962,6 +2018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Roulette LVL 2
+  m_CardIcon: {fileID: 0}
   m_Rariry: 1
   m_TargetType: 0
   m_Range: 0
@@ -1970,7 +2027,8 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 41e9b3cdf408ea24ab685a42addd1452, type: 3}
-  m_Description: Get 1 Random Legendary
+  m_DisplayDescription: 0
+  m_Description: Get 1 Random Legendary Card
   m_Active: 0
   m_ActivationEffect: {fileID: 7430652987143834975}
   m_ActivationSound: {fileID: 0}
@@ -2089,6 +2147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Cannon
+  m_CardIcon: {fileID: 2130535880278150251, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 2
   m_Range: 4
@@ -2097,6 +2156,7 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: eab43b0d46b18ec45a9058ed80aa3702, type: 3}
+  m_DisplayDescription: 0
   m_Description: Ye cannoned, buster!
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714106513448017}
@@ -2148,6 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Flintlock LVL 2
+  m_CardIcon: {fileID: 2130535880278150251, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 2
   m_Range: 3
@@ -2156,6 +2217,7 @@ MonoBehaviour:
   m_Duration: 0
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 42d35cd12aebfaf4386d82798a8a6b00, type: 3}
+  m_DisplayDescription: 0
   m_Description: Pew Pew Pew?
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714107490133457}
@@ -2240,6 +2302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Bag o' Hexes
+  m_CardIcon: {fileID: -1863859237976802683, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 2
   m_TargetType: 3
   m_Range: 3
@@ -2248,6 +2311,7 @@ MonoBehaviour:
   m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
+  m_DisplayDescription: 0
   m_Description: Hexes fer all!
   m_Active: 0
   m_ActivationEffect: {fileID: 3486527377382351768}
@@ -2304,6 +2368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Blunderbuss
+  m_CardIcon: {fileID: 2130535880278150251, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 2
   m_Range: 2
@@ -2312,6 +2377,7 @@ MonoBehaviour:
   m_Duration: 1
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 42d35cd12aebfaf4386d82798a8a6b00, type: 3}
+  m_DisplayDescription: 0
   m_Description: Ye blundered, buster!
   m_Active: 0
   m_ActivationEffect: {fileID: 6907714107112370244}
