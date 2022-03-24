@@ -87,110 +87,46 @@ public class LDtkReader : MonoBehaviour {
 
     private void GetDifficulty(int depth, int difficulty, Vector2Int quadrant, out int[][] quadrants, out int index) {
 
-        //int[] easy = new int[] { 0, m_Easy };
-        //int[] mid = new int[] { m_Easy + 1, m_Mid };
-        //int[] hard = new int[] { m_Mid + 1, m_Hard };
-
-        //quadrants = new int[][] { easy, easy, easy, easy };
-        //index = 0;
-        //if (difficulty == 2) { // 2 easy, 2 medium
-        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-        //    quadrants[index] = mid;
-        //    index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
-        //    index = index % quadrants.Length;
-
-        //    quadrants[index] = mid;
-        //}
-        //if (difficulty == 3) {
-        //    // BOSS
-        //    // return m_PieceData.ToArray();
-        //}
-        //if (difficulty == 4) { // 1 easy, 3 medium
-        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-        //    index = index % quadrants.Length;
-
-        //    for (int i = 0; i < quadrants.Length; i++) {
-        //        if (i != index) {
-        //            quadrants[i] = mid;
-        //        }
-        //    }
-        //}
-        //if (difficulty == 5) { // 1 easy, 2 average, 1 hard
-        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-        //    int _index = index + (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
-        //    _index = _index % quadrants.Length;
-
-        //    for (int i = 0; i < quadrants.Length; i++) {
-        //        if (i != index) {
-        //            quadrants[i] = mid;
-        //        }
-        //        if (i == _index) {
-        //            quadrants[i] = hard;
-        //        }
-        //    }
-        //}
-        //if (difficulty == 6) {
-        //    // BOSS
-        //    // return m_PieceData.ToArray();
-        //}
-        //if (difficulty == 7) { // 1 hard, 3 medium
-        //    for (int i = 0; i < quadrants.Length; i++) {
-        //        quadrants[i] = mid;
-        //    }
-        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-        //    quadrants[index] = hard;
-        //}
-        //if (difficulty == 8) { // 2 hard, 2 medium
-        //    for (int i = 0; i < quadrants.Length; i++) {
-        //        quadrants[i] = mid;
-        //    }
-        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-        //    quadrants[index] = hard;
-        //    index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
-        //    index = index % quadrants.Length;
-        //    quadrants[index] = hard;
-        //}
-        //if (difficulty > 8) { // 4 hard
-        //    for (int i = 0; i < quadrants.Length; i++) {
-        //        quadrants[i] = hard;
-        //    }
-        //}
-        //if (difficulty == 10) {
-        //    // Boss.
-        //    // return m_PieceData.ToArray();
-        //}
-
         int[] easy = new int[] { 0, 49 };
         int[] mid = new int[] { 50, 49 };
         int[] hard = new int[] { 100, 49 };
 
         quadrants = new int[][] { easy, easy, easy, easy };
         index = 0;
-        if (difficulty == 1) { // 3 easy, 1 medium
-            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            quadrants[index] = mid;
-        }
         if (difficulty == 2) { // 2 easy, 2 medium
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
             quadrants[index] = mid;
             index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+            index = index % quadrants.Length;
+
             quadrants[index] = mid;
         }
-        if (difficulty == 3) { 
+        if (difficulty == 3) {
             // BOSS
             // return m_PieceData.ToArray();
         }
         if (difficulty == 4) { // 1 easy, 3 medium
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            index = index % quadrants.Length;
+
             for (int i = 0; i < quadrants.Length; i++) {
                 if (i != index) {
                     quadrants[i] = mid;
                 }
             }
         }
-        if (difficulty == 5) { // 4 medium
+        if (difficulty == 5) { // 1 easy, 2 average, 1 hard
+            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+            int _index = index + (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+            _index = _index % quadrants.Length;
+
             for (int i = 0; i < quadrants.Length; i++) {
-                quadrants[i] = mid;
+                if (i != index) {
+                    quadrants[i] = mid;
+                }
+                if (i == _index) {
+                    quadrants[i] = hard;
+                }
             }
         }
         if (difficulty == 6) {
@@ -211,23 +147,85 @@ public class LDtkReader : MonoBehaviour {
             index = m_Environment.Jumble(depth, quadrant, 3) % 3;
             quadrants[index] = hard;
             index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+            index = index % quadrants.Length;
             quadrants[index] = hard;
         }
-        if (difficulty > 8) { // 3 hard, 1 medium
+        if (difficulty > 8) { // 4 hard
             for (int i = 0; i < quadrants.Length; i++) {
-                quadrants[i] = mid;
-            }
-            index = m_Environment.Jumble(depth, quadrant, 3) % 3;
-            for (int i = 0; i < quadrants.Length; i++) {
-                if (i != index) {
-                    quadrants[i] = hard;
-                }
+                quadrants[i] = hard;
             }
         }
         if (difficulty == 10) {
             // Boss.
             // return m_PieceData.ToArray();
         }
+
+
+
+        //quadrants = new int[][] { easy, easy, easy, easy };
+        //index = 0;
+        //if (difficulty == 1) { // 3 easy, 1 medium
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    quadrants[index] = mid;
+        //}
+        //if (difficulty == 2) { // 2 easy, 2 medium
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    quadrants[index] = mid;
+        //    index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+        //    quadrants[index] = mid;
+        //}
+        //if (difficulty == 3) { 
+        //    // BOSS
+        //    // return m_PieceData.ToArray();
+        //}
+        //if (difficulty == 4) { // 1 easy, 3 medium
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        if (i != index) {
+        //            quadrants[i] = mid;
+        //        }
+        //    }
+        //}
+        //if (difficulty == 5) { // 4 medium
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        quadrants[i] = mid;
+        //    }
+        //}
+        //if (difficulty == 6) {
+        //    // BOSS
+        //    // return m_PieceData.ToArray();
+        //}
+        //if (difficulty == 7) { // 1 hard, 3 medium
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        quadrants[i] = mid;
+        //    }
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    quadrants[index] = hard;
+        //}
+        //if (difficulty == 8) { // 2 hard, 2 medium
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        quadrants[i] = mid;
+        //    }
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    quadrants[index] = hard;
+        //    index += (1 + m_Environment.Jumble(depth, quadrant, 2) % 2);
+        //    quadrants[index] = hard;
+        //}
+        //if (difficulty > 8) { // 3 hard, 1 medium
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        quadrants[i] = mid;
+        //    }
+        //    index = m_Environment.Jumble(depth, quadrant, 3) % 3;
+        //    for (int i = 0; i < quadrants.Length; i++) {
+        //        if (i != index) {
+        //            quadrants[i] = hard;
+        //        }
+        //    }
+        //}
+        //if (difficulty == 10) {
+        //    // Boss.
+        //    // return m_PieceData.ToArray();
+        //}
     }
 
     public void OpenLevelByName(string levelName, Vector2Int quadrant) {
@@ -354,7 +352,7 @@ public class LDtkReader : MonoBehaviour {
                 return m_Environment.boss1;
             }
             if (m_Difficulty > 9) {
-                return m_Environment.boss1;
+                return m_Environment.boss2;
             }
         }
 

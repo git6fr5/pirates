@@ -164,8 +164,13 @@ public class Board : MonoBehaviour {
         m_MaxTurnNumber = m_Enemies.Length;
         m_GameLoop = StartCoroutine(IEGameLoop());
 
-        // Get the exits.
+
         m_Exits = new List<Vector2Int>();
+        if (diffiulty == 10) {
+            return;
+        }
+
+        // Get the exits.
         for (int i = 0; i < nodeLinks.Count; i++) {
             Vector2 direction = Node.LinkToVector(nodeLinks[i]);
             direction.x = direction.x == 1 ? m_Width : (direction.x == -1 ? -1 : 0);
@@ -184,6 +189,7 @@ public class Board : MonoBehaviour {
             }
         }
 
+        
         // Draw the exits.
         for (int i = 0; i < m_Exits.Count; i++) {
             m_Exitmap.SetTile(new Vector3Int(m_Exits[i].x, m_Exits[i].y, 0), m_ExitTile);
@@ -508,47 +514,60 @@ public class Board : MonoBehaviour {
     public List<Vector2Int> DirectManhattanPath(Vector2Int startPosition, Vector2Int endPosition) {
         List<Vector2Int> path = new List<Vector2Int>();
 
-        List<Vector2Int> movements = new List<Vector2Int>() {
-            Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
-        };
-
-        int distance = 0;
-        int maxDistance = m_Height * m_Width;
-
         Vector2Int position = startPosition;
-        path.Add(position);
-
-        while (position != endPosition && distance < maxDistance) {
-            List<Vector2Int> possibleMovements = new List<Vector2Int>();
-            for (int i = 0; i < movements.Count; i++) {
-                bool spikehere = GetAt<Spike>(position + movements[i]) != null;
-                bool treasurehere = GetAt<Treasure>(position + movements[i]) != null;
-                if (!spikehere && !treasurehere) {
-                    possibleMovements.Add(position + movements[i]);
-                }
-            }
-
-            float minDistance = maxDistance;
-            List<Vector2Int> allMinMovements = new List<Vector2Int>();
-            for (int i = 0; i < possibleMovements.Count; i++) {
-                float tempDistance = GetManhattanDistance(possibleMovements[i], endPosition);
-                if (tempDistance == minDistance) {
-                    allMinMovements.Add(possibleMovements[i]);
-                }
-                if (tempDistance < minDistance) {
-                    position = possibleMovements[i];
-                    allMinMovements = new List<Vector2Int>();
-                    allMinMovements.Add(position);
-                    minDistance = tempDistance;
-                }
-            }
-
-            if (allMinMovements.Count > 1) {
-                position = allMinMovements[Random.Range(0, allMinMovements.Count)];
-            }
-            distance += 1;
+        while (position.x != endPosition.x && path.Count < 40) {
+            position = new Vector2Int(position.x + (int)Mathf.Sign(endPosition.x - startPosition.x), position.y);
             path.Add(position);
         }
+        while (position.y != endPosition.y && path.Count < 40) {
+            position = new Vector2Int(position.x, position.y + (int)Mathf.Sign(endPosition.y - startPosition.y));
+            path.Add(position);
+        }
+
+        //List<Vector2Int> movements = new List<Vector2Int>() {
+        //    Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down
+        //};
+
+        //int distance = 0;
+        //int maxDistance = m_Height * m_Width;
+
+        //Vector2Int position = startPosition;
+        //path.Add(position);
+
+        //while (position != endPosition && distance < maxDistance) {
+        //    List<Vector2Int> possibleMovements = new List<Vector2Int>();
+        //    for (int i = 0; i < movements.Count; i++) {
+        //        Vector2Int target = position + movements[i];
+        //        bool spikehere = GetAt<Spike>(target) != null;
+        //        bool treasurehere = GetAt<Treasure>(target) != null;
+        //        bool horizontalBoundCheck = target.x >= 0 && target.x < m_Width;
+        //        bool verticalBoundCheck = target.y >= 0 && target.y < m_Height;
+        //        if (!spikehere && !treasurehere && horizontalBoundCheck && verticalBoundCheck) {
+        //            possibleMovements.Add(position + movements[i]);
+        //        }
+        //    }
+
+        //    float minDistance = maxDistance;
+        //    List<Vector2Int> allMinMovements = new List<Vector2Int>();
+        //    for (int i = 0; i < possibleMovements.Count; i++) {
+        //        float tempDistance = GetManhattanDistance(possibleMovements[i], endPosition);
+        //        if (tempDistance == minDistance) {
+        //            allMinMovements.Add(possibleMovements[i]);
+        //        }
+        //        if (tempDistance < minDistance) {
+        //            position = possibleMovements[i];
+        //            allMinMovements = new List<Vector2Int>();
+        //            allMinMovements.Add(position);
+        //            minDistance = tempDistance;
+        //        }
+        //    }
+
+        //    if (allMinMovements.Count > 1) {
+        //        position = allMinMovements[Random.Range(0, allMinMovements.Count)];
+        //    }
+        //    distance += 1;
+        //    path.Add(position);
+        //}
 
         return path;
     }

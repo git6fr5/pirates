@@ -9,6 +9,7 @@ public class Wall : Piece {
     #region Variables
 
     public bool m_Immune;
+    public bool Immune => m_Immune;
 
     // UI.
     private bool m_MouseOver = false;
@@ -22,18 +23,9 @@ public class Wall : Piece {
     /* --- Unity --- */
     #region Unity
 
-    //protected override void Think() {
-    //    if (!m_InitDelay) {
-    //        m_InitDelayTicks += Time.deltaTime;
-    //        if (m_InitDelayTicks > 5f) {
-    //            m_InitDelay = true;
-    //        }
-    //    }
-
-    //    if (m_InitDelay) {
-    //        Snap();
-    //    }
-    //}
+    protected override void Think() {
+        // SetUI();
+    }
 
     void OnMouseOver() {
         m_MouseOver = true;

@@ -46,7 +46,11 @@ public class Piece : MonoBehaviour {
             m_Shake = WhileShake();
         }
         Think();
-        float deltaTime = Time.deltaTime;
+        
+    }
+
+    void FixedUpdate() {
+        float deltaTime = Time.fixedDeltaTime;
         Move(deltaTime);
     }
 
@@ -86,7 +90,7 @@ public class Piece : MonoBehaviour {
         transform.localPosition = (Vector3)(Vector2)m_Position;
     }
 
-    public void Move(float deltaTime) {
+    public virtual void Move(float deltaTime) {
         if (m_Board == null) {
             return;
         }

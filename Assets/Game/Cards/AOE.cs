@@ -51,7 +51,13 @@ public class AOE : Card {
     public int overrideRange = -1;
 
     public virtual bool AOEEffect(Board board, Vector2Int target, float delay, int i) {
-        StartCoroutine(IEDelayedEffectAnim(delay, target, board, i));
+        if (Charges == 1) {
+            m_ExplodeEffect.transform.SetParent(DelayedEffectBugFixer.Instance.transform);
+            DelayedEffectBugFixer.Instance.DelayEffectAnim(m_ExplodeEffect, explodeSound, delay, target, board, i);
+        }
+        else {
+            StartCoroutine(IEDelayedEffectAnim(delay, target, board, i));
+        }
 
         Piece piece = board.GetAt<Piece>(target);
         Debug.Log("Doing damage");
@@ -60,7 +66,10 @@ public class AOE : Card {
 
         if (piece != null) {
 
-            if (notTargetEnemies && piece.GetComponent<Enemy>() || piece.GetComponent<Parrot>()) {
+            if (notTargetEnemies && (piece.GetComponent<Enemy>() || piece.GetComponent<Parrot>())) {
+                return true;
+            }
+            else if (!notTargetEnemies && piece.GetComponent<Player>()) {
                 return true;
             }
 

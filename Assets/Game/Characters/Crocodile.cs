@@ -55,6 +55,45 @@ public class Crocodile : Character {
         base.CompleteTurn();
     }
 
+    /* --- Movement --- */
+    float speedFactor = 1.5f;
+
+    protected override bool UseCard() {
+        for (int i = 0; i < m_Cards.Length; i++) {
+            if (m_Cards[i] != null && m_Cards[i].Active) {
+                Vector2Int? target = GetTarget(m_Cards[i]);
+                if (target != null) {
+                    Vector2Int intTarget = new Vector2Int((int)((Vector2)target).x, (int)((Vector2)target).y);
+                    if (m_Cards[i].Effect(m_Board, m_Position, intTarget)) {
+                        m_Cards[i].UseCharge();
+                        if (m_Cards[i].Charges <= 0) {
+                            RemoveCard(i);
+                        }
+                        m_ActionsTaken += 1;
+                        float duration = m_Board.TurnDelay;
+                        PerformAction(4 + i, duration / speedFactor);
+                    }
+                    else {
+                        m_Cards[i].Deactivate();
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public override void Move(float deltaTime) {
+        if (m_Board == null) {
+            return;
+        }
+
+        Vector2 displacement = (Vector2)m_Position - (Vector2)transform.localPosition;
+        if (displacement.sqrMagnitude > 0.1f * 0.1f) {
+            transform.position += (Vector3)(displacement.normalized) / (m_Board.TurnDelay / speedFactor / 1.15f) * deltaTime;
+        }
+    }
+
 
     protected override Action GetAction() {
         Action action = Action.Pass;
@@ -83,12 +122,12 @@ public class Crocodile : Character {
             int y = Random.Range(0, m_Board.Height);
             int x = Random.Range(0, m_Board.Width);
 
-            if (i % 2 == 0) {
-                y = Random.Range(0f, 1f) < 0.5f ? 0 : m_Board.Height - 1;
-            }
-            else {
-                x = Random.Range(0f, 1f) < 0.5f ? 0 : m_Board.Width - 1;
-            }
+            //if (i % 2 == 0) {
+            //    y = Random.Range(0f, 1f) < 0.5f ? 0 : m_Board.Height - 1;
+            //}
+            //else {
+            //    x = Random.Range(0f, 1f) < 0.5f ? 0 : m_Board.Width - 1;
+            //}
 
             Vector2Int position = new Vector2Int(x, y);
             List<Vector2Int> path = m_Board.DirectManhattanPath(targets[targets.Count - 1], position);

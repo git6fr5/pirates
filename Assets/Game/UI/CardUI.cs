@@ -68,9 +68,14 @@ public class CardUI : MonoBehaviour {
             return; 
         }
 
-        float deltaTime = Time.deltaTime;
         Draw();
-        Interact(deltaTime);
+        Interact();
+    }
+
+    void FixedUpdate() {
+        float deltaTime = Time.fixedDeltaTime;
+        SetPosition(deltaTime);
+        SetScale(deltaTime);
     }
 
     void LateUpdate() {
@@ -159,7 +164,7 @@ public class CardUI : MonoBehaviour {
     /* --- Interacting --- */
     #region Interacting 
 
-    private void Interact(float deltaTime) {
+    private void Interact() {
         bool m_Input0 = Input.GetMouseButtonDown(0);
         bool m_ReleaseInput0 = Input.GetMouseButtonUp(0);
 
@@ -170,9 +175,7 @@ public class CardUI : MonoBehaviour {
         if (m_Active && m_ReleaseInput0) {
             m_Active = false;
         }
-
-        SetPosition(deltaTime);
-        SetScale(deltaTime);
+        
     }
 
 

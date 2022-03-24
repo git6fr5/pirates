@@ -164,4 +164,31 @@ public class Background : MonoBehaviour {
         SceneManager.LoadScene("Game Over");
     }
 
+
+    public void WinGame() {
+        if (m_Fading) {
+            return;
+        }
+
+        SoundController.PlaySound(SoundController.LoseSound2, 0);
+
+        for (int i = 0; i < board.Pieces.Count; i++) {
+            if (board.Pieces[i] != null) {
+                StartCoroutine(IEDestroyPiece(i, i * 0.05f));
+            }
+        }
+
+        StartCoroutine(IEWin());
+
+        m_Fading = true;
+    }
+
+    private IEnumerator IEWin() {
+        yield return new WaitForSeconds(4f);
+        board.Reset();
+        Close();
+        yield return new WaitForSeconds(GetCloseDelay());
+        SceneManager.LoadScene("Win");
+    }
+
 }

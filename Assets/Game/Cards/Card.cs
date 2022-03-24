@@ -51,7 +51,7 @@ public class Card : MonoBehaviour { // Is there any reason for this to be derive
     [SerializeField, ReadOnly] protected bool m_Active;
     public bool Active => m_Active;
     // Activation Effect
-    [SerializeField] private Effect m_ActivationEffect;
+    [SerializeField] protected Effect m_ActivationEffect;
     public AudioClip m_ActivationSound;
 
     [Header("Targetting")]

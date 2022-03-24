@@ -19,6 +19,9 @@ public class BoardUI : MonoBehaviour {
     public static Sprite DamageIndicator3;
     public Sprite m_DamageIndicator3;
 
+    public static Sprite DamageIndicator4;
+    public Sprite m_DamageIndicator4;
+
     public static Material HeartMaterial;
     public Material m_HeartMaterial;
 
@@ -30,6 +33,7 @@ public class BoardUI : MonoBehaviour {
         DamageIndicator = m_DamageIndicator;
         DamageIndicator2 = m_DamageIndicator2;
         DamageIndicator3 = m_DamageIndicator3;
+        DamageIndicator4 = m_DamageIndicator4;
         HeartMaterial = m_HeartMaterial;
     }
 
@@ -53,10 +57,10 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
-    public static void DrawVisionRowUI(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators, bool redraw = true) {
+    public static void DrawVisionRowUI(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators, bool redraw = true, bool yesPlayer = true) {
         Reset(ref visionIndicators);
         if (redraw) {
-            DrawVisionRow(width, board, origin, ref visionIndicators);
+            DrawVisionRow(width, board, origin, ref visionIndicators, yesPlayer);
         }
     }
 
@@ -100,19 +104,33 @@ public class BoardUI : MonoBehaviour {
         }
     }
 
-    public static void DrawVisionRow(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators) {
+    public static void DrawVisionRow(int width, Board board, Vector2Int origin, ref List<SpriteRenderer> visionIndicators, bool yesPlayer = true) {
         int row = origin.y;
-        Player player = board.Get<Player>();
-
-        for (int n = -width; n <= width; n++) {
-            if (row + n >= 0 && row + n < board.Height) {
-                for (int i = 0; i < board.Width; i++) {
-                    if (player.Position != new Vector2Int(i, row + n)) {
+        if (yesPlayer) {
+            Player player = board.Get<Player>();
+            if (player == null) {
+                return;
+            }
+            for (int n = -width; n <= width; n++) {
+                if (row + n >= 0 && row + n < board.Height) {
+                    for (int i = 0; i < board.Width; i++) {
+                        if (player.Position != new Vector2Int(i, row + n)) {
+                            DrawSquare(new Vector2Int(i, row + n), new Color(1f, 1f, 0f, 0f), 0.5f, ref visionIndicators, 1);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            for (int n = -width; n <= width; n++) {
+                if (row + n >= 0 && row + n < board.Height) {
+                    for (int i = 0; i < board.Width; i++) {
                         DrawSquare(new Vector2Int(i, row + n), new Color(1f, 1f, 0f, 0f), 0.5f, ref visionIndicators, 1);
                     }
                 }
             }
         }
+        
     }
 
     public static void DrawVisionCharacters(Board board, Vector2Int[] targets, Vector2Int origin, ref List<SpriteRenderer> visionIndicators) {
@@ -145,6 +163,9 @@ public class BoardUI : MonoBehaviour {
             }
             else if (AorB == 2) {
                 Sprite sprite = DrawSprite(DamageIndicator3, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
+            }
+            else if (AorB == 3) {
+                Sprite sprite = DrawSprite(DamageIndicator4, position, new Color(1f, 1f, 0f, 0f), 1f, ref damageIndicators, HeartMaterial, 3);
             }
         }
     }

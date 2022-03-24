@@ -35,6 +35,7 @@ public class Trash : MonoBehaviour {
         }
         m_MouseOver = true;
         spriteRenderer.sprite = openSprite;
+        spriteRenderer.material.SetFloat("_OutlineWidth", 0.05f);
     }
 
     void OnMouseExit() {
@@ -43,6 +44,7 @@ public class Trash : MonoBehaviour {
         }
         m_MouseOver = false;
         spriteRenderer.sprite = closedSprite;
+        spriteRenderer.material.SetFloat("_OutlineWidth", 0f);
     }
 
     #endregion

@@ -12,6 +12,8 @@ public class Spritesheet : MonoBehaviour {
 
     public bool dontAnimate = false;
 
+    public bool flip;
+
     /* --- Components --- */
     [Space(2), Header("Components")]
     [HideInInspector] public SpriteRenderer m_SpriteRenderer;
@@ -177,6 +179,10 @@ public class Spritesheet : MonoBehaviour {
 
         if (dontAnimate) {
             return;
+        }
+
+        if (flip) {
+            transform.eulerAngles = 180f * Vector3.up;
         }
 
         // originalColor = m_SpriteRenderer.material.GetColor("_OutlineColor");

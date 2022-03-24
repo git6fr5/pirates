@@ -10,6 +10,8 @@ public class Row : Card {
     [SerializeField] private Effect m_ProjectileEffect;
     [SerializeField] private Effect m_ExplodeEffect;
 
+    public bool skipEnemy;
+
     void LateUpdate() {
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f, 0f);
@@ -46,14 +48,18 @@ public class Row : Card {
 
                         Piece piece = board.GetAt<Piece>(_actualTarget);
                         if (piece != null) {
-                            piece.TakeDamage(m_Value, delay);
 
-                            Character character = piece.GetComponent<Character>();
-                            if (character != null && m_StatusEffect != Status.None && m_Duration > 0) {
-                                character.ApplyStatus(m_StatusEffect, m_Duration);
+                            if (skipEnemy && (piece.GetComponent<Enemy>() || piece.GetComponent<Goldbeard>())) {
+
+                            }
+                            else {
+                                piece.TakeDamage(m_Value, delay);
+                                Character character = piece.GetComponent<Character>();
+                                if (character != null && m_StatusEffect != Status.None && m_Duration > 0) {
+                                    character.ApplyStatus(m_StatusEffect, m_Duration);
+                                }
                             }
                         }
-
                     }
                 }
             }

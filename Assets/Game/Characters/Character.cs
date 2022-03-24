@@ -172,7 +172,7 @@ public class Character : Piece {
         return Action.None;
     }
 
-    private void PerformAction(int index, float duration) {
+    protected void PerformAction(int index, float duration) {
         m_CurrAction = (Action)index;
         m_PerformingAction = true;
         StartCoroutine(IEPerformingAction(duration));
@@ -197,7 +197,7 @@ public class Character : Piece {
     #endregion
 
     /* --- Movement --- */
-    private void Move(int index) {
+    protected virtual void Move(int index) {
         Vector2 direction = (Vector2)(Quaternion.Euler(0f, 0f, 90f * index) * Vector2.right).normalized;
         bool tookAction = m_Board.Move(this, new Vector2Int((int)direction.x, (int)direction.y));
         if (tookAction) {
@@ -242,7 +242,7 @@ public class Character : Piece {
         m_Cards[index].Activate(m_Board, m_Position);
     }
 
-    private bool UseCard() {
+    protected virtual bool UseCard() {
         for (int i = 0; i < m_Cards.Length; i++) {
             if (m_Cards[i] != null && m_Cards[i].Active) {
                 Vector2Int? target = GetTarget(m_Cards[i]);

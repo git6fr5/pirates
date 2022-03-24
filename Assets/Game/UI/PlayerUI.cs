@@ -29,13 +29,6 @@ public class PlayerUI : MonoBehaviour {
 
     public void Refresh(Player player, Board board) {
         if (player == null || board == null) { return; }
-        
-        Treasure[] treasures = (Treasure[])GameObject.FindObjectsOfType(typeof(Treasure));
-        for (int i = 0; i < treasures.Length; i++) {
-            if (treasures[i].Active) {
-                return;
-            }
-        }
 
         transform.SetParent(null);
 

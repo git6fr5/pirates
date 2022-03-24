@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Range: 0
   m_Value: 2
   m_StatusEffect: 3
-  m_Duration: 3
+  m_Duration: 4
   m_Charges: 1
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
   m_DisplayDescription: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Radius: 1
   m_ProjectileEffect: {fileID: 456991811083511791}
   m_ExplodeEffect: {fileID: 220145240927886871}
-  explodeSound: {fileID: 0}
+  explodeSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
   notTargetEnemies: 0
   overrideRange: -1
 --- !u!1 &2631728899125674508
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Roulette
-  m_CardIcon: {fileID: 0}
+  m_CardIcon: {fileID: -8179040606652740800, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 0
   m_TargetType: 0
   m_Range: 0
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Radius: 2
   m_ProjectileEffect: {fileID: 261636262235088590}
   m_ExplodeEffect: {fileID: 9160128149885305050}
-  explodeSound: {fileID: 0}
+  explodeSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
   notTargetEnemies: 0
   overrideRange: -1
 --- !u!1 &3793124160689084136
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Range: 0
   m_Value: 1
   m_StatusEffect: 3
-  m_Duration: 2
+  m_Duration: 3
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
   m_DisplayDescription: 0
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_Range: 0
   m_Value: 1
   m_StatusEffect: 3
-  m_Duration: 1
+  m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 5218cf861cdf2ee44acb5f9e7f4782ed, type: 3}
   m_DisplayDescription: 0
@@ -1441,7 +1441,7 @@ MonoBehaviour:
   m_Radius: 1
   m_ProjectileEffect: {fileID: 942503183715095207}
   m_ExplodeEffect: {fileID: 6180646893597815301}
-  explodeSound: {fileID: 0}
+  explodeSound: {fileID: 8300000, guid: 0a6ace093ce3ab44bbdb4e16c3a3bc25, type: 3}
   notTargetEnemies: 0
   overrideRange: -1
 --- !u!1 &7727712526112861179
@@ -1548,6 +1548,7 @@ MonoBehaviour:
   m_Width: 1
   m_ProjectileEffect: {fileID: 6665781251322583512}
   m_ExplodeEffect: {fileID: 7597250459797136253}
+  skipEnemy: 0
 --- !u!1 &8620044067504359206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1600,7 @@ MonoBehaviour:
   m_Range: 1
   m_Value: 6
   m_StatusEffect: 3
-  m_Duration: 2
+  m_Duration: 3
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: e5115234597e25943a4b2e2a90d55c88, type: 3}
   m_DisplayDescription: 0
@@ -1753,7 +1754,7 @@ MonoBehaviour:
   m_Range: 4
   m_Value: 2
   m_StatusEffect: 1
-  m_Duration: 2
+  m_Duration: 3
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
   m_DisplayDescription: 0
@@ -1872,7 +1873,7 @@ MonoBehaviour:
   m_Range: 3
   m_Value: 1
   m_StatusEffect: 1
-  m_Duration: 1
+  m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
   m_DisplayDescription: 0
@@ -2018,7 +2019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardName: Roulette LVL 2
-  m_CardIcon: {fileID: 0}
+  m_CardIcon: {fileID: -8179040606652740800, guid: 2b8c2d1839e7aec408efba81a373838a, type: 3}
   m_Rariry: 1
   m_TargetType: 0
   m_Range: 0
@@ -2153,7 +2154,7 @@ MonoBehaviour:
   m_Range: 4
   m_Value: 4
   m_StatusEffect: 3
-  m_Duration: 2
+  m_Duration: 3
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: eab43b0d46b18ec45a9058ed80aa3702, type: 3}
   m_DisplayDescription: 0
@@ -2308,7 +2309,7 @@ MonoBehaviour:
   m_Range: 3
   m_Value: 2
   m_StatusEffect: 1
-  m_Duration: 2
+  m_Duration: 3
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 3038c1ed7f07f834c9d7fa9f7b9d2180, type: 3}
   m_DisplayDescription: 0
@@ -2374,7 +2375,7 @@ MonoBehaviour:
   m_Range: 2
   m_Value: 3
   m_StatusEffect: 3
-  m_Duration: 1
+  m_Duration: 2
   m_Charges: 2
   m_Face: {fileID: 21300000, guid: 42d35cd12aebfaf4386d82798a8a6b00, type: 3}
   m_DisplayDescription: 0

@@ -33,7 +33,7 @@ public class TreasureCardUI : CardUI {
         float targetScale = m_MouseOver ? 1.5f : 1f; // Mathf.Max(0f, 1f - distance);
 
         m_Scale = m_Scale != targetScale ? m_Scale + Mathf.Sign(targetScale - m_Scale) * m_ScaleSpeed * deltaTime : m_Scale;
-        if (Mathf.Abs(targetScale - m_Scale) < 0.05f) {
+        if (Mathf.Abs(targetScale - m_Scale) < 0.15f) {
             m_Scale = targetScale;
         }
 

@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9be6c333b58ee54d9ad8350cdadc664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHearts: 10
-  m_Hearts: 10
+  m_MaxHearts: 8
+  m_Hearts: 8
   TookDamage: 0
   m_DebugColor: {r: 1, g: 1, b: 1, a: 1}
   m_ShakeStrength: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontAnimate: 0
+  flip: 1
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
   m_Sprites:
@@ -334,10 +335,11 @@ MonoBehaviour:
   m_TargetType: 3
   m_Range: 1
   m_Value: 2
-  m_StatusEffect: 2
-  m_Duration: 2
+  m_StatusEffect: 0
+  m_Duration: 0
   m_Charges: 10000
   m_Face: {fileID: 0}
+  m_DisplayDescription: 0
   m_Description: 
   m_Active: 0
   m_ActivationEffect: {fileID: 0}

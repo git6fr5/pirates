@@ -72,7 +72,7 @@ MonoBehaviour:
   m_HitSound: {fileID: 8300000, guid: f0924a253dd1cf140bd5bf93014f9829, type: 3}
   m_Difficulty: 1
   m_MovementActions: 1
-  m_VisisonDistance: 7
+  m_VisisonDistance: 6
   m_PlayerInVision: 0
   m_TookCardAction: 0
   AorB: 1
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontAnimate: 0
+  flip: 0
   m_SpriteRenderer: {fileID: 0}
   m_Character: {fileID: 0}
   m_Sprites:

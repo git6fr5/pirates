@@ -34,6 +34,12 @@ public class Effect : MonoBehaviour {
 
     /* --- Unity --- */
     #region Unity
+    public bool forceInit;
+    void Start() {
+        if (forceInit) {
+            Init();
+        }
+    }
 
     // Runs once every frame.
     private void Update() {
